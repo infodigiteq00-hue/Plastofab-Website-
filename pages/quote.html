@@ -1,0 +1,77 @@
+<!--
+title: Get a Quote
+description: Ask Plasto-Fab for a quote on tanks, scrubbers, piping or other corrosion-resistant process equipment. Tell us your industry, project and preferred material.
+group: contact
+-->
+<section class="qt-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>Contact</span><span aria-hidden="true">/</span><span aria-current="page">Get a Quote</span></nav>
+    <h1 class="h-xl">Ask for <span class="grad">a quote.</span></h1>
+    <p class="lede">Five quick steps, so we can come back with our best price.</p>
+  </div>
+</section>
+
+<section class="qt" aria-label="Quote request">
+  <div class="wrap">
+    <form class="wiz" data-wizard data-mailto="info@plasto-fab.com" data-subject="Quote request" data-sent="Your email app should open with the request ready. Attach your drawing before sending." novalidate>
+      <div class="wiz__bar" aria-hidden="true"><i></i></div>
+      <ol class="wiz__steps" aria-label="Steps"><li class="is-on">Industry</li><li>Project</li><li>Material</li><li>Size</li><li>You</li></ol>
+
+      <fieldset class="wiz__panel is-on" data-required-group>
+        <legend><span>01</span>Which industry is it for?</legend>
+        <div class="tiles">
+          <label class="tile"><input type="radio" name="industry" value="Chemical" data-label="Industry"><span><b>Chemical</b>Acids, alkalis, solvents</span></label>
+          <label class="tile"><input type="radio" name="industry" value="Pharma" data-label="Industry"><span><b>Pharma</b>APIs and intermediates</span></label>
+          <label class="tile"><input type="radio" name="industry" value="Water" data-label="Industry"><span><b>Water</b>Effluent and sewage</span></label>
+          <label class="tile"><input type="radio" name="industry" value="Electroplating" data-label="Industry"><span><b>Electroplating</b>Plating, pickling, anodising</span></label>
+          <label class="tile"><input type="radio" name="industry" value="Other" data-label="Industry"><span><b>Other</b>Tell us in step 4</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="wiz__panel" data-required-group>
+        <legend><span>02</span>What do you need?</legend>
+        <div class="tiles">
+          <label class="tile"><input type="checkbox" name="project" value="Tank" data-label="Project type"><span><b>Tank</b>Storage, process, pickling</span></label>
+          <label class="tile"><input type="checkbox" name="project" value="Scrubber" data-label="Project type"><span><b>Scrubber</b>Air pollution control</span></label>
+          <label class="tile"><input type="checkbox" name="project" value="Piping" data-label="Project type"><span><b>Piping</b>Pipes, ducts, stacks</span></label>
+          <label class="tile"><input type="checkbox" name="project" value="Other" data-label="Project type"><span><b>Other</b>Blowers, vessels, STP…</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="wiz__panel">
+        <legend><span>03</span>Any material preference?</legend>
+        <div class="tiles tiles--sm">
+          <label class="tile"><input type="checkbox" name="material" value="PP" data-label="Material preference"><span><b>PP</b></span></label>
+          <label class="tile"><input type="checkbox" name="material" value="HDPE" data-label="Material preference"><span><b>HDPE</b></span></label>
+          <label class="tile"><input type="checkbox" name="material" value="PVC" data-label="Material preference"><span><b>PVC</b></span></label>
+          <label class="tile"><input type="checkbox" name="material" value="PVDF" data-label="Material preference"><span><b>PVDF</b></span></label>
+          <label class="tile"><input type="checkbox" name="material" value="FRP" data-label="Material preference"><span><b>FRP</b></span></label>
+          <label class="tile"><input type="checkbox" name="material" value="Not sure, please advise" data-label="Material preference"><span><b>Not sure</b>Advise me</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="wiz__panel">
+        <legend><span>04</span>Size and details</legend>
+        <div class="form-grid">
+          <div class="field span-2"><label for="q-size">Approx. size / capacity</label><input id="q-size" name="size" placeholder="e.g. 20 kL, Ø 2,500 mm × 4,000 mm" data-label="Size / capacity"></div>
+          <div class="field span-2"><label for="q-msg">Chemical, temperature, anything else</label><textarea id="q-msg" name="message" rows="4" data-label="Details"></textarea></div>
+        </div>
+        <p class="form-note">Have a drawing? Attach it to the email that opens when you send this.</p>
+      </fieldset>
+      <fieldset class="wiz__panel">
+        <legend><span>05</span>Where should we send the quote?</legend>
+        <div class="form-grid">
+          <div class="field"><label for="q-co">Company name <span class="req">*</span></label><input id="q-co" name="organisation" autocomplete="organization" required data-label="Company"></div>
+          <div class="field"><label for="q-person">Contact person</label><input id="q-person" name="person" autocomplete="name" data-label="Contact person"></div>
+          <div class="field"><label for="q-email">Email <span class="req">*</span></label><input id="q-email" name="email" type="email" autocomplete="email" required data-label="Email"></div>
+          <div class="field"><label for="q-phone">Phone <span class="req">*</span></label><input id="q-phone" name="phone" type="tel" autocomplete="tel" required data-label="Phone"></div>
+        </div>
+        <label class="consent" data-required-group><input type="checkbox" name="consent" value="Yes" data-label="Happy to be contacted by phone or email"><span>I'm happy for the sales team to call or email me about this.</span></label>
+      </fieldset>
+
+      <div class="wiz__nav">
+        <button type="button" class="btn btn--ghost" data-back hidden>Back</button>
+        <button type="button" class="btn btn--primary" data-next>Next</button>
+        <button type="submit" class="btn btn--primary" data-send hidden>Send request</button>
+        <p class="form-note" data-form-note aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,866 @@
+{
+"wix/centrifugal-blower/00": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/centrifugal-blower/01": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/centrifugal-blower/02": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/centrifugal-blower/03": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/ducting/00": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/ducting/01": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/ducting/02": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/ducting/03": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/ducting/04": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/ducting/05": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/ducting/06": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/home/00": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/home/01": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/home/02": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/home/03": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/home/04": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/home/05": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/home/06": {
+"w": 1600,
+"h": 939,
+"tw": 720,
+"th": 423
+},
+"wix/home/07": {
+"w": 986,
+"h": 1600,
+"tw": 444,
+"th": 720
+},
+"wix/home/08": {
+"w": 1600,
+"h": 1176,
+"tw": 720,
+"th": 529
+},
+"wix/home/09": {
+"w": 1600,
+"h": 1222,
+"tw": 720,
+"th": 550
+},
+"wix/home/10": {
+"w": 1600,
+"h": 1600,
+"tw": 720,
+"th": 720
+},
+"wix/home/11": {
+"w": 1600,
+"h": 913,
+"tw": 720,
+"th": 411
+},
+"wix/home/12": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/home/13": {
+"w": 1280,
+"h": 1600,
+"tw": 576,
+"th": 720
+},
+"wix/home/14": {
+"w": 720,
+"h": 1600,
+"tw": 324,
+"th": 720
+},
+"wix/home/15": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/home/16": {
+"w": 900,
+"h": 1600,
+"tw": 405,
+"th": 720
+},
+"wix/home/17": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/home/18": {
+"w": 1365,
+"h": 768,
+"tw": 720,
+"th": 405
+},
+"wix/home/19": {
+"w": 768,
+"h": 1376,
+"tw": 402,
+"th": 720
+},
+"wix/home/20": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/home/21": {
+"w": 1280,
+"h": 1600,
+"tw": 576,
+"th": 720
+},
+"wix/home/22": {
+"w": 1280,
+"h": 1600,
+"tw": 576,
+"th": 720
+},
+"wix/home/23": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/others/00": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/others/01": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/others/02": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/others/03": {
+"w": 720,
+"h": 1600,
+"tw": 324,
+"th": 720
+},
+"wix/others/04": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/others/05": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/others/06": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/others/07": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/reaction-vessels/00": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/reaction-vessels/01": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/reaction-vessels/02": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/reaction-vessels/03": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/reaction-vessels/04": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/reaction-vessels/05": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/scrubbing-system/00": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/scrubbing-system/01": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/scrubbing-system/02": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/scrubbing-system/03": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/scrubbing-system/04": {
+"w": 720,
+"h": 1600,
+"tw": 324,
+"th": 720
+},
+"wix/scrubbing-system/05": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/scrubbing-system/06": {
+"w": 720,
+"h": 1600,
+"tw": 324,
+"th": 720
+},
+"wix/scrubbing-system/07": {
+"w": 900,
+"h": 1600,
+"tw": 405,
+"th": 720
+},
+"wix/sewage-plant/00": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/sewage-plant/01": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/sewage-plant/02": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/sewage-plant/03": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/sewage-plant/04": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/storage-tanks/00": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/01": {
+"w": 1040,
+"h": 588,
+"tw": 720,
+"th": 407
+},
+"wix/storage-tanks/02": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/03": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/04": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/05": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/storage-tanks/06": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/07": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/08": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/storage-tanks/09": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/storage-tanks/10": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/storage-tanks/11": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/12": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/storage-tanks/13": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/storage-tanks/14": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"wix/storage-tanks/15": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/storage-tanks/16": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"wix/storage-tanks/17": {
+"w": 900,
+"h": 1600,
+"tw": 405,
+"th": 720
+},
+"wix/storage-tanks/18": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/19": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/20": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/storage-tanks/21": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"wix/vacuum-receiver/00": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/vacuum-receiver/01": {
+"w": 768,
+"h": 1024,
+"tw": 540,
+"th": 720
+},
+"wix/vacuum-receiver/02": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/vacuum-receiver/03": {
+"w": 720,
+"h": 1600,
+"tw": 324,
+"th": 720
+},
+"wix/vacuum-receiver/04": {
+"w": 720,
+"h": 1600,
+"tw": 324,
+"th": 720
+},
+"wix/vacuum-receiver/05": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"wix/vacuum-receiver/06": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/bend--IMG_20220923_135918": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/centrifugal-blower--20180124_145409": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"site/products/centrifugal-blower--20180124_161359": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"site/products/centrifugal-blower--20190921_101040": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/drum-washer--IMG-20220526-WA0031": {
+"w": 1280,
+"h": 576,
+"tw": 720,
+"th": 324
+},
+"site/products/ducting--20121102_145235": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/ducting--20130228_121644": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/ducting--20130308_175351": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/frp-canopy--FRP-Cabin-1": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"site/products/frp-grating--20150204_174009": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/frp-grating--Photo-0058": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/frp-lining--20150310_092654": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/mist-eliminator--20190920_144125": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/mist-eliminator--IMG_20191206_165457": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/pickling-tank--20160813_102117": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/pp-frp-tank--20170526_153925": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"site/products/pp-frp-tank--20190312_124115": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/pp-frp-tank--IMG_20220812_161352": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/pp-hdpe-tank--20131218_135248": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/pp-hdpe-tank--IMG_20220610_135642": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/reaction-vessels--20180710_111759": {
+"w": 1600,
+"h": 900,
+"tw": 720,
+"th": 405
+},
+"site/products/reaction-vessels--IMG-20220720-WA0038": {
+"w": 1200,
+"h": 1600,
+"tw": 540,
+"th": 720
+},
+"site/products/reaction-vessels--IMG_20201201_122424-1": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/scrubbing-system--100_0040": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/scrubbing-system--IMG_20200219_160225": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/scrubbing-system--IMG_20200801_105304": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/sewage-treatment-plant--20160330_094931": {
+"w": 1600,
+"h": 1200,
+"tw": 720,
+"th": 540
+},
+"site/products/sewage-treatment-plant--IMG_20220405_173500": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/sewage-treatment-plant--IMG_20220816_154042": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/vacuum-receiver--IMG_20201127_122545": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/vacuum-receiver--IMG_20210524_173042": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/products/vacuum-receiver--IMG_20220519_144711": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/misc/IMG_20200811_161043": {
+"w": 1600,
+"h": 652,
+"tw": 720,
+"th": 293
+},
+"site/misc/IMG_20201201_122424": {
+"w": 1600,
+"h": 720,
+"tw": 720,
+"th": 324
+},
+"site/misc/PVC-Horizontal-scrubber-and-fan-combo": {
+"w": 1200,
+"h": 760,
+"tw": 720,
+"th": 456
+},
+"site/misc/about-us-1": {
+"w": 1600,
+"h": 800,
+"tw": 720,
+"th": 360
+},
+"site/misc/career-banner1": {
+"w": 1500,
+"h": 809,
+"tw": 720,
+"th": 388
+},
+"site/misc/contact-banner": {
+"w": 1500,
+"h": 883,
+"tw": 720,
+"th": 424
+},
+"site/misc/contact-thumb": {
+"w": 150,
+"h": 148,
+"tw": 150,
+"th": 148
+},
+"site/misc/why-us": {
+"w": 1600,
+"h": 1133,
+"tw": 720,
+"th": 510
+},
+"stp/plant-01": {
+"w": 767,
+"h": 485,
+"tw": 720,
+"th": 455
+},
+"stp/plant-02": {
+"w": 775,
+"h": 484,
+"tw": 720,
+"th": 450
+},
+"stp/plant-03": {
+"w": 813,
+"h": 489,
+"tw": 720,
+"th": 433
+},
+"stp/plant-04": {
+"w": 1032,
+"h": 774,
+"tw": 720,
+"th": 540
+},
+"stp/plant-05": {
+"w": 780,
+"h": 603,
+"tw": 720,
+"th": 557
+},
+"stp/plant-06": {
+"w": 780,
+"h": 1040,
+"tw": 540,
+"th": 720
+},
+"stp/plant-07": {
+"w": 771,
+"h": 623,
+"tw": 720,
+"th": 582
+},
+"stp/plant-08": {
+"w": 1040,
+"h": 780,
+"tw": 720,
+"th": 540
+},
+"stp/plant-09": {
+"w": 1032,
+"h": 774,
+"tw": 720,
+"th": 540
+},
+"stp/plant-10": {
+"w": 1032,
+"h": 774,
+"tw": 720,
+"th": 540
+},
+"stp/plant-11": {
+"w": 960,
+"h": 640,
+"tw": 720,
+"th": 480
+},
+"stp/plant-12": {
+"w": 960,
+"h": 640,
+"tw": 720,
+"th": 480
+},
+"stp/plant-13": {
+"w": 1032,
+"h": 774,
+"tw": 720,
+"th": 540
+}
+}

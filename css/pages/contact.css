@@ -1,0 +1,34 @@
+/* Contact: a live open/closed sign in Ankleshwar time, three contact cards, the form */
+.co-hero { padding: 140px 0 40px; }
+.co-hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 30px; align-items: end; }
+.co-hero__grid > div:first-child { display: grid; gap: 22px; }
+.open { display: grid; gap: 10px; padding: 26px; border-radius: 24px; background: #0d1424; color: #fff; box-shadow: 0 40px 70px -40px rgba(13, 20, 36, .7); }
+.open__light { width: 14px; height: 14px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 6px rgba(61, 220, 132, .18), 0 0 18px rgba(61, 220, 132, .8); animation: co-blink 2s ease-in-out infinite; }
+.open.is-closed .open__light { background: #f26b3a; box-shadow: 0 0 0 6px rgba(242, 107, 58, .18); animation: none; }
+@keyframes co-blink { 50% { opacity: .5; } }
+.open__state { font-size: clamp(28px, 3vw, 40px); font-weight: 500; letter-spacing: -.02em; }
+.open__time { font-size: 14px; color: rgba(255, 255, 255, .7); font-variant-numeric: tabular-nums; }
+.open__week { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.open__week li { text-align: center; font-size: 11.5px; padding: 8px 0; border-radius: 8px; background: rgba(255, 255, 255, .06); color: rgba(255, 255, 255, .7); }
+.open__week li.is-closed { color: rgba(255, 255, 255, .3); text-decoration: line-through; }
+.open__week li.is-today { background: var(--lime); color: var(--navy); font-weight: 600; text-decoration: none; }
+.open__hours { font-size: 13px; color: rgba(255, 255, 255, .6); }
+.co-cards { padding: 30px 0 10px; }
+.co-cards__grid { display: grid; grid-template-columns: 1.3fr 1fr 1.2fr; gap: 14px; }
+.ccard { display: grid; gap: 10px; align-content: start; padding: 26px 28px; border-radius: 24px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.ccard__k { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.ccard address { font-style: normal; font-size: 17px; line-height: 1.55; }
+.ccard a { color: var(--ink); text-decoration: none; font-size: 17px; font-weight: 500; overflow-wrap: anywhere; }
+.ccard a small { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 6px; }
+.ccard a:hover { color: var(--blue); }
+.ccard .ccard__go { font-size: 14px; color: var(--blue); }
+.ccard--tel { background: var(--navy); color: #fff; border: 0; }
+.ccard--tel .ccard__k { color: rgba(255, 255, 255, .6); }
+.ccard--tel a { color: #fff; }
+.ccard--tel a:hover { color: var(--lime); }
+.co-form__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(30px, 5vw, 80px); align-items: start; }
+.co-form__copy { display: grid; gap: 18px; }
+.co-form__copy a { color: var(--blue); font-weight: 500; }
+.co-form__copy img { width: 100%; height: auto; border-radius: 20px; margin-top: 8px; }
+@media (max-width: 1000px) { .co-hero__grid, .co-cards__grid, .co-form__grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .open__light { animation: none; } }

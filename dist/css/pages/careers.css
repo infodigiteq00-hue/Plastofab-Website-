@@ -1,0 +1,22 @@
+/* Careers: words that drift past, a stack of shop photos, the application */
+.ca-hero { padding: 140px 0 60px; overflow: hidden; }
+.ca-hero .wrap { display: grid; gap: 22px; margin-bottom: 50px; }
+.words { display: grid; gap: 10px; }
+.words p { display: flex; gap: 40px; width: max-content; font-size: clamp(40px, 6vw, 92px); font-weight: 600; letter-spacing: -.04em; line-height: 1; animation: ca-drift 40s linear infinite; }
+.words p:nth-child(2) { animation-direction: reverse; animation-duration: 46s; }
+.words span:nth-child(odd) { color: var(--navy); }
+.words span:nth-child(even) { color: transparent; -webkit-text-stroke: 1.5px var(--green); }
+@keyframes ca-drift { to { transform: translateX(-50%); } }
+.ca-life__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(30px, 6vw, 90px); align-items: center; }
+.ca-life__photos { position: relative; height: clamp(380px, 42vw, 560px); }
+.ca-life__photos img { position: absolute; border-radius: 20px; object-fit: cover; box-shadow: 0 40px 70px -40px rgba(13, 20, 36, .6); transition: transform .6s var(--ease); }
+.ca-life__photos img:nth-child(1) { left: 0; top: 0; width: 46%; height: 78%; }
+.ca-life__photos img:nth-child(2) { right: 0; top: 10%; width: 50%; height: 44%; }
+.ca-life__photos img:nth-child(3) { right: 6%; bottom: 0; width: 62%; height: 38%; }
+.ca-life__photos:hover img:nth-child(1) { transform: rotate(-2deg); } .ca-life__photos:hover img:nth-child(2) { transform: rotate(2deg) translateY(-6px); } .ca-life__photos:hover img:nth-child(3) { transform: translateY(6px); }
+.ca-life__copy { display: grid; gap: 20px; }
+.ca-apply__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(30px, 5vw, 80px); align-items: start; }
+.ca-apply__copy { display: grid; gap: 18px; }
+.ca-apply__copy a { color: var(--blue); font-weight: 500; }
+@media (max-width: 1000px) { .ca-life__grid, .ca-apply__grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .words p { animation: none; } }
