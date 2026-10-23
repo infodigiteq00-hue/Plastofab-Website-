@@ -111,7 +111,7 @@
       card.tabIndex = 0;
       card.addEventListener('click', function (e) {
         if (moved || e.target.closest('a')) return;
-        if (i !== active) { go(i); return; }
+        if (i !== active) { go(i); restart(); return; }
         card.classList.toggle('is-flipped');
       });
       card.addEventListener('keydown', function (e) {
@@ -136,6 +136,8 @@
     stage.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hoverCard = true; });
     stage.addEventListener('pointerleave', function () { hoverCard = false; });
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // after a click, give the chosen card its full time before moving on
+    var restart = function () { if (onScreen && !reducedMotion) { clearInterval(timer); timer = setInterval(advance, 3500); } };
     var advance = function () {
       if (!onScreen || hoverCard || startX !== null || range.querySelector('.pcard.is-flipped')) return;
       if (active + dir < 0 || active + dir > n - 1) dir = -dir;   // glide to one end, then back

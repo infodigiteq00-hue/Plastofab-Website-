@@ -12,7 +12,7 @@ Run it after editing anything in pages/:   python3 build-pages.py
 import html, json, os, re
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = '49'   # cache-busting version for css/js
+V = '50'   # cache-busting version for css/js
 
 # the site menu: (label, [(title, href, hint), ...]) or (label, href)
 NAV = [
