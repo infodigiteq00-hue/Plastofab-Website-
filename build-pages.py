@@ -8,8 +8,9 @@ It also refreshes the header and footer inside index.html, between the
 <!-- site-header --> and <!-- site-footer --> markers, so every page matches.
 
 Run it after editing anything in pages/:   python3 build-pages.py
+(--no-index builds the inner pages only and leaves index.html untouched)
 """
-import html, json, os, re
+import html, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 V = '50'   # cache-busting version for css/js
@@ -19,6 +20,7 @@ NAV = [
     ('Company', 'company', [
         ('About Us', 'about.html', 'Since 1992, in Ankleshwar'),
         ('Clients', 'clients.html', 'Who we build for'),
+        ('Notable Projects', 'projects.html', 'Case studies from the field'),
         ('Careers', 'careers.html', 'Be a part of our story'),
     ]),
     ('Products', 'products', [
@@ -91,7 +93,6 @@ def footer(home=False):
       <div>
         <h4>Get in touch</h4>
         <a href="tel:+919824110409">+91 98241 10409</a>
-        <a href="tel:+919998008589">+91 99980 08589</a>
         <a href="mailto:info@plasto-fab.com">info@plasto-fab.com</a>
         <span>Plot No. 7510, Near Karmatur Char Rasta, GIDC, Ankleshwar 393 002, Gujarat, India</span>
       </div>
@@ -160,6 +161,9 @@ def build():
         built.append(slug)
 
     # the homepage keeps its own content; only its header and footer are refreshed
+    if '--no-index' in sys.argv:
+        print('built', len(built), 'pages:', ', '.join(built), '(index.html left alone)')
+        return
     current_href = 'index.html'
     p = os.path.join(ROOT, 'index.html')
     s = open(p).read()
