@@ -4,12 +4,14 @@
      1. the real logo turns into a printed thermoplastic sheet
      2. the sheet rolls into a cylinder, and the seam is extrusion-welded
         (a hot bead runs up the joint)
-     3. dished heads, a manway and nozzles form: a process tank.
-        It turns once, then sets low like a horizon for the statement
-     4. Thermoplastics: the tank takes on each material in turn
+     3. dished heads form and the column becomes a wet scrubber system:
+        exhaust stack, centrifugal blower on the inlet, recirculation pump
+        and piping, ladder and platform. It turns once, then sets low
+        like a horizon for the statement
+     4. Thermoplastics: the scrubber takes on each material in turn
         (PP-H, HDPE, PVC-U, CPVC, PVDF, ECTFE) and its ring seams weld
-     5. Composites: glass fibre winds round it, turning it into a
-        dual-laminate FRP vessel
+     5. Composites: glass fibre winds round the column, turning it into a
+        dual-laminate FRP scrubber
 
    Everything follows the scroll and plays backwards too.
    ═══════════════════════════════════════════════════════════ */
@@ -24,17 +26,22 @@ const mix = (a, b, t) => a + (b - a) * t;
 const canvas = document.getElementById('stage');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// the tank, in logo widths: the logo covers 40% of the sheet it is printed on
+// the scrubber column, in logo widths: the logo covers 40% of the sheet it is printed on
 const SHEET_W = 2.5;
 const R = SHEET_W / TAU;          // radius once rolled
-const SHELL_H = 3.0 * R;          // straight shell
+const SHELL_H = 3.8 * R;          // straight shell: sump, packed bed, spray zone, mist eliminator
 const HEAD = 0.42 * R;            // depth of each dished head
 const SKIRT = 0.34 * R;           // support skirt under the bottom head
-// the whole tank's height, manway to skirt, and where its middle sits relative to the shell's
-const BOX_TOP = SHELL_H / 2 + 1.1 * HEAD + 0.16 * R;
-const BOX_BOT = -(SHELL_H / 2 + 0.55 * HEAD + SKIRT);
+const GROUND = -(SHELL_H / 2 + 0.55 * HEAD + SKIRT);
+const STACK = 1.0 * R;            // exhaust stack above the outlet nozzle
+const STACK_TOP = SHELL_H / 2 + HEAD + 0.1 * R + 0.18 * R + STACK;
+// the whole system's box: stack top to ground, pump on the left to blower on the right (as the sections show it)
+const BOX_TOP = STACK_TOP + 0.04 * R;
+const BOX_BOT = GROUND;
 const TOTAL_H = BOX_TOP - BOX_BOT;
 const BOX_MID = (BOX_TOP + BOX_BOT) / 2;
+const BOX_W = 3.9 * R;
+const BOX_MIDX = 0.42 * R;
 const SEAM_TURN = 0.62 - Math.PI; // turns the seam (at the back) to the front-right while it is welded
 
 // thermoplastics, in the order the section lists them: [name, colour]
@@ -155,9 +162,9 @@ const tankFrag = `
     // stiffener rings throw a soft shadow on the shell just above and below them
     float dr = min(abs(y - uRingY), abs(y + uRingY));
     ao *= 1.0 - 0.32 * exp(-max(dr - 0.012, 0.0) / 0.02) * step(0.012, dr) * uHeads;
-    // and the manway shades the top of the head round its foot
+    // and the gas outlet shades the top of the head round its foot
     float rAx = length(vLocal.xz);
-    ao *= 1.0 - 0.3 * exp(-max(rAx - 0.25 * uR, 0.0) / 0.025) * step(hs, y) * uHeads;
+    ao *= 1.0 - 0.3 * exp(-max(rAx - 0.3 * uR, 0.0) / 0.025) * step(hs, y) * uHeads;
 
     // the fresh weld is still hot: a glow just behind the head of the bead
     float headY = mix(-hs, hs, uWeld), hot = 0.0;
@@ -318,18 +325,20 @@ async function init() {
   };
   const domeY = d => HEAD * Math.sqrt(Math.max(0, 1 - (d / R) ** 2));   // height of the top head at a distance from the axis
 
-  // top head: manway with a bolted cover and a handle, two nozzles, two lifting lugs
+  // top head: the gas outlet, a reducer and the exhaust stack; two small nozzles and two lifting lugs
   const top = new THREE.Group();
-  const manway = nozzle(0.24 * R, 0.2 * R, true); manway.position.y = domeY(0) - 0.04 * R; top.add(manway);
-  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.09 * R, 0.012 * R, 10, 28, Math.PI), steelMat);
-  handle.position.set(0, manway.position.y + 0.2 * R + 0.24 * R * 0.34 * 1.05 + 0.005, 0); top.add(handle);
-  [[0.62, 0.18, 0.075, 0.2, true], [-0.52, -0.34, 0.09, 0.17, false], [0.12, -0.66, 0.05, 0.15, true]].forEach(([x, z, r, l, blind]) => {
+  const outlet = nozzle(0.3 * R, 0.1 * R, false); outlet.position.y = domeY(0) - 0.04 * R; top.add(outlet);
+  const oTop = outlet.position.y + 0.1 * R;
+  top.add(mesh(new THREE.CylinderGeometry(0.22 * R, 0.3 * R, 0.18 * R, 48, 1, true), partMat, 0, oTop + 0.09 * R, 0));   // reducer
+  top.add(mesh(cylG(0.36 * R, 0.04 * R, 48), partMat, 0, oTop + 0.2 * R, 0));                                          // stack flange
+  top.add(mesh(cylG(0.22 * R, STACK, 48, true), partMat, 0, oTop + 0.18 * R + STACK / 2, 0));                            // stack
+  top.add(mesh(cylG(0.29 * R, 0.035 * R, 48), partMat, 0, oTop + 0.18 * R + STACK, 0));                                 // lip
+  top.add(mesh(cylG(0.2 * R, 0.002, 32), holeMat, 0, oTop + 0.18 * R + STACK + 0.02 * R, 0));
+  const port = nozzle(0.035 * R, 0.08 * R, true); port.rotation.z = -Math.PI / 2; port.position.set(0.21 * R, oTop + 0.18 * R + STACK * 0.55, 0); top.add(port);   // sampling port
+  [[0.6, 0.22, 0.07, 0.18, true], [-0.5, -0.42, 0.06, 0.15, true]].forEach(([x, z, r, l, blind]) => {
     const n = nozzle(r * R, l * R, blind); n.position.set(x * R, domeY(Math.hypot(x, z) * R) - 0.02 * R, z * R); top.add(n);
   });
-  [-1, 1].forEach(sd => {
-    const lug = mesh(new THREE.BoxGeometry(0.03 * R, 0.14 * R, 0.13 * R), partMat, sd * 0.78 * R, domeY(0.78 * R) + 0.03 * R, 0.05 * R);
-    lug.rotation.y = 0; top.add(lug);
-  });
+  [-1, 1].forEach(sd => top.add(mesh(new THREE.BoxGeometry(0.03 * R, 0.14 * R, 0.13 * R), partMat, sd * 0.8 * R, domeY(0.8 * R) + 0.03 * R, 0.05 * R)));
 
   // bottom: the support skirt with an access opening, on a base ring
   const bottom = new THREE.Group();
@@ -341,7 +350,7 @@ async function init() {
   const oa = 0.35; opening.position.x = Math.sin(oa) * R * 0.945; opening.position.z = Math.cos(oa) * R * 0.945; opening.rotation.y = oa;
   bottom.add(opening);
 
-  // the shell: two stiffener rings, an inlet and an outlet, a sight-glass level gauge, a nameplate
+  // the shell: two body flanges, packing manholes, a sump level gauge, a nameplate
   const body = new THREE.Group();
   const RING_Y = SHELL_H * 0.3;
   TU.uRingY.value = RING_Y;
@@ -350,21 +359,27 @@ async function init() {
     const h = new THREE.Group(); h.position.set(Math.sin(theta) * (R + out), y, Math.cos(theta) * (R + out)); h.rotation.y = theta;
     child.rotation.x = Math.PI / 2; h.add(child); body.add(h); return h;
   };
-  const sideNozzles = [onShell(1.02, SHELL_H * 0.2, nozzle(0.07 * R, 0.22 * R, false), -0.02 * R), onShell(-0.62, -SHELL_H * 0.4, nozzle(0.08 * R, 0.24 * R, false), -0.02 * R)];
-  // level gauge on the left: a clear tube stood off the shell on two connections, with liquid in it
-  const gauge = new THREE.Group(), gx = -1.32, off = 0.2 * R, gTop = SHELL_H * 0.4, gBot = -SHELL_H * 0.38;
+  // packing access manholes, with bolted covers and handles
+  const manhole = () => {
+    const g = nozzle(0.15 * R, 0.1 * R, true);
+    const hd = new THREE.Mesh(new THREE.TorusGeometry(0.06 * R, 0.009 * R, 8, 20, Math.PI), steelMat);
+    hd.rotation.y = Math.PI / 2; hd.position.y = 0.1 * R + 0.15 * R * 0.34 * 1.05; g.add(hd); return g;
+  };
+  const sideNozzles = [onShell(0.95, -SHELL_H * 0.27, manhole(), -0.02 * R), onShell(0.95, SHELL_H * 0.22, manhole(), -0.02 * R)];
+  // level gauge on the sump: a clear tube stood off the shell on two connections, with liquid in it
+  const gauge = new THREE.Group(), gx = -2.25, off = 0.2 * R, gTop = -SHELL_H * 0.1, gBot = -SHELL_H * 0.44;
   const gl = (h, y) => { const c = new THREE.Group(); c.position.set(Math.sin(gx) * (R + off), y, Math.cos(gx) * (R + off)); c.rotation.y = gx; return c; };
   const tube = gl(0, 0);
   const glassMat = new THREE.ShaderMaterial({ uniforms: { uTint: { value: new THREE.Vector3(0.9, 0.95, 1.0) }, uFill: { value: 0.12 } }, vertexShader: partVert, fragmentShader: glassFrag, transparent: true, depthWrite: false });
   const liquidMat = new THREE.ShaderMaterial({ uniforms: { uTint: { value: new THREE.Vector3(0.38, 0.62, 0.78) }, uFill: { value: 0.82 } }, vertexShader: partVert, fragmentShader: glassFrag, transparent: true });
-  const level = gBot + (gTop - gBot) * 0.62;
+  const level = gBot + (gTop - gBot) * 0.55;
   tube.add(mesh(cylG(0.026 * R, level - gBot, 20), liquidMat, 0, (level + gBot) / 2, 0));
   tube.add(mesh(cylG(0.036 * R, gTop - gBot, 24), glassMat, 0, (gTop + gBot) / 2, 0));
   [gTop, gBot].forEach(y => {
-    tube.add(mesh(cylG(0.05 * R, 0.05 * R, 20), steelMat, 0, y + (y > 0 ? 0.03 : -0.03) * R, 0));                // caps
+    tube.add(mesh(cylG(0.05 * R, 0.05 * R, 20), steelMat, 0, y + (y > gBot ? 0.03 : -0.03) * R, 0));                // caps
     const arm = mesh(cylG(0.026 * R, off, 16), partMat, 0, y, -off / 2); arm.rotation.x = Math.PI / 2; tube.add(arm);   // connection to the shell
     tube.add(mesh(new THREE.BoxGeometry(0.07 * R, 0.07 * R, 0.07 * R), steelMat, 0, y, -off * 0.45));                 // isolating valve
-    const lever = mesh(new THREE.BoxGeometry(0.11 * R, 0.014 * R, 0.02 * R), steelMat, 0.05 * R, y + 0.045 * R, -off * 0.45); tube.add(lever);
+    tube.add(mesh(new THREE.BoxGeometry(0.11 * R, 0.014 * R, 0.02 * R), steelMat, 0.05 * R, y + 0.045 * R, -off * 0.45));
   });
   body.add(tube);
   tube.traverse(o => { if (o.material === glassMat) o.renderOrder = 3; else if (o.material === liquidMat) o.renderOrder = 2; });
@@ -374,7 +389,7 @@ async function init() {
     g.fillStyle = '#c9ccd0'; g.fillRect(0, 0, 512, 320);
     g.strokeStyle = '#8d9298'; g.lineWidth = 8; g.strokeRect(14, 14, 484, 292);
     g.fillStyle = '#2b3140'; g.font = '600 64px Poppins, Arial, sans-serif'; g.textAlign = 'center'; g.fillText('PLASTO-FAB', 256, 120);
-    g.font = '400 34px Poppins, Arial, sans-serif'; g.fillText('ANKLESHWAR · INDIA', 256, 180);
+    g.font = '400 34px Poppins, Arial, sans-serif'; g.fillText('WET SCRUBBER · ANKLESHWAR', 256, 180);
     g.fillRect(70, 215, 372, 3); g.fillRect(70, 250, 372, 3);
     [[36, 36], [476, 36], [36, 284], [476, 284]].forEach(([x, y]) => { g.beginPath(); g.arc(x, y, 10, 0, TAU); g.fillStyle = '#9aa0a7'; g.fill(); });
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.NoColorSpace; t.anisotropy = 4; return t;
@@ -386,8 +401,83 @@ async function init() {
       void main(){ vec3 b = texture2D(uMap, vUv).rgb; vec3 n = normalize(vN), v = normalize(cameraPosition - vWorld);
         gl_FragColor = vec4(tone(shade(b, n, v, 0.32, 0.65, 1.0)), 1.0); }`,
   }));
-  const pa = 0.42; plate.position.set(Math.sin(pa) * (R + 0.004), -SHELL_H * 0.2, Math.cos(pa) * (R + 0.004)); plate.rotation.y = pa;
+  const pa = 0.3; plate.position.set(Math.sin(pa) * (R + 0.004), -SHELL_H * 0.13, Math.cos(pa) * (R + 0.004)); plate.rotation.y = pa;
   body.add(plate);
+
+  // the plant round the column. Each rig is built in a frame turned to its angle: +z points out from the axis
+  const motorMat = mat({ color: new THREE.Vector3(0.14, 0.26, 0.46), rough: { value: 0.36 }, metal: 0.15, frp: false });
+  const yellowMat = mat({ color: new THREE.Vector3(0.86, 0.64, 0.07), rough: { value: 0.42 }, frp: false });
+  const galvMat = mat({ color: new THREE.Vector3(0.6, 0.62, 0.64), rough: { value: 0.55 }, metal: 0.55, frp: false });
+  const concMat = mat({ color: new THREE.Vector3(0.66, 0.65, 0.62), rough: { value: 0.9 }, frp: false });
+  const rig = theta => { const g = new THREE.Group(); g.rotation.y = theta; body.add(g); return g; };
+  const box = (w, h, d, m, x, y, z) => mesh(new THREE.BoxGeometry(w, h, d), m, x, y, z);
+  const pipe = (r, len, m, x, y, z, axis) => { const o = mesh(cylG(r, len, 20), m, x, y, z); if (axis === 'z') o.rotation.x = Math.PI / 2; if (axis === 'x') o.rotation.z = Math.PI / 2; return o; };
+  // a centrifugal casing: the spiral volute with its tangential outlet (+u), extruded along z
+  const volute = (r0, r1, L, depth) => {
+    const sh = new THREE.Shape(), n = 64;
+    for (let i = 0; i <= n; i++) {
+      const a = 0.04 + (TAU - 0.04) * i / n, th = Math.PI / 2 - a, r = r0 + (r1 - r0) * a / TAU;
+      i ? sh.lineTo(r * Math.cos(th), r * Math.sin(th)) : sh.moveTo(r * Math.cos(th), r * Math.sin(th));
+    }
+    sh.lineTo(L, r1); sh.lineTo(L, r0); sh.closePath();
+    const bev = depth * 0.08;
+    const g = new THREE.ExtrudeGeometry(sh, { depth: depth - 2 * bev, bevelEnabled: true, bevelThickness: bev, bevelSize: bev * 0.8, bevelSegments: 3, curveSegments: 4 });
+    g.translate(0, 0, -(depth - 2 * bev) / 2);
+    return g;
+  };
+
+  // centrifugal blower, pushing the fumes into the column's inlet low on the right
+  const blower = rig(2.2), yIn = -SHELL_H * 0.3;
+  const VR0 = 0.26 * R, VR1 = 0.5 * R, VL = 0.5 * R, VD = 0.3 * R, vy = yIn - (VR0 + VR1) / 2, vz = R + 0.14 * R + 0.3 * R + VL;
+  const inlet = nozzle(0.13 * R, 0.14 * R, false); inlet.rotation.x = Math.PI / 2; inlet.position.set(0, yIn, R - 0.02 * R); blower.add(inlet);
+  blower.add(pipe(0.12 * R, vz - VL - (R + 0.14 * R), partMat, 0, yIn, (vz - VL + R + 0.14 * R) / 2, 'z'));                // duct
+  blower.add(box(VD + 0.08 * R, VR1 - VR0 + 0.08 * R, 0.035 * R, partMat, 0, yIn, vz - VL));                                // outlet flange
+  const casing = mesh(volute(VR0, VR1, VL, VD), partMat, 0, vy, vz); casing.rotation.y = Math.PI / 2; blower.add(casing);
+  const eye = nozzle(0.16 * R, 0.1 * R, false); eye.rotation.z = Math.PI / 2; eye.position.set(-VD / 2, vy, vz); blower.add(eye);
+  blower.add(pipe(0.055 * R, 0.12 * R, steelMat, VD / 2 + 0.06 * R, vy, vz, 'x'));                                           // coupling guard
+  blower.add(pipe(0.17 * R, 0.42 * R, motorMat, VD / 2 + 0.12 * R + 0.21 * R, vy, vz, 'x'));                                 // motor
+  blower.add(pipe(0.15 * R, 0.07 * R, motorMat, VD / 2 + 0.12 * R + 0.455 * R, vy, vz, 'x'));                               // fan cowl
+  for (let i = 0; i < 10; i++) { const a = i / 10 * TAU; const f = box(0.36 * R, 0.012 * R, 0.03 * R, motorMat, VD / 2 + 0.33 * R, vy + Math.sin(a) * 0.17 * R, vz + Math.cos(a) * 0.17 * R); f.rotation.x = -a; blower.add(f); }   // cooling fins
+  blower.add(box(0.12 * R, 0.08 * R, 0.12 * R, motorMat, VD / 2 + 0.3 * R, vy + 0.2 * R, vz));                               // terminal box
+  blower.add(box(VD * 0.9, vy - 0.42 * R - GROUND, 0.5 * R, galvMat, 0, (vy - 0.42 * R + GROUND) / 2, vz));                  // casing stool
+  blower.add(box(0.38 * R, vy - 0.17 * R - GROUND, 0.3 * R, galvMat, VD / 2 + 0.33 * R, (vy - 0.17 * R + GROUND) / 2, vz)); // motor stool
+  blower.add(box(1.2 * R, 0.05 * R, 0.8 * R, concMat, 0.25 * R, GROUND + 0.025 * R, vz));                                   // plinth
+
+  // recirculation pump on its plinth: draws from the sump, sends the liquor up to the spray header
+  const pump = rig(-1.55), yS = -SHELL_H / 2 + 0.12 * R, yTop = SHELL_H * 0.4, pz = 1.5 * R, px = -0.11 * R;
+  pump.add(box(0.5 * R, yS - 0.17 * R - GROUND, 0.75 * R, concMat, 0, (yS - 0.17 * R + GROUND) / 2, pz + 0.18 * R));         // plinth
+  const pc = mesh(volute(0.08 * R, 0.14 * R, 0.13 * R, 0.1 * R), partMat, 0, yS, pz); pc.rotation.z = Math.PI / 2; pump.add(pc);
+  pump.add(pipe(0.085 * R, 0.3 * R, motorMat, 0, yS, pz + 0.28 * R, 'z'));                                                   // motor
+  pump.add(box(0.2 * R, 0.035 * R, 0.55 * R, galvMat, 0, yS - 0.12 * R, pz + 0.15 * R));                                    // base frame
+  const suct = nozzle(0.05 * R, 0.1 * R, false); suct.rotation.x = Math.PI / 2; suct.position.set(0, yS, R - 0.02 * R); pump.add(suct);
+  pump.add(pipe(0.045 * R, pz - 0.05 * R - (R + 0.1 * R), partMat, 0, yS, (pz - 0.05 * R + R + 0.1 * R) / 2, 'z'));          // suction line
+  pump.add(pipe(0.045 * R, yTop - 0.12 * R - (yS + 0.13 * R), partMat, px, (yTop - 0.12 * R + yS + 0.13 * R) / 2, pz));      // riser
+  const elbow = mesh(new THREE.TorusGeometry(0.12 * R, 0.045 * R, 12, 18, Math.PI / 2), partMat, px, yTop - 0.12 * R, pz - 0.12 * R); elbow.rotation.y = -Math.PI / 2; pump.add(elbow);
+  pump.add(pipe(0.045 * R, pz - 0.12 * R - (R + 0.1 * R), partMat, px, yTop, (pz - 0.12 * R + R + 0.1 * R) / 2, 'z'));      // into the spray header
+  const spray = nozzle(0.05 * R, 0.1 * R, false); spray.rotation.x = Math.PI / 2; spray.position.set(px, yTop, Math.sqrt(R * R - px * px) - 0.02 * R); pump.add(spray);
+  const vY = yS + 0.55 * R;                                                                                                  // discharge valve with its handwheel
+  pump.add(box(0.13 * R, 0.1 * R, 0.13 * R, partMat, px, vY, pz));
+  pump.add(pipe(0.01 * R, 0.12 * R, steelMat, px, vY, pz - 0.12 * R, 'z'));
+  const wheel = mesh(new THREE.TorusGeometry(0.07 * R, 0.01 * R, 8, 24), steelMat, px, vY, pz - 0.18 * R); pump.add(wheel);
+  [-0.05, 0.4, 0.85].forEach(f => pump.add(box(0.03 * R, 0.03 * R, pz - R, galvMat, px, mix(yS + 0.6 * R, yTop - 0.3 * R, f), (pz + R) / 2)));   // pipe supports
+
+  // access platform round the back of the column, with a caged ladder up to it
+  const yP = SHELL_H / 2 - 0.02 * R, pr = 1.55 * R, a0 = 1.7, aL = TAU - 3.4;
+  const deck = new THREE.Group(); body.add(deck);
+  deck.add(mesh(new THREE.CylinderGeometry(pr, pr, 0.035 * R, 72, 1, false, a0, aL), galvMat, 0, yP, 0));
+  const band = (r, h, y, m) => mesh(new THREE.CylinderGeometry(r, r, h, 72, 1, true, a0, aL), m, 0, y, 0);
+  deck.add(band(pr, 0.06 * R, yP + 0.045 * R, yellowMat), band(pr, 0.022 * R, yP + 0.24 * R, yellowMat), band(pr, 0.026 * R, yP + 0.44 * R, yellowMat));
+  for (let i = 0; i <= 9; i++) {
+    const a = a0 + aL * i / 9;
+    deck.add(mesh(cylG(0.016 * R, 0.44 * R, 8), yellowMat, Math.sin(a) * pr, yP + 0.22 * R, Math.cos(a) * pr));          // posts
+    const k = box(0.025 * R, 0.025 * R, pr - R, galvMat, Math.sin(a) * (pr + R) / 2, yP - 0.06 * R, Math.cos(a) * (pr + R) / 2); k.rotation.y = a; deck.add(k);   // brackets
+  }
+  const ladder = rig(-2.75), lz = R + 0.16 * R, lTop = yP + 0.45 * R;
+  [-0.09, 0.09].forEach(x => ladder.add(mesh(cylG(0.014 * R, lTop - GROUND, 8), yellowMat, x * R, (lTop + GROUND) / 2, lz)));
+  for (let y = GROUND + 0.12 * R; y < yP; y += 0.12 * R) ladder.add(pipe(0.009 * R, 0.18 * R, yellowMat, 0, y, lz, 'x'));
+  for (let y = GROUND + 0.9 * R; y < lTop; y += 0.38 * R) ladder.add(mesh(new THREE.CylinderGeometry(0.2 * R, 0.2 * R, 0.016 * R, 24, 1, true, -Math.PI / 2, Math.PI), yellowMat, 0, y, lz));   // cage hoops
+  [-1.2, 0, 1.2].forEach(a => ladder.add(mesh(cylG(0.008 * R, lTop - GROUND - 0.9 * R, 6), yellowMat, Math.sin(a) * 0.2 * R, (lTop + GROUND + 0.9 * R) / 2, lz + Math.cos(a) * 0.2 * R)));
+  const rigs = [blower, pump, deck, ladder];
 
   top.position.y = SHELL_H / 2; bottom.position.y = -SHELL_H / 2;
   top.visible = bottom.visible = body.visible = false;
@@ -462,8 +552,9 @@ async function init() {
   function spot(box, out) {
     const r = box.getBoundingClientRect(), pin = box.closest('.mat__pin').getBoundingClientRect();
     toWorld(r.left + r.width / 2, r.top - pin.top + r.height / 2, out);
-    const s = Math.min(r.height / TOTAL_H, r.width / (2.6 * R)) * unit;   // world units per tank unit
-    out.y -= BOX_MID * s;                                                  // centre the whole tank, not the shell
+    const s = Math.min(r.height / TOTAL_H, r.width / BOX_W) * unit;   // world units per tank unit
+    out.y -= BOX_MID * s;                                              // centre the whole system, not the shell
+    out.x -= BOX_MIDX * s;
     return s;
   }
   const P = new THREE.Vector3(), tmp = new THREE.Vector3(), tmp2 = new THREE.Vector3(), tmp3 = new THREE.Vector3();
@@ -491,21 +582,22 @@ async function init() {
     // size: the logo's own width, then the sheet fitting the screen, then the tank fitting it
     const logoW = Math.min(vw * (narrow ? 0.9 : 0.78), 1000) * unit;
     const sheetS = Math.min(vw * (narrow ? 0.92 : 0.8), 1150) * unit / SHEET_W;
-    const tankS = Math.min(vh * (narrow ? 0.5 : 0.62) / TOTAL_H, vw * 0.7 / (2 * R)) * unit;
+    const tankS = Math.min(vh * (narrow ? 0.56 : 0.7) / TOTAL_H, vw * 0.8 / BOX_W) * unit;
     let S = mix(logoW, sheetS, grow);
-    S = mix(S, tankS, ease(seg(p, 0.13, 0.36)));
+    const asTank = ease(seg(p, 0.13, 0.36));
+    S = mix(S, tankS, asTank);
     toWorld(cx, vh * 0.5, P);
+    P.y -= BOX_MID * S * asTank;                       // centre the whole system, stack to ground
 
     // turn: the seam comes round to the front-right while it is welded, then one full turn
     let turn = SEAM_TURN * ease(seg(p, 0.12, 0.24)) - TAU * ease(seg(p, 0.36, 0.5));
 
     // set low like a horizon (the top head showing), then back up
     const atH = ease(seg(p, 0.52, 0.6)) * (1 - ease(seg(p, 0.9, 1)));
-    // the head spans most of the width, low enough that the manway stays below the statement
-    const hS = (narrow ? vw * 0.62 : Math.min(vw * 0.36, vh * 0.62)) / R * unit;
+    // the head spans much of the width, low enough that the stack stays below the statement
+    const hS = (narrow ? Math.min(vw * 0.3, vh * 0.17) : Math.min(vw * 0.13, vh * 0.22)) / R * unit;
     S = mix(S, hS, atH);
-    const topLocal = SHELL_H / 2 + HEAD;
-    toWorld(cx, vh - vh * (narrow ? 0.12 : 0.14), tmp).y -= topLocal * hS;
+    toWorld(cx, vh * (narrow ? 0.62 : 0.56), tmp).y -= STACK_TOP * hS;
     P.lerp(tmp, atH);
     turn += atH * 0.25;
 
@@ -538,6 +630,7 @@ async function init() {
     rings.forEach(m => m.scale.set(1, hv, 1));
     sideNozzles.forEach(h => h.scale.setScalar(hv));
     tube.scale.setScalar(hv); plate.scale.setScalar(hv);
+    rigs.forEach(g => g.scale.setScalar(hv));
 
     // the weld head and its haze
     HU.uOn.value = weld > 0 && weld < 1 ? Math.sin(Math.PI * weld) : 0;
@@ -547,8 +640,8 @@ async function init() {
 
     // shadow under the skirt, only once it stands
     const stand = heads * (1 - atH);
-    shadow.position.set(P.x, P.y - (SHELL_H / 2 + HEAD * 0.55 + SKIRT) * S, P.z - R * S);
-    shadow.scale.set(R * 3.6 * S, R * 0.55 * S, 1);
+    shadow.position.set(P.x + BOX_MIDX * S * (1 - atH), P.y + GROUND * S, P.z - R * S);
+    shadow.scale.set(BOX_W * 1.25 * S, R * 0.6 * S, 1);
     shadow.material.uniforms.uA.value = 0.32 * stand;
     shadow.visible = stand > 0.01;
 

@@ -10,13 +10,13 @@ python3 -m http.server 5191 --directory plastofab-site
 
 | Section | What happens |
 |---|---|
-| Welcome (`.intro`, one pinned scene) | "Welcome to" and the real logo. As you scroll, a flat plastic sheet with the logo printed on it slides in. It **rolls into a cylinder**, the seam is **welded** (a hot bead runs up it), the **dished heads** grow on, and the finished tank **spins once**. It then sinks to the horizon with its top showing at the bottom centre while **"Creating shapes that matter."** rises in word by word (`js/ui.js`). Finally the tank comes back up to the centre. |
-| Thermoplastics (`.mat--thermo`) | The tank moves beside the list and changes material as each line comes into view: PP-H, HDPE, PVC-U, CPVC, PVDF and ECTFE, each with its own colour and gloss. A weld ring glows on each change. |
-| Composites (`.mat--frp`) | Glass-fibre roving **winds helically** over the liner (the FRP wrap of a dual-laminate tank), with a lime band at the winding head. |
+| Welcome (`.intro`, one pinned scene) | "Welcome to" and the real logo. As you scroll, a flat plastic sheet with the logo printed on it slides in. It **rolls into a cylinder**, the seam is **welded** (a hot bead runs up it), the **dished heads** grow on, and it becomes a **wet scrubber system** that **spins once**. It then sinks to the horizon with its top showing at the bottom centre while **"Creating shapes that matter."** rises in word by word (`js/ui.js`). Finally it comes back up to the centre. |
+| Thermoplastics (`.mat--thermo`) | The scrubber moves beside the list and changes material as each line comes into view: PP-H, HDPE, PVC-U, CPVC, PVDF and ECTFE, each with its own colour and gloss. A weld ring glows on each change. |
+| Composites (`.mat--frp`) | Glass-fibre roving **winds helically** over the liner (the FRP wrap of a dual-laminate scrubber), with a lime band at the winding head. |
 
-The tank is meant to look like real equipment. It has a manway with a handle, flanged nozzles with studs and nuts, lifting lugs, stiffener rings, a skirt and base ring, a glass level gauge with liquid in it, and a nameplate. It is lit by a studio light setup (softboxes, ceiling and floor bounce) with ACES tone mapping.
+The scrubber is meant to look like real equipment: a packed column with an exhaust stack, a centrifugal blower (blue motor) feeding the low inlet, a recirculation pump on a plinth with its riser, valve and spray-header line, packing manholes, body flanges, a sump level gauge, a yellow caged ladder up to a top platform, and a nameplate. It is lit by a studio light setup (softboxes, ceiling and floor bounce) with ACES tone mapping.
 
-- The tank follows the `.mat__tank` boxes, so CSS controls where it sits at every width.
+- The scrubber follows the `.mat__tank` boxes, so CSS controls where it sits at every width.
 - Browsers without WebGL get the static logo (`.no-webgl`).
 - **To change the scene, edit `js/tank-story.js`, then run `./build.sh`.** The page loads `js/tank-story.min.js`, which is that file bundled with only the parts of Three.js it uses. After rebuilding, bump its `?v=` in `index.html` (both the `modulepreload` and the `script` tag).
 - To stay fast, the canvas:
@@ -26,9 +26,10 @@ The tank is meant to look like real equipment. It has a manway with a handle, fl
 
 ## The rest of the home page
 
-- **The range:** a coverflow of the 7 product families with real shop-floor photos, starting on Scrubbing Systems. Each card's "Get a quote" ticks the matching project type in the form at the bottom.
+- **Product portfolio** (`.port`): nine equipment families as studio renders on a 3D ring that turns as you scroll, with each family's text and an index to jump to it. The renders are illustrations made with Codex image generation (`ref/renders/`, converted by `python3 make.py` there into `assets/portfolio/`).
+- **Work gallery** (`#range`): 10 cards of real work photos in a strip that scrolls sideways (arrows, drag, swipe or arrow keys), including FRP/GRP, thermoplastic and separation tanks. Each card's "Get a quote" ticks the matching project type in the form at the bottom.
 - **Industries:** chemical, pharma, water, electroplating and the others they serve.
-- **Process:** five steps (material, shaping, welding, inspection, delivery and installation) as a deck of shop photos, with a step bar. "View photo" opens the current one full size.
+- **Process:** five steps (material, design, manufacturing, inspect, dispatch) as a deck of shop photos (the design step is a general-arrangement drawing, `assets/pages/design/scrubber-drawing.svg`), with a step bar. "View photo" opens the current one full size.
 - **Proof:**
   - figures: founded 1992, 250+ clients, 1,500+ projects, 25+ products
   - four cards: German welding equipment, DVS 2207–2208, imported machinery and the 12,000 sq ft shop

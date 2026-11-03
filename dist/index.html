@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/site.css?v=2">
+<link rel="stylesheet" href="css/site.css?v=4">
 <link rel="stylesheet" href="css/pages.css?v=1">
 <link rel="icon" href="assets/brand/favicon.png">
-<link rel="modulepreload" href="js/tank-story.min.js?v=6">
+<link rel="modulepreload" href="js/tank-story.min.js?v=8">
 </head>
 <body>
 
@@ -33,7 +33,7 @@
 <!-- /site-header -->
 
 <main id="top">
-  <!-- 1 · welcome → the logo becomes a printed sheet → it rolls and is welded into a tank
+  <!-- 1 · welcome → the logo becomes a printed sheet → it rolls and is welded into a scrubber column
        → the tank turns once and sets low → the statement rises above it (one pinned scene) -->
   <section class="intro" aria-label="Welcome">
     <div class="intro__pin">
@@ -50,7 +50,7 @@
     </div>
   </section>
 
-  <!-- 2 · thermoplastics: the tank takes on each material in turn -->
+  <!-- 2 · thermoplastics: the scrubber takes on each material in turn -->
   <section class="mat mat--thermo" id="thermoplastics" aria-labelledby="thermo-title">
     <div class="mat__pin">
       <div class="mat__text">
@@ -88,132 +88,199 @@
     </div>
   </section>
 
-  <!-- 4 · the range -->
+  <!-- 4 · the product portfolio: rendered equipment on a turning ring -->
+  <section class="port" id="portfolio" aria-labelledby="port-title">
+    <div class="port__pin">
+      <div class="wrap port__layout">
+        <div class="port__info">
+          <span class="eyebrow">Our product portfolio</span>
+          <h2 id="port-title">Nine families of <span class="grad">process equipment.</span></h2>
+          <div class="port__detail" aria-live="polite">
+            <article class="pdet is-active">
+              <span class="pdet__n">01 / 09 · Pollution control</span>
+              <h3>Scrubbing Systems</h3>
+              <p>Wet scrubbers and packed columns that strip acid fumes and particles from exhaust, supplied turnkey with blowers, pumps, mist eliminators and stacks.</p>
+              <a class="pdet__link" href="products.html#scrubbers">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">02 / 09 · Glass-fibre reinforced</span>
+              <h3>FRP / GRP Tanks</h3>
+              <p>Filament-wound FRP and GRP tanks in polyester or vinyl ester resin: light, strong and corrosion-proof, for storage and process duty.</p>
+              <a class="pdet__link" href="products.html#storage">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">03 / 09 · PP · HDPE · PVC · PVDF</span>
+              <h3>Thermoplastic Tanks</h3>
+              <p>Welded thermoplastic tanks in the polymer that suits the chemical, from small day tanks to large vertical storage, round or rectangular.</p>
+              <a class="pdet__link" href="products.html#storage">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">04 / 09 · Settling and separation</span>
+              <h3>Separation Tanks</h3>
+              <p>Compartmented tanks with weirs and baffles that separate oil, solids and liquids before treatment or discharge.</p>
+              <a class="pdet__link" href="products.html#storage">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">05 / 09 · Process vessels</span>
+              <h3>Reaction Vessels</h3>
+              <p>Vessels for chemical reactions, designed for the dynamic and hydrostatic loads of the process, up to 80 kL.</p>
+              <a class="pdet__link" href="products.html#vessels">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">06 / 09 · Vacuum and pressure</span>
+              <h3>Vacuum Receivers</h3>
+              <p>Receivers and traps built to hold full vacuum, and pressure tanks rated up to 8 kg/cm², in the material your chemical needs.</p>
+              <a class="pdet__link" href="products.html#vacuum">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">07 / 09 · Three decades of blowers</span>
+              <h3>Centrifugal Blowers</h3>
+              <p>Custom centrifugal blowers in PP and FRP for corrosive fumes and moist gases.</p>
+              <a class="pdet__link" href="products.html#blowers">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">08 / 09 · Ø 300 – 5,000 mm</span>
+              <h3>Ducting &amp; Stacks</h3>
+              <p>Non-metallic ducts, pipes, bends and stacks, assembled in our shop to cut installation time, with piping work at site.</p>
+              <a class="pdet__link" href="products.html#ducting">Explore the range →</a>
+            </article>
+            <article class="pdet">
+              <span class="pdet__n">09 / 09 · Electro-coagulation &amp; ozone</span>
+              <h3>Sewage Treatment Plants</h3>
+              <p>Chemical-free, skid-mounted sewage treatment with a small footprint and low running cost.</p>
+              <a class="pdet__link" href="water-treatment.html">Explore the range →</a>
+            </article>
+          </div>
+          <ol class="port__index" aria-label="Product families"><li><button type="button" data-port-go="0"><span>01</span>Scrubbing Systems</button></li><li><button type="button" data-port-go="1"><span>02</span>FRP / GRP Tanks</button></li><li><button type="button" data-port-go="2"><span>03</span>Thermoplastic Tanks</button></li><li><button type="button" data-port-go="3"><span>04</span>Separation Tanks</button></li><li><button type="button" data-port-go="4"><span>05</span>Reaction Vessels</button></li><li><button type="button" data-port-go="5"><span>06</span>Vacuum Receivers</button></li><li><button type="button" data-port-go="6"><span>07</span>Centrifugal Blowers</button></li><li><button type="button" data-port-go="7"><span>08</span>Ducting &amp; Stacks</button></li><li><button type="button" data-port-go="8"><span>09</span>Sewage Treatment Plants</button></li></ol>
+        </div>
+        <div class="port__stage" aria-hidden="true">
+          <div class="port__floor"></div>
+          <div class="port__ring" data-ring><figure class="pitem" data-port-item><img src="assets/portfolio/scrubber.webp" alt="Scrubbing Systems (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/frp-tanks.webp" alt="FRP / GRP Tanks (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/thermo-tank.webp" alt="Thermoplastic Tanks (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/separation-tank.webp" alt="Separation Tanks (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/reaction-vessel.webp" alt="Reaction Vessels (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/vacuum-receiver.webp" alt="Vacuum Receivers (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/blower.webp" alt="Centrifugal Blowers (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/ducting.webp" alt="Ducting &amp; Stacks (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure><figure class="pitem" data-port-item><img src="assets/portfolio/stp.webp" alt="Sewage Treatment Plants (illustration)" width="900" height="900" loading="lazy" decoding="async" draggable="false"></figure></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4b · the work gallery: real photos in a sideways strip -->
   <section class="range" id="range" aria-labelledby="range-title">
     <div class="wrap">
       <div class="range__bar">
         <div>
-          <span class="eyebrow">What we make</span>
+          <span class="eyebrow">Work gallery · what we make</span>
           <h2 id="range-title">Engineered against corrosion.</h2>
         </div>
         <div class="range__nav">
-          <span class="range__count" data-count aria-live="polite">04 / 07</span>
-          <button class="round" type="button" data-prev aria-label="Previous product"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
-          <button class="round" type="button" data-next aria-label="Next product"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <span class="range__count" data-count aria-live="polite">01 / 10</span>
+          <button class="round" type="button" data-prev aria-label="Scroll back"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <button class="round" type="button" data-next aria-label="Scroll on"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
         </div>
       </div>
     </div>
-
-    <div class="range__stage">
-      <ul class="range__track" data-track>
-        <li class="pcard" style="--tone:#d8a400">
-          <div class="pcard__inner">
-            <div class="pcard__face pcard__front">
-              <img src="assets/pages/wix/storage-tanks/21-t.webp" alt="Yellow vertical PP storage tanks" width="540" height="720" loading="lazy">
-              <h3>Storage<br>Tanks</h3>
-            </div>
-            <div class="pcard__face pcard__back">
-              <span class="pcard__ci">FRP · thermoplastic</span>
-              <h3>Storage Tanks</h3>
-              <p>For liquids and gases in industrial service, entirely in FRP or thermoplastic, as each client needs. Pickling tanks for metal surface treatment too.</p>
-              <ul class="chips"><li>Ø 300–6,000 mm</li><li>Double wall</li><li>Leak monitoring</li><li>Pickling tanks</li></ul>
-              <a class="pcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
-            </div>
+    <div class="gal" data-gal tabindex="0" aria-label="Work gallery, scrolls sideways">
+      <ul class="gal__track">
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/scrubbing-system/01-t.webp" alt="Scrubbing Systems: work by Plasto-Fab" width="540" height="720" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">01 · Pollution control</span>
+            <h3>Scrubbing Systems</h3>
+            <p>Scrubbers and columns that remove particles and gases from exhaust, with the fans, mist eliminators and stacks to match.</p>
+            <ul class="chips"><li>Wet scrubbers</li><li>Columns</li><li>Turnkey</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Scrubber">Get a quote →</a>
           </div>
         </li>
-        <li class="pcard" style="--tone:#1f9e78">
-          <div class="pcard__inner">
-            <div class="pcard__face pcard__front">
-              <img src="assets/pages/wix/reaction-vessels/01-t.webp" alt="A green FRP reaction vessel" width="720" height="540" loading="lazy">
-              <h3>Reaction<br>Vessels</h3>
-            </div>
-            <div class="pcard__face pcard__back">
-              <span class="pcard__ci">Process vessels</span>
-              <h3>Reaction Vessels</h3>
-              <p>For chemical reactions, designed for the dynamic and hydrostatic loads of the process. Process tanks for highly corrosive media.</p>
-              <ul class="chips"><li>Corrosive media</li><li>Up to 80 kL</li><li>Special designs</li></ul>
-              <a class="pcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
-            </div>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/storage-tanks/21-t.webp" alt="Storage Tanks: work by Plasto-Fab" width="540" height="720" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">02 · FRP · thermoplastic</span>
+            <h3>Storage Tanks</h3>
+            <p>For liquids and gases in industrial service, entirely in FRP or thermoplastic. Pickling tanks for metal surface treatment too.</p>
+            <ul class="chips"><li>Ø 300–6,000 mm</li><li>Double wall</li><li>Leak monitoring</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
           </div>
         </li>
-        <li class="pcard" style="--tone:#e2a400">
-          <div class="pcard__inner">
-            <div class="pcard__face pcard__front">
-              <img src="assets/pages/wix/vacuum-receiver/04-t.webp" alt="A yellow vacuum receiver on legs" width="405" height="720" loading="lazy">
-              <h3>Vacuum<br>Receivers</h3>
-            </div>
-            <div class="pcard__face pcard__back">
-              <span class="pcard__ci">Vacuum &amp; pressure</span>
-              <h3>Vacuum Receivers &amp; Pressure Tanks</h3>
-              <p>Vacuum traps in the material that suits your chemical, built to hold full vacuum, and receivers that take up to 8 kg/cm².</p>
-              <ul class="chips"><li>Full vacuum</li><li>8 kg/cm²</li><li>Any MOC</li></ul>
-              <a class="pcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
-            </div>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/storage-tanks/18-t.webp" alt="FRP / GRP Tanks: work by Plasto-Fab" width="720" height="324" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">03 · Glass-fibre reinforced</span>
+            <h3>FRP / GRP Tanks</h3>
+            <p>Light, strong tanks in polyester or vinyl ester resin, alone or over a thermoplastic liner as dual laminate.</p>
+            <ul class="chips"><li>FRP</li><li>GRP</li><li>Dual laminate</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
           </div>
         </li>
-        <li class="pcard" style="--tone:#2f6db5" data-start>
-          <div class="pcard__inner">
-            <div class="pcard__face pcard__front">
-              <img src="assets/pages/wix/scrubbing-system/01-t.webp" alt="White PP scrubber columns" width="540" height="720" loading="lazy">
-              <h3>Scrubbing<br>Systems</h3>
-            </div>
-            <div class="pcard__face pcard__back">
-              <span class="pcard__ci">Pollution control</span>
-              <h3>Scrubbing Systems</h3>
-              <p>Scrubbers and columns that remove particles and gases from industrial exhaust streams, with the fans, mist eliminators and stacks to match.</p>
-              <ul class="chips"><li>Wet scrubbers</li><li>Columns</li><li>Mist eliminators</li><li>Turnkey</li></ul>
-              <a class="pcard__cta" href="#contact" data-sample="Scrubber">Get a quote →</a>
-            </div>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/storage-tanks/08-t.webp" alt="Thermoplastic Tanks: work by Plasto-Fab" width="720" height="540" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">04 · PP · HDPE · PVC · PVDF</span>
+            <h3>Thermoplastic Tanks</h3>
+            <p>Welded tanks in the polymer that suits the chemical, round or rectangular, to DVS 2207–2208.</p>
+            <ul class="chips"><li>PP-H</li><li>HDPE</li><li>PVDF</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
           </div>
         </li>
-        <li class="pcard" style="--tone:#e0b000">
-          <div class="pcard__inner">
-            <div class="pcard__face pcard__front">
-              <img src="assets/pages/wix/centrifugal-blower/00-t.webp" alt="A yellow centrifugal blower on a steel frame" width="720" height="540" loading="lazy">
-              <h3>Centrifugal<br>Blowers</h3>
-            </div>
-            <div class="pcard__face pcard__back">
-              <span class="pcard__ci">Three decades</span>
-              <h3>Centrifugal Blowers</h3>
-              <p>Custom-made blowers for corrosive fumes and moist gases, from three decades of building them.</p>
-              <ul class="chips"><li>Corrosive fumes</li><li>Moist gases</li><li>Custom built</li></ul>
-              <a class="pcard__cta" href="#contact" data-sample="Other">Get a quote →</a>
-            </div>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/storage-tanks/13-t.webp" alt="Separation Tanks: work by Plasto-Fab" width="720" height="540" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">05 · Settling and separation</span>
+            <h3>Separation Tanks</h3>
+            <p>Compartmented tanks with weirs and baffles that separate oil, solids and liquids before treatment or discharge.</p>
+            <ul class="chips"><li>Compartments</li><li>Weirs</li><li>Baffles</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
           </div>
         </li>
-        <li class="pcard" style="--tone:#d23b2f">
-          <div class="pcard__inner">
-            <div class="pcard__face pcard__front">
-              <img src="assets/pages/wix/ducting/05-t.webp" alt="A large red FRP duct on site" width="720" height="540" loading="lazy">
-              <h3>Ducting<br>&amp; Stacks</h3>
-            </div>
-            <div class="pcard__face pcard__back">
-              <span class="pcard__ci">Pipes · ducts · stacks</span>
-              <h3>Ducting &amp; Stacks</h3>
-              <p>Pipes and ducting in non-metallic materials, 300 mm to 5,000 mm, assembled in-house to cut installation time. Piping work at site too.</p>
-              <ul class="chips"><li>Ø 300–5,000 mm</li><li>Site piping</li><li>Bends</li></ul>
-              <a class="pcard__cta" href="#contact" data-sample="Piping">Get a quote →</a>
-            </div>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/reaction-vessels/01-t.webp" alt="Reaction Vessels: work by Plasto-Fab" width="720" height="405" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">06 · Process vessels</span>
+            <h3>Reaction Vessels</h3>
+            <p>For chemical reactions, designed for the dynamic and hydrostatic loads of the process.</p>
+            <ul class="chips"><li>Corrosive media</li><li>Up to 80 kL</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
           </div>
         </li>
-        <li class="pcard" style="--tone:#1f7fc8">
-          <div class="pcard__inner">
-            <div class="pcard__face pcard__front">
-              <img src="assets/pages/wix/sewage-plant/02-t.webp" alt="An electro-coagulation sewage treatment plant with blue filter vessels" width="720" height="540" loading="lazy">
-              <h3>Sewage<br>Treatment</h3>
-            </div>
-            <div class="pcard__face pcard__back">
-              <span class="pcard__ci">Electro-coagulation</span>
-              <h3>Sewage Treatment Plants</h3>
-              <p>Chemical-free, non-biological treatment by electro-coagulation and ozone: skid-mounted, small footprint, low running cost.</p>
-              <ul class="chips"><li>Colour −95%</li><li>BOD −85%</li><li>COD −80%</li></ul>
-              <a class="pcard__cta" href="#contact" data-sample="Other">Get a quote →</a>
-            </div>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/vacuum-receiver/04-t.webp" alt="Vacuum Receivers: work by Plasto-Fab" width="324" height="720" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">07 · Vacuum and pressure</span>
+            <h3>Vacuum Receivers</h3>
+            <p>Vacuum traps built to hold full vacuum, and receivers that take up to 8 kg/cm².</p>
+            <ul class="chips"><li>Full vacuum</li><li>8 kg/cm²</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Tank">Get a quote →</a>
+          </div>
+        </li>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/centrifugal-blower/00-t.webp" alt="Centrifugal Blowers: work by Plasto-Fab" width="720" height="405" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">08 · Three decades</span>
+            <h3>Centrifugal Blowers</h3>
+            <p>Custom blowers for corrosive fumes and moist gases.</p>
+            <ul class="chips"><li>Corrosive fumes</li><li>Moist gases</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Other">Get a quote →</a>
+          </div>
+        </li>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/ducting/05-t.webp" alt="Ducting &amp; Stacks: work by Plasto-Fab" width="720" height="540" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">09 · Pipes · ducts · stacks</span>
+            <h3>Ducting &amp; Stacks</h3>
+            <p>Non-metallic pipes and ducts, 300 to 5,000 mm, assembled in-house. Piping work at site too.</p>
+            <ul class="chips"><li>Ø 300–5,000 mm</li><li>Site piping</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Piping">Get a quote →</a>
+          </div>
+        </li>
+        <li class="wcard">
+          <figure class="wcard__ph"><img src="assets/pages/wix/sewage-plant/02-t.webp" alt="Sewage Treatment: work by Plasto-Fab" width="720" height="405" loading="lazy" draggable="false"></figure>
+          <div class="wcard__body">
+            <span class="wcard__k">10 · Electro-coagulation</span>
+            <h3>Sewage Treatment</h3>
+            <p>Chemical-free, non-biological treatment by electro-coagulation and ozone, skid-mounted.</p>
+            <ul class="chips"><li>Colour −95%</li><li>BOD −85%</li><li>COD −80%</li></ul>
+            <a class="wcard__cta" href="#contact" data-sample="Other">Get a quote →</a>
           </div>
         </li>
       </ul>
     </div>
-    <p class="range__hint">Hover or tap a card for details · <a href="products.html">See all 15 products →</a></p>
+    <div class="wrap gal__foot"><span class="gal__bar" aria-hidden="true"><i data-gal-bar></i></span><a href="products.html">See the full catalogue →</a></div>
   </section>
 
   <!-- 5 · industries -->
@@ -239,44 +306,44 @@
     </div>
   </section>
 
-  <!-- 6 · from sheet to shipped: a pinned deck of shop photos, dealt by scroll -->
+  <!-- 6 · from material to dispatch: a pinned deck of shop photos, dealt by scroll -->
   <section class="certs" id="process" aria-labelledby="certs-title">
     <div class="certs__pin">
       <div class="wrap certs__layout">
         <div class="certs__info">
           <span class="eyebrow">How we build</span>
-          <h2 id="certs-title">From sheet <span class="grad">to shipped.</span></h2>
+          <h2 id="certs-title">From material <span class="grad">to dispatch.</span></h2>
 
           <div class="certs__detail" aria-live="polite">
             <article class="cdet is-active">
-              <span class="cdet__tag">01 · Material in motion</span>
-              <h3>Skilled hands, stronger solutions.</h3>
-              <p>Engineering thermoplastic sheet, chosen for the chemical it will hold, is handled and formed by a team that has done it for three decades.</p>
-              <div class="cdet__meta"><span>PP-H</span><span>HDPE</span><span>PVC-U</span><span>PVDF</span></div>
+              <span class="cdet__tag">01 · Material</span>
+              <h3>The right material for the chemical.</h3>
+              <p>Every job starts with the medium, the temperature and the pressure. We choose the thermoplastic, FRP or dual laminate that will last in that service.</p>
+              <div class="cdet__meta"><span>PP-H</span><span>HDPE</span><span>PVC-U</span><span>PVDF</span><span>FRP</span></div>
             </article>
             <article class="cdet">
-              <span class="cdet__tag">02 · Shaping the form</span>
-              <h3>Rolled, bent and fitted.</h3>
-              <p>Precision fabrication for real-world performance, on imported bending and butt-welding machines. We work from your drawings or make the fabrication drawings ourselves.</p>
-              <div class="cdet__meta"><span>Bending machines</span><span>Butt welding</span><span>Your drawings or ours</span></div>
+              <span class="cdet__tag">02 · Design</span>
+              <h3>Engineered before it is cut.</h3>
+              <p>We work from your drawings or make the design and fabrication drawings ourselves, sized for the dynamic and hydrostatic loads of the process.</p>
+              <div class="cdet__meta"><span>Process design</span><span>Fabrication drawings</span><span>Your drawings or ours</span></div>
             </article>
             <article class="cdet">
-              <span class="cdet__tag">03 · Seamless welds</span>
+              <span class="cdet__tag">03 · Manufacturing</span>
               <h3>Fewer joints, greater reliability.</h3>
-              <p>We design out unnecessary joints where we can, and weld the rest with online extrusion welding to DVS 2207–2208, on German Wegener &amp; Widos equipment.</p>
+              <p>Sheets are bent, rolled and welded in our Ankleshwar shop, with online extrusion welding to DVS 2207–2208 on German Wegener &amp; Widos equipment.</p>
               <div class="cdet__meta"><span>DVS 2207–2208</span><span>Wegener</span><span>Widos</span></div>
             </article>
             <article class="cdet">
-              <span class="cdet__tag">04 · Final inspection</span>
+              <span class="cdet__tag">04 · Inspect</span>
               <h3>Tested before it leaves.</h3>
-              <p>Every piece of equipment is checked and tested for the conditions it will face before it leaves our facility.</p>
+              <p>Every piece of equipment is checked and tested for the conditions it will face, and clients are welcome to inspect it with us before dispatch.</p>
               <div class="cdet__meta"><span>Inspection</span><span>Testing</span></div>
             </article>
             <article class="cdet">
-              <span class="cdet__tag">05 · Delivered &amp; installed</span>
-              <h3>Erected and commissioned.</h3>
-              <p>We deliver, erect and commission on site, and come back for field service, repair and installation, wherever the plant is.</p>
-              <div class="cdet__meta"><span>Erection</span><span>Commissioning</span><span>Field service</span></div>
+              <span class="cdet__tag">05 · Dispatch</span>
+              <h3>Packed, loaded and on its way.</h3>
+              <p>Finished equipment is secured and loaded at our works on NH 48, within easy reach of plants across western India and beyond.</p>
+              <div class="cdet__meta"><span>Packing</span><span>Loading</span><span>Delivery</span></div>
             </article>
           </div>
 
@@ -284,10 +351,10 @@
 
           <ol class="certs__steps" aria-label="Steps">
             <li><button type="button" data-goto="0"><span>01</span>Material<i></i></button></li>
-            <li><button type="button" data-goto="1"><span>02</span>Form<i></i></button></li>
-            <li><button type="button" data-goto="2"><span>03</span>Weld<i></i></button></li>
+            <li><button type="button" data-goto="1"><span>02</span>Design<i></i></button></li>
+            <li><button type="button" data-goto="2"><span>03</span>Manufacturing<i></i></button></li>
             <li><button type="button" data-goto="3"><span>04</span>Inspect<i></i></button></li>
-            <li><button type="button" data-goto="4"><span>05</span>Install<i></i></button></li>
+            <li><button type="button" data-goto="4"><span>05</span>Dispatch<i></i></button></li>
           </ol>
         </div>
 
@@ -305,19 +372,19 @@
             </svg>
           </div>
           <div class="deck" data-deck>
-            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/08.webp" data-title="Material in motion" data-meta="Forming a thermoplastic sheet in our Ankleshwar shop" aria-label="Photo: forming a thermoplastic sheet">
+            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/08.webp" data-title="Material" data-meta="Forming a thermoplastic sheet in our Ankleshwar shop" aria-label="Photo: forming a thermoplastic sheet">
               <span class="sheet__paper"><img src="assets/pages/wix/home/08-t.webp" alt="" width="720" height="529"></span><span class="sheet__glare"></span>
             </button>
-            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/09.webp" data-title="Shaping the form" data-meta="A sheet rolled into a shell, held for welding" aria-label="Photo: rolling a sheet into a shell">
-              <span class="sheet__paper"><img src="assets/pages/wix/home/09-t.webp" alt="" width="720" height="550" loading="lazy"></span><span class="sheet__glare"></span>
+            <button class="sheet sheet--photo" type="button" data-src="assets/pages/design/scrubber-drawing.svg" data-title="Design" data-meta="A scrubber system drawn up before fabrication (illustration)" aria-label="Illustration: a scrubber system design drawing">
+              <span class="sheet__paper"><img src="assets/pages/design/scrubber-drawing.svg" alt="" width="1600" height="1200" loading="lazy"></span><span class="sheet__glare"></span>
             </button>
-            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/13.webp" data-title="Seamless welds" data-meta="Extrusion welding inside a large HDPE tank" aria-label="Photo: welding inside a tank">
+            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/13.webp" data-title="Manufacturing" data-meta="Extrusion welding inside a large HDPE tank" aria-label="Photo: welding inside a tank">
               <span class="sheet__paper"><img src="assets/pages/wix/home/13-t.webp" alt="" width="576" height="720" loading="lazy"></span><span class="sheet__glare"></span>
             </button>
-            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/10.webp" data-title="Final inspection" data-meta="A finished vertical HDPE tank under inspection" aria-label="Photo: inspecting a finished tank">
-              <span class="sheet__paper"><img src="assets/pages/wix/home/10-t.webp" alt="" width="720" height="720" loading="lazy"></span><span class="sheet__glare"></span>
+            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/23.webp" data-title="Inspect" data-meta="Inspecting installed equipment with the client's team" aria-label="Photo: inspecting equipment with the client">
+              <span class="sheet__paper"><img src="assets/pages/wix/home/23-t.webp" alt="" width="720" height="324" loading="lazy"></span><span class="sheet__glare"></span>
             </button>
-            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/15.webp" data-title="Delivered" data-meta="PP pickling tanks loaded for dispatch" aria-label="Photo: tanks loaded on a truck">
+            <button class="sheet sheet--photo" type="button" data-src="assets/pages/wix/home/15.webp" data-title="Dispatch" data-meta="PP pickling tanks loaded for dispatch" aria-label="Photo: tanks loaded on a truck">
               <span class="sheet__paper"><img src="assets/pages/wix/home/15-t.webp" alt="" width="720" height="325" loading="lazy"></span><span class="sheet__glare"></span>
             </button>
           </div>
@@ -482,11 +549,11 @@
 
 <script src="js/site.js?v=1"></script>
 <script src="js/nav.js?v=1"></script>
-<script src="js/ui.js?v=2"></script>
+<script src="js/ui.js?v=4"></script>
 <script src="js/home.js?v=1"></script>
 <script src="js/callback.js?v=1"></script>
 <script src="js/ink.js?v=1"></script>
 <!-- js/tank-story.js bundled with Three.js and minified: run ./build.sh after editing it -->
-<script type="module" src="js/tank-story.min.js?v=6"></script>
+<script type="module" src="js/tank-story.min.js?v=8"></script>
 </body>
 </html>

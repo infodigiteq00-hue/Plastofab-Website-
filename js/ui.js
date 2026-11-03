@@ -1,5 +1,5 @@
-/* Page interactions: the statement's word reveal, the product
-   coverflow with flip cards, and the certificate viewer. */
+/* Page interactions: the statement's word reveal, the product portfolio ring,
+   the work gallery strip, and the process deck viewer. */
 (function () {
   'use strict';
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
@@ -64,96 +64,125 @@
     fadeHint();
   })();
 
-  /* ── the range: coverflow + flip cards ─────────────────── */
-  var range = document.querySelector('.range');
-  if (range) (function () {   // own scope, so names never collide with other features
-    var stage = range.querySelector('.range__stage');
-    var cards = Array.prototype.slice.call(range.querySelectorAll('.pcard'));
-    var count = range.querySelector('[data-count]');
-    var n = cards.length;                                 // exactly 7 cards, no loop
-    var active = Math.max(0, cards.findIndex(function (c) { return c.hasAttribute('data-start'); }));   // CPC in the middle: 3 each side
-    var pad = function (v) { return (v < 10 ? '0' : '') + v; };
-
-    var layout = function () {
-      var w = cards[0].offsetWidth, narrow = window.innerWidth < 700;
-      cards.forEach(function (card, i) {
-        var o = i - active, a = Math.abs(o);
-        var x = a === 0 ? 0 : Math.sign(o) * (w * (narrow ? 0.78 : 0.74) + (a - 1) * w * (narrow ? 0.36 : 0.38));
-        var ry = a === 0 ? 0 : -Math.sign(o) * (10 + a * 6);
-        var sc = 1 - a * 0.08;
-        card.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,' + (-a * 130) + 'px) rotateY(' + ry + 'deg) scale(' + sc.toFixed(2) + ')';
-        card.style.opacity = String(a > 3 ? 0 : a === 3 ? 0.5 : a === 2 ? 0.85 : 1);
-        card.style.zIndex = String(20 - a);
-        card.style.pointerEvents = a > 3 ? 'none' : '';
-        card.setAttribute('aria-hidden', String(a > 3));
-        card.classList.toggle('is-active', o === 0);
-        if (o !== 0) card.classList.remove('is-flipped');
-      });
-      count.textContent = pad(active + 1) + ' / ' + pad(n);
+  /* ── product portfolio: rendered equipment on a ring that turns with the scroll ── */
+  var port = document.querySelector('.port');
+  if (port) (function () {
+    var items = Array.prototype.slice.call(port.querySelectorAll('[data-port-item]'));
+    var dets = Array.prototype.slice.call(port.querySelectorAll('.pdet'));
+    var gos = Array.prototype.slice.call(port.querySelectorAll('[data-port-go]'));
+    var stage = port.querySelector('.port__stage');
+    var n = items.length, step = 360 / n, cur = 0, goal = 0, on = -1, raf = 0;
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // 0 → 1 through the pinned section; the ring settles on each item for a moment
+    var progress = function () {
+      var r = port.getBoundingClientRect(), span = port.offsetHeight - window.innerHeight;
+      return clamp(-r.top / Math.max(1, span), 0, 1);
     };
-    var go = function (i) { active = clamp(i, 0, n - 1); layout(); };
-    range.querySelector('[data-prev]').addEventListener('click', function () { go(active - 1); });
-    range.querySelector('[data-next]').addEventListener('click', function () { go(active + 1); });
+    var target = function () {
+      var t = progress() * (n - 1), i = Math.floor(t), f = t - i;
+      f = f < 0.3 ? 0 : f > 0.7 ? 1 : (f - 0.3) / 0.4;   // hold, then turn
+      return i + f * f * (3 - 2 * f);
+    };
+    var draw = function () {
+      var w = stage.offsetWidth, rad = Math.min(w * 0.62, 560), lift = Math.min(w * 0.08, 70);
+      items.forEach(function (it, i) {
+        var d = i - cur;
+        d -= n * Math.round(d / n);                                   // shortest way round
+        var a = d * step * Math.PI / 180, z = (Math.cos(a) - 1) * rad;
+        var x = Math.sin(a) * rad, y = (1 - Math.cos(a)) * -lift;
+        var front = Math.max(0, Math.cos(a));
+        it.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) scale(' + (0.42 + 0.58 * Math.pow(front, 3)).toFixed(3) + ')';
+        it.style.opacity = String(Math.cos(a) < 0 ? 0 : Math.min(1, 0.15 + Math.pow(front, 4)).toFixed(3));
+        it.style.zIndex = String(Math.round(100 + z));
+        it.style.filter = 'saturate(' + (0.4 + 0.6 * front).toFixed(2) + ') brightness(' + (0.9 + 0.1 * front).toFixed(2) + ')';
+      });
+      var a2 = Math.round(cur);
+      if (a2 !== on) {
+        on = a2;
+        dets.forEach(function (d, i) { d.classList.toggle('is-active', i === on); });
+        gos.forEach(function (g, i) { g.classList.toggle('is-on', i === on); g.setAttribute('aria-current', i === on ? 'true' : 'false'); });
+      }
+    };
+    var tick = function () {
+      raf = 0;
+      cur += (goal - cur) * (reducedMotion ? 1 : 0.14);
+      if (Math.abs(goal - cur) < 0.001) cur = goal;
+      draw();
+      if (cur !== goal) raf = requestAnimationFrame(tick);
+    };
+    var update = function () { goal = target(); if (!raf) raf = requestAnimationFrame(tick); };
+    // the index scrolls the page to where that item faces you
+    gos.forEach(function (g, i) {
+      g.addEventListener('click', function () {
+        var span = port.offsetHeight - window.innerHeight;
+        var y = port.getBoundingClientRect().top + window.scrollY + span * (i / (n - 1));
+        window.scrollTo({ top: y, behavior: reducedMotion ? 'auto' : 'smooth' });
+      });
+    });
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', function () { draw(); });
+    goal = cur = target(); draw();
+  })();
 
-    // drag / swipe to browse
-    var startX = null, moved = false;
-    stage.addEventListener('pointerdown', function (e) { startX = e.clientX; moved = false; });
+  /* ── work gallery: a sideways-scrolling strip of real work ── */
+  var gal = document.querySelector('[data-gal]');
+  if (gal) (function () {
+    var range = gal.closest('.range');
+    var cards = Array.prototype.slice.call(gal.querySelectorAll('.wcard'));
+    var count = range.querySelector('[data-count]'), bar = range.querySelector('[data-gal-bar]');
+    var pad = function (v) { return (v < 10 ? '0' : '') + v; };
+    var stepW = function () { return cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : gal.clientWidth; };
+    var at = function () { return clamp(Math.round(gal.scrollLeft / stepW()), 0, cards.length - 1); };
+    var sync = function () {
+      var max = gal.scrollWidth - gal.clientWidth;
+      var i = gal.scrollLeft >= max - 4 ? cards.length - 1 : at();
+      count.textContent = pad(i + 1) + ' / ' + pad(cards.length);
+      if (bar) {
+        var vis = gal.clientWidth / gal.scrollWidth;
+        bar.style.width = (vis * 100).toFixed(2) + '%';
+        bar.style.transform = 'translateX(' + (max > 0 ? gal.scrollLeft / max * (1 / vis - 1) * 100 : 0).toFixed(2) + '%)';
+      }
+    };
+    var go = function (dir) { gal.scrollBy({ left: dir * stepW(), behavior: 'smooth' }); };
+    range.querySelector('[data-prev]').addEventListener('click', function () { go(-1); });
+    range.querySelector('[data-next]').addEventListener('click', function () { go(1); });
+    gal.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { go(1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { go(-1); e.preventDefault(); }
+    });
+    gal.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+
+    // drag with the mouse (touch scrolls natively)
+    var sx = null, sl = 0, dragged = false;
+    gal.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('a')) return;
+      sx = e.clientX; sl = gal.scrollLeft; dragged = false;
+    });
     window.addEventListener('pointermove', function (e) {
-      if (startX === null) return;
-      var dx = e.clientX - startX;
-      if (Math.abs(dx) > 8) { moved = true; stage.classList.add('is-dragging'); }
-      if (Math.abs(dx) > 70) { go(active + (dx < 0 ? 1 : -1)); startX = e.clientX; }
+      if (sx === null) return;
+      var dx = e.clientX - sx;
+      if (!dragged && Math.abs(dx) > 6) { dragged = true; gal.classList.add('is-dragging'); }
+      if (dragged) gal.scrollLeft = sl - dx;
     });
-    window.addEventListener('pointerup', function () { startX = null; stage.classList.remove('is-dragging'); });
+    window.addEventListener('pointerup', function () {
+      if (sx === null) return;
+      sx = null;
+      if (dragged) {
+        gal.classList.remove('is-dragging');
+        gal.scrollTo({ left: at() * stepW(), behavior: 'smooth' });   // settle on a card
+      }
+    });
+    gal.addEventListener('click', function (e) { if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; } }, true);
 
-    // click a side card to bring it forward; tap the front card to flip it (touch screens)
-    cards.forEach(function (card, i) {
-      card.tabIndex = 0;
-      card.addEventListener('click', function (e) {
-        if (moved || e.target.closest('a')) return;
-        if (i !== active) { go(i); restart(); return; }
-        card.classList.toggle('is-flipped');
-      });
-      card.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i !== active) go(i); else card.classList.toggle('is-flipped'); }
-      });
-    });
-    range.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { go(active + 1); e.preventDefault(); }
-      if (e.key === 'ArrowLeft') { go(active - 1); e.preventDefault(); }
-    });
-
-    // "Request a sample" ticks that product in the call-back form
-    range.querySelectorAll('[data-sample]').forEach(function (a) {
+    // "Get a quote" ticks that project type in the form at the bottom
+    gal.querySelectorAll('[data-sample]').forEach(function (a) {
       a.addEventListener('click', function () {
         var box = document.querySelector('.callback input[value="' + a.dataset.sample + '"]');
         if (box) box.checked = true;
       });
     });
-
-    // advance on its own while on screen; wait while a card is hovered, flipped or dragged
-    var onScreen = false, hoverCard = false, timer = 0, dir = 1;
-    stage.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hoverCard = true; });
-    stage.addEventListener('pointerleave', function () { hoverCard = false; });
-    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // after a click, give the chosen card its full time before moving on
-    var restart = function () { if (onScreen && !reducedMotion) { clearInterval(timer); timer = setInterval(advance, 3500); } };
-    var advance = function () {
-      if (!onScreen || hoverCard || startX !== null || range.querySelector('.pcard.is-flipped')) return;
-      if (active + dir < 0 || active + dir > n - 1) dir = -dir;   // glide to one end, then back
-      go(active + dir);
-    };
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        var was = onScreen;
-        onScreen = es[0].isIntersecting;
-        // restart the clock when it comes into view, so the first card always gets its full time
-        if (onScreen && !was && !reducedMotion) { clearInterval(timer); timer = setInterval(advance, 3500); }
-      }, { threshold: 0.35 }).observe(stage);
-    }
-
-    window.addEventListener('resize', layout);
-    layout();
+    sync();
   })();
 
   /* ── certificate viewer ────────────────────────────────── */
