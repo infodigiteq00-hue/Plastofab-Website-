@@ -509,7 +509,8 @@ async function init() {
   let vw = 1, vh = 1, unit = 1;
   let quality = 1, lastKey = '', slow = 0, hidden = false;
   function resize() {
-    vw = innerWidth; vh = innerHeight;
+    // the canvas's own size: on phones it is taller than innerHeight while the address bar shows
+    vw = canvas.clientWidth || innerWidth; vh = canvas.clientHeight || innerHeight;
     const dpr = Math.max(0.6, Math.min(devicePixelRatio, 1.5) * quality);
     renderer.setPixelRatio(dpr);
     renderer.setSize(vw, vh, false);
@@ -580,13 +581,16 @@ async function init() {
     TU.uGrow.value = grow; TU.uBend.value = bend; TU.uHeads.value = heads; TU.uWeld.value = weld;
 
     // size: the logo's own width, then the sheet fitting the screen, then the tank fitting it
-    const logoW = Math.min(vw * (narrow ? 0.9 : 0.78), 1000) * unit;
+    // the page logo's own box, so the WebGL copy lands exactly on it whatever the browser bars do
+    const lr = logoImg.getBoundingClientRect();
+    const logoW = (lr.width || Math.min(vw * (narrow ? 0.9 : 0.78), 1000)) * unit;
     const sheetS = Math.min(vw * (narrow ? 0.92 : 0.8), 1150) * unit / SHEET_W;
     const tankS = Math.min(vh * (narrow ? 0.56 : 0.7) / TOTAL_H, vw * 0.8 / BOX_W) * unit;
     let S = mix(logoW, sheetS, grow);
     const asTank = ease(seg(p, 0.13, 0.36));
     S = mix(S, tankS, asTank);
     toWorld(cx, vh * 0.5, P);
+    if (lr.width) P.lerp(toWorld(lr.left + lr.width / 2, lr.top + lr.height / 2, tmp), 1 - grow);
     P.y -= BOX_MID * S * asTank;                       // centre the whole system, stack to ground
 
     // turn: the seam comes round to the front-right while it is welded, then one full turn
