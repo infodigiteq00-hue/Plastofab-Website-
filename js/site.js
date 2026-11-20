@@ -19,9 +19,22 @@
     var po = new IntersectionObserver(function (entries) {
       var hits = entries.filter(function (e) { return e.isIntersecting; }).map(function (e) { return e.target; });
       hits.sort(function (a, b) { return a.compareDocumentPosition(b) & 4 ? -1 : 1; });   // in reading order
-      hits.forEach(function (el, i) { el.style.setProperty('--pop-d', Math.min(i, 6) * 80 + 'ms'); el.classList.add('is-popped'); po.unobserve(el); });
+      hits.forEach(function (el, i) { el.style.setProperty('--pop-d', Math.min(i, 6) * 80 + 'ms'); el.classList.add('is-popped', 'is-in'); po.unobserve(el); });
     }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
     pops.forEach(function (el) { po.observe(el); });
+    // safety net: when scrolling pauses, anything already at or above the bottom of the screen is shown,
+    // even if a fast scroll carried it past between two observer checks
+    var sweepT = 0;
+    var sweep = function () {
+      pops = pops.filter(function (el) {
+        if (el.classList.contains('is-popped')) return false;
+        if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('is-popped', 'is-in'); po.unobserve(el); return false; }
+        return true;
+      });
+      if (!pops.length) window.removeEventListener('scroll', onSweep);
+    };
+    var onSweep = function () { clearTimeout(sweepT); sweepT = setTimeout(sweep, 180); };
+    window.addEventListener('scroll', onSweep, { passive: true });
   }
 
   var targets = Array.prototype.slice.call(document.querySelectorAll('.reveal'));

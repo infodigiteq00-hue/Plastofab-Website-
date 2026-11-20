@@ -108,7 +108,7 @@ POSTS = [
 <li>A small footprint, less civil construction and a very low operating cost.</li>
 <li>It can retrofit existing facilities.</li>
 </ul>
-<p>We have installed these plants from Gujarat to Egypt. Read about the process in detail on our <a href="water-treatment.html">sewage treatment page</a>, or see <a href="projects.html">the plants we have installed</a>.</p>
+<p>We have installed these plants from Gujarat to Egypt. Read about the process in detail on our <a href="water-treatment.html">sewage treatment page</a>, or see <a href="water-treatment.html#plants">the plants we have installed</a>.</p>
 '''),
  ('dvs-welding-standards', 'Quality', 'DVS 2207 and 2208: what the welding guidelines mean for your equipment',
   'The German standards behind every thermoplastic weld we make, and why they matter to the people who buy the equipment.',
