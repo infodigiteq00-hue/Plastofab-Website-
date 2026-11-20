@@ -1,4 +1,4 @@
-/* Fabrication: a full-bleed welding hero, joints compared, a sticky photo story with a weld bead */
+/* Fabrication: a full-bleed turnkey hero, what we deliver, a sticky end-to-end photo story with a weld bead */
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .fb-hero { position: relative; min-height: 100svh; display: grid; align-items: end; padding: 140px 0 clamp(60px, 10vh, 110px); color: #fff; overflow: hidden; background: #0b1020; }
 .fb-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transform: scale(1.06); animation: fb-zoom 14s ease-out forwards; }
@@ -10,17 +10,18 @@
 .fb-lime { color: var(--lime); }
 .fb-hero__lede { max-width: 52ch; color: rgba(255, 255, 255, .85); font-size: clamp(16px, 1.4vw, 19px); }
 
-.fb-joints__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 30px clamp(30px, 6vw, 90px); align-items: start; }
-.fb-joints__grid > div:first-child { display: grid; gap: 16px; }
-.seams { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-.seams__tank { position: relative; height: 200px; border-radius: 22px; background: linear-gradient(90deg, #cfcabb, #ece8dd 40%, #d6d1c3); overflow: hidden; display: grid; align-content: end; padding: 16px 20px; }
-.seams__tank i { position: absolute; left: 0; right: 0; height: 3px; background: #b8b2a2; box-shadow: 0 1px 0 rgba(255, 255, 255, .7); }
-.seams__tank--many i:nth-child(1) { top: 16%; } .seams__tank--many i:nth-child(2) { top: 32%; } .seams__tank--many i:nth-child(3) { top: 48%; } .seams__tank--many i:nth-child(4) { top: 64%; }
-.seams__tank--many i:nth-child(5) { top: 0; bottom: 0; left: 40%; right: auto; width: 3px; height: auto; }
-.seams__tank--few i { top: 0; bottom: 0; left: 60%; right: auto; width: 3px; height: auto; background: var(--lime); box-shadow: 0 0 12px rgba(168, 198, 6, .7); }
-.seams__tank span { position: relative; font-weight: 500; font-size: 15px; color: #2b2a24; background: rgba(255, 255, 255, .8); justify-self: start; padding: 6px 12px; border-radius: 999px; }
+.fb-scope__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 20px clamp(30px, 6vw, 90px); align-items: end; margin-bottom: clamp(30px, 4vw, 50px); }
+.fb-scope__head > div { display: grid; gap: 16px; }
+.scope { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.scope__card { display: grid; grid-template-rows: auto auto 1fr; gap: 8px; align-content: start; padding: 10px 10px 22px; border-radius: 20px; border: 1px solid var(--line); background: #fff; }
+.scope__card figure { margin: 0 0 8px; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: var(--bg-soft); }
+.scope__card img { width: 100%; height: 100%; object-fit: cover; }
+.scope__card b { padding: 0 8px; font-weight: 500; font-size: 18px; }
+.scope__card span { padding: 0 8px; color: var(--muted); font-size: 15px; }
+.scope__card a { color: var(--blue); }
 
 .fb-story { padding: clamp(60px, 8vw, 110px) 0; }
+.fb-story .sec-head { margin-bottom: clamp(20px, 3vw, 40px); }
 .fb-story__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(30px, 6vw, 90px); }
 .fb-story__media { position: relative; }
 .frame2 { position: sticky; top: 110px; margin: 0; aspect-ratio: 4 / 3.2; border-radius: 26px; overflow: hidden; background: #0b1020; box-shadow: 0 50px 90px -50px rgba(13, 20, 36, .7); }
@@ -57,11 +58,20 @@
 .plus span { color: var(--muted); font-size: 15px; }
 
 @media (max-width: 1000px) {
-  .fb-joints__grid, .fb-story__grid, .fb-plus__grid { grid-template-columns: 1fr; }
+  .fb-scope__head, .fb-story__grid, .fb-plus__grid { grid-template-columns: 1fr; }
+  .scope { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scope__card:first-child { grid-column: 1 / -1; }
+  .scope__card:first-child figure { aspect-ratio: 16 / 7; }
   .fb-story__media { position: sticky; top: 74px; z-index: 2; }
   .frame2 { position: relative; top: 0; aspect-ratio: 16 / 9; border-radius: 0 0 20px 20px; }
   .st { min-height: 46svh; }
   .std, .mach { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 560px) { .std, .mach, .plus, .seams { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .fb-hero h1 { font-size: 36px; }
+  .fb-hero h1 br { display: none; }
+  .fb-lime { display: block; }
+  .std, .mach, .plus, .scope { grid-template-columns: 1fr; }
+  .scope__card:first-child figure { aspect-ratio: 4 / 3; }
+}
 @media (prefers-reduced-motion: reduce) { .fb-hero__img { animation: none; transform: none; } .frame2 img { transition: none; } }

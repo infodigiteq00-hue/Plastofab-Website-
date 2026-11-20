@@ -1,8 +1,21 @@
-/* Materials: a periodic table of what we build with, and an exploded dual-laminate wall */
+/* Materials: a photo hero, five material swatches, a table of what we build with with a photo card, and an exploded dual-laminate wall */
 .mt-hero { padding: 140px 0 40px; }
 .mt-hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 30px 60px; align-items: end; }
 .mt-hero__grid > div { display: grid; gap: 22px; }
-.mt-table-sec { padding: 20px 0 clamp(70px, 9vw, 120px); }
+.mt-hero__ph { margin-top: clamp(30px, 4vw, 50px); }
+.mt-hero__ph img { width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; border-radius: 26px; background: #e9e6dc; }
+
+.mt-swatch-sec { padding: clamp(60px, 8vw, 100px) 0 clamp(30px, 4vw, 50px); }
+.mt-swatch-sec__head { display: grid; gap: 14px; margin-bottom: clamp(24px, 3vw, 36px); }
+.mt-swatch-sec__head h2 { font-size: clamp(30px, 3.6vw, 48px); }
+.swatches { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.swatch { width: 100%; display: grid; gap: 4px; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; color: inherit; font: inherit; }
+.swatch img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin-bottom: 8px; background: #e9e6dc; transition: transform .5s var(--ease); }
+.swatch:hover img { transform: translateY(-4px); }
+.swatch b { font-weight: 500; font-size: 18px; }
+.swatch span { font-size: 14px; color: var(--muted); }
+
+.mt-table-sec { padding: 20px 0 clamp(70px, 9vw, 120px); scroll-margin-top: 90px; }
 .mt-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
 .mt-filter .chip { cursor: pointer; }
 .mt-filter .chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
@@ -20,6 +33,9 @@
 .el[aria-selected="true"] b, .el[aria-selected="true"] span, .el[aria-selected="true"] small { color: #fff; }
 .el.is-dim { opacity: .25; }
 .mt-card { position: sticky; top: 100px; display: grid; gap: 14px; padding: clamp(24px, 3vw, 36px); border-radius: 26px; color: #fff; background: radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--c, #2e4b8f) 70%, #fff 0%), var(--c, #2e4b8f) 60%); box-shadow: 0 40px 70px -40px color-mix(in srgb, var(--c, #2e4b8f) 80%, transparent); transition: background .5s; }
+.mt-card__ph { margin: 0 0 6px; position: relative; aspect-ratio: 3 / 2; border-radius: 16px; overflow: hidden; background: rgba(255, 255, 255, .15); }
+.mt-card__ph img { width: 100%; height: 100%; object-fit: cover; }
+.mt-card__ph figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 10px; font-size: 13px; color: #fff; background: linear-gradient(0deg, rgba(0, 0, 0, .55), transparent); }
 .mt-card__sym { font-size: clamp(56px, 6vw, 88px); font-weight: 600; letter-spacing: -.04em; line-height: .9; }
 .mt-card__kind { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255, 255, 255, .75); }
 .mt-card h2 { font-size: clamp(22px, 2.2vw, 30px); }
@@ -36,6 +52,8 @@
 .mt-dual .lede { color: rgba(255, 255, 255, .78); }
 .mt-dual__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(30px, 6vw, 90px); align-items: center; }
 .mt-dual__copy { display: grid; gap: 18px; }
+.mt-dual__ph { margin: 6px 0 0; max-width: 300px; aspect-ratio: 3 / 2; border-radius: 16px; overflow: hidden; background: #1a2440; }
+.mt-dual__ph img { width: 100%; height: 100%; object-fit: cover; }
 .layers { position: relative; height: min(64svh, 520px); perspective: 1400px; }
 .layer { position: absolute; left: 10%; right: 10%; top: 50%; height: 34%; margin-top: -17%; border-radius: 16px; display: grid; align-content: end; padding: 16px 20px; transform-style: preserve-3d;
   transform: translate3d(calc(var(--e, 0) * var(--dx)), calc(var(--e, 0) * var(--dy)), 0) rotateX(58deg) rotateZ(-28deg); box-shadow: 0 30px 50px -20px rgba(0, 0, 0, .6); transition: transform .1s linear; }
@@ -48,9 +66,15 @@
 
 @media (max-width: 1000px) {
   .mt-hero__grid, .mt-grid, .mt-dual__grid { grid-template-columns: 1fr; }
-  .mt-card { position: static; }
+  .mt-card { position: static; scroll-margin-top: 90px; }
+  .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .mt-dual { height: auto; }
   .mt-dual__pin { position: relative; height: auto; padding: 90px 0; }
   .layers { height: 420px; }
+}
+@media (max-width: 700px) {
+  .swatches { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter); scroll-padding: 0 var(--gutter); }
+  .swatches li { flex: 0 0 44%; scroll-snap-align: start; }
+  .mt-hero__ph img { aspect-ratio: 3 / 2; border-radius: 20px; }
 }
 @media (max-width: 560px) { .ptable { grid-template-columns: repeat(3, minmax(0, 1fr)); } .el { padding: 10px; } .el span { display: none; } }

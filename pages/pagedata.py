@@ -10,52 +10,58 @@ CLIENTS = ['Thermax', 'Jubilant Life Sciences', 'Asian Paints', 'Glenmark', 'Anu
            'Lewens Labs', 'PI Industries', 'Aditya Birla Group', 'Zydus Cadila', 'Gujarat Gas', 'Wockhardt', 'Filatex', 'Isagro',
            'Kancor', 'Mahavir Synthesis', 'Modiguard', 'Kohler', 'Cadila Pharmaceuticals', 'GSK']
 
-# the catalogue: (anchor, name, tone, kicker, text, facts, items, photo folders)
+# the catalogue: (anchor, name, tone, kicker, text, facts, items, photo folders or single photos)
 CATALOGUE = [
     ('storage', 'Storage Tanks', '#d8a400', 'Tanks for liquids and gases',
      ['Storage tanks and process vessels serve many industrial uses, so each has to meet different requirements. We make a wide range for storing liquids and gases, entirely in FRP or in thermoplastic, as the client needs.',
       'Pickling tanks process metal surface treatment: the metal is immersed in pickling acid to take the scale and rust off.'],
-     [('Ø 300–6,000 mm', 'diameter'), ('Double wall', 'with leakage monitoring'), ('FRP or thermoplastic', 'to suit the chemical')],
+     [('Made to measure', 'for liquids and gases'), ('Double wall', 'with leakage monitoring'), ('FRP or thermoplastic', 'to suit the chemical')],
      ['Pickling tanks', 'PP / HDPE tanks', 'PP / FRP tanks', 'PP & HDPE spiral tanks'], ['wix/storage-tanks']),
     ('scrubbers', 'Scrubbing Systems', '#2f6db5', 'Pollution control',
      ['Scrubbers and columns are pollution-control equipment: they remove particles and gases from industrial exhaust streams.',
-      'We supply them as turnkey units, with the fans, mist eliminators, ducting and stacks they need.'],
+      'We supply them as turnkey units, with the fans, mist eliminators and ducting they need.'],
      [('Turnkey', 'complete units'), ('Gases & particles', 'removed from exhaust'), ('Any MOC', 'matched to the fumes')],
-     ['Wet scrubbers', 'Columns', 'Mist eliminators', 'Stacks'], ['wix/scrubbing-system']),
+     ['Wet scrubbers', 'Columns', 'Mist eliminators'], ['wix/scrubbing-system']),
     ('vessels', 'Reaction Vessels', '#1f9e78', 'Process vessels',
      ['Reaction vessels process chemical reactions, so each is designed for the dynamic and hydrostatic loads of its own process.'],
-     [('Up to 80 kL', 'individual special designs'), ('Corrosive media', 'process tanks for the harshest'), ('Chemical treatment', 'processes')],
+     [('Special designs', 'for each process'), ('Corrosive media', 'process tanks for the harshest'), ('Chemical treatment', 'processes')],
      ['Reaction vessels', 'Process tanks'], ['wix/reaction-vessels']),
     ('vacuum', 'Vacuum Receivers & Pressure Tanks', '#e2a400', 'Vacuum and pressure',
      ['Vacuum traps made in the material that suits each chemical, designed to sustain full vacuum.',
-      'Receivers and tanks of robust construction in different polymers, able to withstand pressure up to 8 kg/cm² and full vacuum.'],
-     [('8 kg/cm²', 'pressure'), ('Full vacuum', 'sustained'), ('Different MOC', 'for chemical compatibility')],
+      'Receivers and tanks of robust construction in different polymers, able to withstand both pressure and full vacuum.'],
+     [('Pressure-rated', 'robust construction'), ('Full vacuum', 'sustained'), ('Different MOC', 'for chemical compatibility')],
      ['Vacuum receivers', 'Vacuum traps', 'Pressure tanks'], ['wix/vacuum-receiver']),
     ('blowers', 'Centrifugal Blowers', '#e0b000', 'Three decades of blowers',
      ['Plasto-Fab has three decades of experience making custom centrifugal blowers, built to handle corrosive fumes and moist gases.'],
      [('30 years', 'of custom blowers'), ('Corrosive fumes', 'and moist gases')],
      ['Centrifugal blowers', 'Impellers'], ['wix/centrifugal-blower']),
-    ('ducting', 'Ducting & Stacks', '#d23b2f', 'Pipes, ducts and stacks',
+    ('ducting', 'Ducting', '#d23b2f', 'Pipes, ducts and bends',
      ['We make pipes and ducting in non-metallic materials to each client\'s requirement, and we take on piping work at site.',
       'Ducts and piping are assembled in our shop to cut installation time in the field.'],
-     [('Ø 300–5,000 mm', 'pipes and ducts'), ('In-house assembly', 'less time on site'), ('Site piping', 'we install too')],
-     ['Ducting', 'Stacks', 'Piping', 'Bends'], ['wix/ducting']),
-    ('others', 'Linings, Gratings & More', '#6b5bd6', 'Everything else in FRP and thermoplastic',
-     ['FRP lining with various resins for existing equipment, and the many smaller parts a plant needs, made in the same corrosion-proof materials.'],
-     [('Various resins', 'for FRP lining')],
-     ['FRP lining', 'FRP canopies & cabins', 'Bends', 'Drum washers', 'FRP grating', 'Mist eliminators', 'Venturi'], ['wix/others']),
+     [('Non-metallic', 'pipes and ducts to order'), ('In-house assembly', 'less time on site'), ('Site piping', 'we install too')],
+     ['Ducting', 'Piping', 'Bends'], ['wix/ducting']),
+    ('turnkey', 'Turnkey Solutions', '#6b5bd6', 'Designed, built, erected, commissioned',
+     ['We design, engineer, build, erect and commission complete systems, not only single pieces of equipment: one supplier from the first drawing to the plant running on site.',
+      'A scrubber system arrives with its blower, pumps and ducting; a sewage treatment plant arrives skid-mounted. We take on piping work at site, FRP lining of existing equipment as part of the job, and return for field service, repair and installation.'],
+     [('One supplier', 'design to commissioning'), ('Site work', 'erection and piping'), ('Field service', 'repair and installation')],
+     ['Scrubber systems', 'Sewage treatment plants', 'Tank farms', 'Site piping', 'FRP lining'],
+     ['site/misc/PVC-Horizontal-scrubber-and-fan-combo', 'wix/sewage-plant/02', 'wix/home/05', 'wix/scrubbing-system/06', 'site/products/frp-lining--20150310_092654',
+      'wix/storage-tanks/02', 'wix/sewage-plant/00']),
 ]
 
 
 # the photo each category leads with (its most typical piece), then the rest
 LEAD = {'wix/storage-tanks': ['21', '18', '12', '19', '00'], 'wix/scrubbing-system': ['01', '00', '02'], 'wix/reaction-vessels': ['01', '04', '03'],
-        'wix/vacuum-receiver': ['04', '05', '00'], 'wix/centrifugal-blower': ['00', '01', '03'], 'wix/ducting': ['05', '01', '04'], 'wix/others': ['04', '01', '02']}
+        'wix/vacuum-receiver': ['04', '05', '00'], 'wix/centrifugal-blower': ['00', '01', '03'], 'wix/ducting': ['05', '01', '04']}
 
 
 def photos(man, folder):
-    keys = sorted(k for k in man if k.startswith(folder + '/') and not k.endswith('-t'))
-    lead = [f'{folder}/{n}' for n in LEAD.get(folder, []) if f'{folder}/{n}' in man]
-    keys = lead + [k for k in keys if k not in lead]
+    if folder in man:  # a single photo rather than a folder
+        keys = [folder]
+    else:
+        keys = sorted(k for k in man if k.startswith(folder + '/') and not k.endswith('-t'))
+        lead = [f'{folder}/{n}' for n in LEAD.get(folder, []) if f'{folder}/{n}' in man]
+        keys = lead + [k for k in keys if k not in lead]
     return [{'src': f'assets/pages/{k}.webp', 'thumb': f'assets/pages/{k}-t.webp', 'w': man[k]['w'], 'h': man[k]['h'], 'tw': man[k]['tw'], 'th': man[k]['th']} for k in keys]
 
 

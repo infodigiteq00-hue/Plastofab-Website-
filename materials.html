@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/site.css?v=50">
-<link rel="stylesheet" href="css/pages.css?v=50">
-<link rel="stylesheet" href="css/pages/materials.css?v=50">
+<link rel="stylesheet" href="css/site.css?v=51">
+<link rel="stylesheet" href="css/pages.css?v=51">
+<link rel="stylesheet" href="css/pages/materials.css?v=51">
 <link rel="icon" href="assets/brand/favicon.png">
 </head>
 <body class="page page--materials">
@@ -39,9 +39,25 @@
     </div>
     <p class="lede">The right material is the whole job: it decides how long a tank survives the chemical inside it. These are the ones we weld, line and wind.</p>
   </div>
+  <figure class="wrap mt-hero__ph">
+    <img src="assets/materials/sheets.webp" alt="Stacked thermoplastic sheets in several materials and colours" width="1536" height="1024" fetchpriority="high">
+  </figure>
 </section>
 
-<section class="mt-table-sec" aria-label="Materials">
+<section class="mt-swatch-sec" aria-labelledby="swatch-title">
+  <div class="wrap">
+    <header class="mt-swatch-sec__head"><span class="eyebrow">Know them by sight</span><h2 id="swatch-title">Five families, one workshop.</h2></header>
+    <ul class="swatches">
+      <li><button type="button" class="swatch" data-pick="PP-H"><img src="assets/materials/pp-t.webp" alt="" width="720" height="720" loading="lazy" decoding="async"><b>PP-H</b><span>Polypropylene sheet</span></button></li>
+      <li><button type="button" class="swatch" data-pick="HDPE"><img src="assets/materials/hdpe-t.webp" alt="" width="720" height="720" loading="lazy" decoding="async"><b>HDPE</b><span>Black sheet and pipe</span></button></li>
+      <li><button type="button" class="swatch" data-pick="PVC-U"><img src="assets/materials/pvc-t.webp" alt="" width="720" height="720" loading="lazy" decoding="async"><b>PVC-U &amp; CPVC</b><span>Rigid PVC sheet</span></button></li>
+      <li><button type="button" class="swatch" data-pick="PVDF"><img src="assets/materials/pvdf-t.webp" alt="" width="720" height="720" loading="lazy" decoding="async"><b>PVDF</b><span>Fluoropolymer, welded</span></button></li>
+      <li><button type="button" class="swatch" data-pick="FRP / GRP"><img src="assets/materials/frp-t.webp" alt="" width="720" height="720" loading="lazy" decoding="async"><b>FRP</b><span>Glass fibre and resin</span></button></li>
+    </ul>
+  </div>
+</section>
+
+<section class="mt-table-sec" aria-label="Materials" id="table">
   <div class="wrap">
     <div class="mt-filter" role="group" aria-label="Show">
       <button type="button" class="chip" data-kind="all" aria-pressed="true">All</button>
@@ -51,20 +67,21 @@
     </div>
     <div class="mt-grid">
       <div class="ptable" role="listbox" aria-label="Choose a material" data-ptable>
-        <button class="el el--thermo" role="option" aria-selected="true" data-kind="thermo" data-name="Polypropylene homopolymer" data-text="Polypropylene for aggressive chemical environments: resistant to a wide range of acids, alkalis and salt solutions, and rigid enough for tanks and vessels." data-use="Storage and process tanks · scrubbers · ducting"><small>01</small><b>PP-H</b><span>Polypropylene</span></button>
-        <button class="el el--thermo" role="option" aria-selected="false" data-kind="thermo" data-name="High-density polyethylene" data-text="Tough, impact-resistant and chemically inert. A natural choice for effluent treatment and large storage." data-use="Effluent tanks · large vessels · spiral tanks"><small>02</small><b>HDPE</b><span>Polyethylene</span></button>
-        <button class="el el--thermo" role="option" aria-selected="false" data-kind="thermo" data-name="Unplasticised PVC" data-text="Rigid, with high mechanical strength, for structural tanks and pipes." data-use="Tanks · piping · ducting"><small>03</small><b>PVC-U</b><span>Polyvinyl chloride</span></button>
-        <button class="el el--thermo" role="option" aria-selected="false" data-kind="thermo" data-name="Chlorinated PVC" data-text="Keeps its strength at higher temperatures than PVC-U, for hot process liquids." data-use="Hot-liquid tanks · piping"><small>04</small><b>CPVC</b><span>Chlorinated PVC</span></button>
-        <button class="el el--fluoro" role="option" aria-selected="false" data-kind="fluoro" data-name="Polyvinylidene fluoride" data-text="A fluoropolymer with excellent resistance to strong acids, halogens and the most aggressive media." data-use="Linings · high-purity and aggressive service"><small>05</small><b>PVDF</b><span>Fluoropolymer</span></button>
-        <button class="el el--fluoro" role="option" aria-selected="false" data-kind="fluoro" data-name="Ethylene chlorotrifluoroethylene" data-text="A fluoropolymer for strong acids, chlorine and high temperatures." data-use="Linings · chlorine and acid service"><small>06</small><b>ECTFE</b><span>Fluoropolymer</span></button>
-        <button class="el el--fluoro" role="option" aria-selected="false" data-kind="fluoro" data-name="Fluorinated ethylene propylene" data-text="A fluoropolymer lining with near-universal chemical resistance." data-use="Linings in GRP equipment"><small>07</small><b>FEP</b><span>Fluoropolymer</span></button>
-        <button class="el el--fluoro" role="option" aria-selected="false" data-kind="fluoro" data-name="Perfluoroalkoxy" data-text="A fluoropolymer lining for the most aggressive and hottest duties." data-use="Linings in GRP equipment"><small>08</small><b>PFA</b><span>Fluoropolymer</span></button>
-        <button class="el el--comp" role="option" aria-selected="false" data-kind="comp" data-name="PP-lined FRP" data-text="A polypropylene liner for chemical resistance, reinforced outside with glass-fibre plastic for strength: a dual laminate." data-use="Large tanks · reaction vessels · columns"><small>09</small><b>PP-FRP</b><span>Dual laminate</span></button>
-        <button class="el el--comp" role="option" aria-selected="false" data-kind="comp" data-name="PVC-lined FRP" data-text="PVC's chemical resistance on the inside, FRP's strength outside." data-use="Tanks · scrubbers · ducting"><small>10</small><b>PVC-FRP</b><span>Dual laminate</span></button>
-        <button class="el el--comp" role="option" aria-selected="false" data-kind="comp" data-name="PVDF-lined FRP" data-text="A PVDF liner for extreme chemical resistance, with an FRP structural shell." data-use="Extreme chemical service"><small>11</small><b>PVDF-FRP</b><span>Dual laminate</span></button>
-        <button class="el el--comp" role="option" aria-selected="false" data-kind="comp" data-name="Fibre / glass reinforced plastic" data-text="Glass fibre in unsaturated polyester or vinyl ester resins: strong, and right for large and complex shapes." data-use="Tanks · canopies · gratings · stacks · linings"><small>12</small><b>FRP / GRP</b><span>Composite</span></button>
+        <button class="el el--thermo" role="option" aria-selected="true" data-photo="pp" data-kind="thermo" data-name="Polypropylene homopolymer" data-text="Polypropylene for aggressive chemical environments: resistant to a wide range of acids, alkalis and salt solutions, and rigid enough for tanks and vessels." data-use="Storage and process tanks · scrubbers · ducting"><small>01</small><b>PP-H</b><span>Polypropylene</span></button>
+        <button class="el el--thermo" role="option" aria-selected="false" data-photo="hdpe" data-kind="thermo" data-name="High-density polyethylene" data-text="Tough, impact-resistant and chemically inert. A natural choice for effluent treatment and large storage." data-use="Effluent tanks · large vessels · spiral tanks"><small>02</small><b>HDPE</b><span>Polyethylene</span></button>
+        <button class="el el--thermo" role="option" aria-selected="false" data-photo="pvc" data-kind="thermo" data-name="Unplasticised PVC" data-text="Rigid, with high mechanical strength, for structural tanks and pipes." data-use="Tanks · piping · ducting"><small>03</small><b>PVC-U</b><span>Polyvinyl chloride</span></button>
+        <button class="el el--thermo" role="option" aria-selected="false" data-photo="pvc" data-kind="thermo" data-name="Chlorinated PVC" data-text="Keeps its strength at higher temperatures than PVC-U, for hot process liquids." data-use="Hot-liquid tanks · piping"><small>04</small><b>CPVC</b><span>Chlorinated PVC</span></button>
+        <button class="el el--fluoro" role="option" aria-selected="false" data-photo="pvdf" data-kind="fluoro" data-name="Polyvinylidene fluoride" data-text="A fluoropolymer with excellent resistance to strong acids, halogens and the most aggressive media." data-use="Linings · high-purity and aggressive service"><small>05</small><b>PVDF</b><span>Fluoropolymer</span></button>
+        <button class="el el--fluoro" role="option" aria-selected="false" data-photo="pvdf" data-kind="fluoro" data-name="Ethylene chlorotrifluoroethylene" data-text="A fluoropolymer for strong acids, chlorine and high temperatures." data-use="Linings · chlorine and acid service"><small>06</small><b>ECTFE</b><span>Fluoropolymer</span></button>
+        <button class="el el--fluoro" role="option" aria-selected="false" data-photo="pvdf" data-kind="fluoro" data-name="Fluorinated ethylene propylene" data-text="A fluoropolymer lining with near-universal chemical resistance." data-use="Linings in GRP equipment"><small>07</small><b>FEP</b><span>Fluoropolymer</span></button>
+        <button class="el el--fluoro" role="option" aria-selected="false" data-photo="pvdf" data-kind="fluoro" data-name="Perfluoroalkoxy" data-text="A fluoropolymer lining for the most aggressive and hottest duties." data-use="Linings in GRP equipment"><small>08</small><b>PFA</b><span>Fluoropolymer</span></button>
+        <button class="el el--comp" role="option" aria-selected="false" data-photo="frp" data-kind="comp" data-name="PP-lined FRP" data-text="A polypropylene liner for chemical resistance, reinforced outside with glass-fibre plastic for strength: a dual laminate." data-use="Large tanks · reaction vessels · columns"><small>09</small><b>PP-FRP</b><span>Dual laminate</span></button>
+        <button class="el el--comp" role="option" aria-selected="false" data-photo="frp" data-kind="comp" data-name="PVC-lined FRP" data-text="PVC's chemical resistance on the inside, FRP's strength outside." data-use="Tanks · scrubbers · ducting"><small>10</small><b>PVC-FRP</b><span>Dual laminate</span></button>
+        <button class="el el--comp" role="option" aria-selected="false" data-photo="frp" data-kind="comp" data-name="PVDF-lined FRP" data-text="A PVDF liner for extreme chemical resistance, with an FRP structural shell." data-use="Extreme chemical service"><small>11</small><b>PVDF-FRP</b><span>Dual laminate</span></button>
+        <button class="el el--comp" role="option" aria-selected="false" data-photo="frp" data-kind="comp" data-name="Fibre / glass reinforced plastic" data-text="Glass fibre in unsaturated polyester or vinyl ester resins: strong, and right for large and complex shapes." data-use="Tanks · canopies · gratings · linings"><small>12</small><b>FRP / GRP</b><span>Composite</span></button>
       </div>
       <aside class="mt-card" aria-live="polite" data-card>
+        <figure class="mt-card__ph"><img src="assets/materials/pp-t.webp" alt="" width="720" height="720" data-c-img><figcaption data-c-cap>Polypropylene sheet</figcaption></figure>
         <span class="mt-card__sym" data-c-sym>PP-H</span>
         <p class="mt-card__kind" data-c-kind>Thermoplastic</p>
         <h2 data-c-name>Polypropylene homopolymer</h2>
@@ -83,6 +100,7 @@
         <span class="eyebrow">Dual laminate</span>
         <h2 id="dual-title" class="h-l">Two materials, one wall.</h2>
         <p class="lede">A thermoplastic liner stands up to the chemical; glass-fibre reinforced plastic wound over it carries the load. Together they are light, strong and corrosion-proof.</p>
+        <figure class="mt-dual__ph"><img src="assets/materials/frp-t.webp" alt="A dual-laminate wall in cross-section, beside glass-fibre roving" width="720" height="720" loading="lazy" decoding="async"></figure>
       </div>
       <div class="layers" aria-hidden="true">
         <div class="layer layer--liner"><span>Thermoplastic liner</span><small>chemical resistance</small></div>
@@ -122,9 +140,9 @@
 </footer>
 <!-- /site-footer -->
 
-<script src="js/site.js?v=50"></script>
-<script src="js/nav.js?v=50"></script>
-<script src="js/pages.js?v=50"></script>
-<script src="js/pages/materials.js?v=50"></script>
+<script src="js/site.js?v=51"></script>
+<script src="js/nav.js?v=51"></script>
+<script src="js/pages.js?v=51"></script>
+<script src="js/pages/materials.js?v=51"></script>
 </body>
 </html>

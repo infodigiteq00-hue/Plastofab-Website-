@@ -624,6 +624,9 @@ async function init() {
     // composites: glass fibre winds on as the section scrolls
     TU.uWind.value = ease(seg(sm.frp, 0.05, 0.7));
 
+    // at rest only the page's own logo shows: a trackpad bounce moves the page but not this fixed canvas,
+    // so drawing both there would show the logo twice. The WebGL copy appears just before the page's fades.
+    group.visible = p > 0.006;
     group.position.copy(P);
     group.scale.setScalar(S);
     group.rotation.y = turn;
@@ -655,7 +658,7 @@ async function init() {
     const gone = settled && frp.getBoundingClientRect().bottom < 1;
     if (gone !== hidden) { hidden = gone; canvas.style.visibility = gone ? 'hidden' : ''; }
     if (gone) { lastKey = ''; return; }
-    const key = [vw, vh, P.x, P.y, S, turn, shell.x, shell.y].map(v => v.toFixed(4)).join();
+    const key = [vw, vh, P.x, P.y, S, turn, shell.x, shell.y].map(v => v.toFixed(4)).join() + group.visible;
     if (settled && !haze.visible && key === lastKey) return;
     lastKey = key;
     renderer.render(scene, camera);
