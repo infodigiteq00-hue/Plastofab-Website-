@@ -76,7 +76,7 @@ def blocks(root):
         album = esc(json.dumps([{'src': p['src'], 'thumb': p['thumb'], 'alt': name} for p in ph]))
         shown = ph[:5]
         tiles = ''.join(
-            f'<button type="button" class="cat__ph{" cat__ph--big" if j == 0 else ""}" data-lightbox="{album}" data-lightbox-title="{esc(name)}" data-lightbox-start="{j}" aria-label="{esc(name)}: photo {j + 1} of {len(ph)}">'
+            f'<button type="button" class="cat__ph{" cat__ph--big" if j == 0 else ""}" style="--ph:url(/{p["thumb"]})" data-lightbox="{album}" data-lightbox-title="{esc(name)}" data-lightbox-start="{j}" aria-label="{esc(name)}: photo {j + 1} of {len(ph)}">'
             f'<img src="{p["thumb"]}" alt="" width="{p["tw"]}" height="{p["th"]}" loading="lazy" decoding="async">'
             + (f'<span>+{len(ph) - 5} photos</span>' if j == 4 and len(ph) > 5 else '') + '</button>'
             for j, p in enumerate(shown))

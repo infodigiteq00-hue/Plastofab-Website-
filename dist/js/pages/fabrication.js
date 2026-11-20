@@ -1,25 +1,28 @@
-/* Fabrication: the step nearest the middle of the screen picks the photo, and the weld bead grows with the scroll. */
+/* Fabrication: the hero photos change slowly while the hero is on screen; the joint lines draw themselves
+   when the fewer-joints drawing comes into view. (The step bar is the shared stepper in pages.js.) */
 (function () {
   'use strict';
-  var story = document.querySelector('[data-story]');
-  if (!story) return;
-  var steps = Array.prototype.slice.call(story.querySelectorAll('.st'));
-  var imgs = Array.prototype.slice.call(story.querySelectorAll('.frame2 img'));
-  var cap = story.querySelector('[data-story-cap]'), wrap = story.querySelector('.fb-story__steps');
-  var on = -1, ticking = false;
-  function update() {
-    ticking = false;
-    var vh = window.innerHeight, best = 0;
-    steps.forEach(function (s, i) { if (s.getBoundingClientRect().top < vh * 0.55) best = i; });
-    if (best !== on) {
-      on = best;
-      steps.forEach(function (s, i) { s.classList.toggle('is-on', i === best); });
-      imgs.forEach(function (im, i) { im.classList.toggle('is-on', i === best); });
-      cap.textContent = '0' + (best + 1) + ' / 0' + steps.length;
+  var hero = document.querySelector('[data-hero]');
+  if (hero && !SP.reduced) {
+    var slides = Array.prototype.slice.call(hero.querySelectorAll('.fb-hero__slide')), at = 0, timer = 0;
+    var next = function () {
+      slides[at].classList.remove('is-on');
+      at = (at + 1) % slides.length;
+      slides[at].classList.add('is-on');
+    };
+    if (slides.length > 1 && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        clearInterval(timer);
+        if (es[0].isIntersecting) timer = setInterval(next, 6000);
+      }).observe(hero);
     }
-    var r = wrap.getBoundingClientRect();
-    wrap.style.setProperty('--bp', SP.clamp((vh * 0.55 - r.top) / r.height, 0, 1).toFixed(3));
   }
-  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  update();
+
+  var joints = document.querySelector('.joints');
+  if (joints) {
+    if (SP.reduced || !('IntersectionObserver' in window)) joints.classList.add('is-on');
+    else new IntersectionObserver(function (es, io) {
+      if (es[0].isIntersecting) { joints.classList.add('is-on'); io.disconnect(); }
+    }, { threshold: 0.5 }).observe(joints);
+  }
 })();

@@ -133,8 +133,9 @@ main, .site-footer { position: relative; z-index: 1; }
 .gal__track { list-style: none; margin: 0; padding: 6px var(--gal-pad) 30px; display: flex; gap: 22px; width: max-content; }
 .wcard { scroll-snap-align: start; flex: none; width: clamp(280px, 27vw, 360px); display: flex; flex-direction: column; border-radius: 22px; background: #fff; border: 1px solid var(--line); overflow: hidden; box-shadow: 0 30px 50px -40px rgba(13, 20, 36, .45); transition: transform .4s var(--ease), box-shadow .4s; }
 .wcard:hover { transform: translateY(-4px); box-shadow: 0 40px 60px -40px rgba(13, 20, 36, .55); }
-.wcard__ph { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--bg-soft); }
-.wcard__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); -webkit-user-drag: none; }
+.wcard__ph { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--bg-soft); isolation: isolate; }
+.wcard__ph::before { content: ""; position: absolute; inset: -20px; z-index: -1; background: var(--ph) center / cover; filter: blur(18px) saturate(1.1); opacity: .55; }   /* fills the space round a photo that is shown whole */
+.wcard__ph img { width: 100%; height: 100%; object-fit: contain; transition: transform .8s var(--ease); -webkit-user-drag: none; }
 .wcard:hover .wcard__ph img { transform: scale(1.04); }
 .wcard__body { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px 24px; flex: 1; }
 .wcard__k { font-size: 11.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
@@ -148,14 +149,14 @@ main, .site-footer { position: relative; z-index: 1; }
 .gal__bar i { display: block; height: 100%; width: 30%; border-radius: 3px; background: var(--brand); }
 
 /* ── 4 · the product portfolio: rendered equipment on a ring ── */
-.port { height: 520svh; background: linear-gradient(#fff, var(--bg-soft)); }
-.port__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: center; }
+.port { padding: clamp(70px, 9vw, 120px) 0; background: linear-gradient(#fff, var(--bg-soft)); overflow: hidden; }
+.port__pin { display: flex; align-items: center; }
 .port__layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 30px; align-items: center; width: 100%; }
 .port__info { display: grid; gap: 18px; align-content: center; }
 .port__info h2 { font-size: clamp(30px, 3.6vw, 50px); }
 .port__detail { display: grid; min-height: 170px; }
-.pdet { grid-area: 1 / 1; display: grid; gap: 10px; align-content: start; opacity: 0; transform: translateY(12px); transition: opacity .45s, transform .45s var(--ease); pointer-events: none; }
-.pdet.is-active { opacity: 1; transform: none; pointer-events: auto; }
+.pdet { grid-area: 1 / 1; display: grid; gap: 10px; align-content: start; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .2s, transform .2s, visibility 0s .2s; pointer-events: none; }
+.pdet.is-active { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition: opacity .4s .18s, transform .5s .18s var(--ease), visibility 0s; }   /* the old one leaves before the new one arrives */
 .pdet__n { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
 .pdet h3 { font-size: clamp(24px, 2.4vw, 32px); font-weight: 600; color: var(--ink); }
 .pdet p { color: var(--ink-2); max-width: 46ch; }
@@ -167,19 +168,25 @@ main, .site-footer { position: relative; z-index: 1; }
 .port__index button:hover, .port__index button.is-on { color: var(--navy); }
 .port__index button.is-on { font-weight: 500; }
 .port__index button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
-.port__stage { position: relative; height: min(76svh, 720px); perspective: 1400px; }
+.port__stage { position: relative; height: min(76svh, 720px); perspective: 1400px; cursor: grab; touch-action: pan-y; outline: none; -webkit-user-select: none; user-select: none; }
+.port__stage.is-dragging { cursor: grabbing; }
+.port__stage:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; border-radius: 20px; }
+.port__ctrl { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.port__hint { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
+.port__all { margin-left: auto; font-size: 14px; font-weight: 500; color: var(--blue); text-decoration: none; }
+.port__all:hover { color: var(--green); }
 .port__ring { position: absolute; inset: 0; transform-style: preserve-3d; }
-.pitem { position: absolute; left: 50%; top: 50%; width: min(34vw, 62svh, 520px); aspect-ratio: 1; margin: 0; translate: -50% -52%; will-change: transform, opacity; }
+.pitem { position: absolute; left: 50%; top: 50%; width: min(34vw, 62svh, 520px); aspect-ratio: 1; margin: 0; translate: -50% -52%; will-change: transform, opacity; pointer-events: none; }
 .pitem img { width: 100%; height: 100%; object-fit: contain; -webkit-user-drag: none; user-select: none; }
 .port__floor { position: absolute; left: 8%; right: 8%; bottom: 6%; height: 22%; border-radius: 50%; background: radial-gradient(closest-side, rgba(30, 42, 82, .16), rgba(30, 42, 82, .05) 60%, transparent); }
 @media (max-width: 900px) {
-  .port { height: 560svh; }
-  .port__layout { grid-template-columns: 1fr; gap: 0; align-content: start; padding-top: 86px; }
+  .port__layout { grid-template-columns: 1fr; gap: 0; align-content: start; }
+  .port__ctrl { order: 3; }
   .port__info { gap: 10px; }
   .port__index { display: none; }
   .port__detail { min-height: 150px; }
   .pdet p { font-size: 14px; }
-  .port__stage { height: 50svh; }
+  .port__stage { height: min(56svh, 420px); }
   .pitem { width: min(62vw, 40svh); }
 }
 @media (max-width: 700px) {
@@ -453,3 +460,24 @@ img[src$="clients/26.webp"] { object-view-box: inset(34% 3% 32% 3%); }
 .no-webgl .mat--thermo .mat__tank { background-image: url(../assets/portfolio/scrubber.webp); }
 .no-webgl .mat--frp .mat__tank { background-image: url(../assets/portfolio/frp-tanks.webp); }
 @media (prefers-reduced-motion: reduce) { .logos__row { animation: none; } .logos { overflow-x: auto; } }
+
+/* ── pop-in: cards rise and settle with a little spring as they come into view (site.js adds .pop / .is-popped).
+      Animations only, with no fill afterwards, so each card's own hover and transitions keep working. ── */
+:root { --spring: cubic-bezier(.2, 1.25, .35, 1); }
+.pop:not(.is-popped) { opacity: 0; }
+.pop.is-popped { animation: pop-in .75s var(--spring) var(--pop-d, 0ms) backwards; }
+@keyframes pop-in { from { opacity: 0; translate: 0 26px; scale: .94; } }
+.pop--rise.is-popped { animation-name: pop-rise; animation-duration: .9s; animation-timing-function: var(--ease); }
+@keyframes pop-rise { from { opacity: 0; translate: 0 22px; } }
+.pop--line.is-popped { animation-name: pop-fade; animation-duration: .6s; }
+@keyframes pop-fade { from { opacity: 0; } }
+.pop--line.is-popped::before { animation: pop-draw .8s var(--ease) calc(var(--pop-d, 0ms) + 150ms) backwards; transform-origin: 0 50%; }
+@keyframes pop-draw { from { scale: 0 1; } }
+/* photos inside a card settle from a slight zoom as the card arrives */
+.pop.is-popped :is(.wcard__ph, .bcard__ph, .pj-card__img) img, .bento__t.is-popped img { animation: pop-zoom 1.4s var(--ease) var(--pop-d, 0ms) backwards; }
+@keyframes pop-zoom { from { scale: 1.12; } }
+/* cards with no hover of their own lift a little toward the pointer */
+.pillar, .std__card, .mv, .founder, .plant, .ccard { transition: translate .45s var(--ease), box-shadow .45s; }
+.std__card:hover, .mv:hover, .founder:hover, .plant:hover, .ccard:hover { translate: 0 -6px; box-shadow: 0 28px 46px -32px rgba(13, 20, 36, .5); }
+.pillar:hover { translate: 0 -4px; }
+@media (prefers-reduced-motion: reduce) { .pop:not(.is-popped) { opacity: 1; } .pop.is-popped, .pop.is-popped::before, .pop.is-popped img { animation: none; } }

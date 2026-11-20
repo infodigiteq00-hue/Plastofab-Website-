@@ -1,5 +1,5 @@
-/* Materials: choose a tile (or a photo swatch) to see it in the card (arrow keys move between tiles);
-   the filter dims the others; the laminate layers come apart as the section scrolls. */
+/* Materials: choose a tile to see it in the card (arrow keys move between tiles); the filter dims the others;
+   the sample deck fans open when it comes into view; the laminate layers come apart as the section scrolls. */
 (function () {
   'use strict';
   var table = document.querySelector('[data-ptable]'), card = document.querySelector('[data-card]');
@@ -7,8 +7,11 @@
     var els = Array.prototype.slice.call(table.querySelectorAll('.el'));
     var KIND = { thermo: 'Thermoplastic', fluoro: 'Fluoropolymer', comp: 'Composite' };
     var COL = { thermo: '#2e4b8f', fluoro: '#1f8f8a', comp: '#6e8f00' };
-    var PHOTO = { pp: 'Polypropylene sheet', hdpe: 'HDPE sheet and pipe', pvc: 'PVC-U and CPVC sheet', pvdf: 'PVDF sheet with a weld', frp: 'A dual-laminate wall and glass-fibre roving' };
-    var img = card.querySelector('[data-c-img]'), cap = card.querySelector('[data-c-cap]');
+    // what each sheet looks like in the hand
+    var LOOK = { pp: 'Satin grey-beige sheet', hdpe: 'Glossy black sheet', pvc: 'Matte dark-grey sheet', cpvc: 'Light-grey sheet', pvdf: 'Ivory sheet with a fine gloss',
+      ectfe: 'Off-white sheet', fep: 'Milky, translucent lining', pfa: 'Milky, translucent lining', frp: 'Glass-fibre weave in resin',
+      ppfrp: 'PP liner bonded to wound FRP', pvcfrp: 'PVC liner bonded to wound FRP', pvdffrp: 'PVDF liner bonded to wound FRP' };
+    var tex = card.querySelector('[data-c-tex]'), cap = card.querySelector('[data-c-cap]');
     var pick = function (el, focus) {
       els.forEach(function (e) { e.setAttribute('aria-selected', String(e === el)); e.tabIndex = e === el ? 0 : -1; });
       card.querySelector('[data-c-sym]').textContent = el.querySelector('b').textContent;
@@ -16,8 +19,8 @@
       card.querySelector('[data-c-name]').textContent = el.dataset.name;
       card.querySelector('[data-c-text]').textContent = el.dataset.text;
       card.querySelector('[data-c-use]').textContent = el.dataset.use;
-      img.src = 'assets/materials/' + el.dataset.photo + '-t.webp';
-      cap.textContent = el.dataset.kind === 'fluoro' && el.querySelector('b').textContent !== 'PVDF' ? 'Fluoropolymer sheet (PVDF shown)' : PHOTO[el.dataset.photo];
+      tex.className = 'mt-card__tex tex-' + el.dataset.tex;
+      cap.textContent = LOOK[el.dataset.tex];
       card.style.setProperty('--c', COL[el.dataset.kind]);
       card.classList.remove('is-swap'); void card.offsetWidth; card.classList.add('is-swap');
       if (focus) el.focus();
@@ -32,15 +35,6 @@
       });
     });
     pick(els[0]);
-    Array.prototype.forEach.call(document.querySelectorAll('[data-pick]'), function (b) {
-      b.addEventListener('click', function () {
-        var el = els.filter(function (e) { return e.querySelector('b').textContent === b.dataset.pick; })[0];
-        if (!el) return;
-        document.querySelector('.mt-filter [data-kind="all"]').click();
-        pick(el);
-        (window.innerWidth < 1000 ? card : document.querySelector('.mt-table-sec')).scrollIntoView({ behavior: SP.reduced ? 'auto' : 'smooth', block: 'start' });
-      });
-    });
     Array.prototype.forEach.call(document.querySelectorAll('.mt-filter [data-kind]'), function (c, _, all) {
       c.addEventListener('click', function () {
         Array.prototype.forEach.call(all, function (o) { o.setAttribute('aria-pressed', String(o === c)); });
@@ -49,6 +43,15 @@
         if (first) pick(first);
       });
     });
+  }
+
+  // the sample deck opens like a swatch book when it scrolls into view
+  var deck = document.querySelector('.chipdeck');
+  if (deck && !SP.reduced && 'IntersectionObserver' in window) {
+    deck.classList.add('is-closed');
+    new IntersectionObserver(function (es, io) {
+      if (es[0].isIntersecting) { setTimeout(function () { deck.classList.remove('is-closed'); }, 150); io.disconnect(); }
+    }, { threshold: 0.5 }).observe(deck);
   }
 
   var ex = document.querySelector('[data-explode]');

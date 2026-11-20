@@ -2,6 +2,7 @@
      [data-count-to]   numbers that count up when they come into view
      [data-lightbox]   photo albums that open in a full-screen viewer
      form[data-mailto] forms that open the visitor's email app, filled in
+     [data-stepper]    numbered steps with progress lines that advance on their own until one is picked
    Exposes window.SP for page scripts (lightbox, clamp, reduced-motion flag). */
 (function () {
   'use strict';
@@ -150,5 +151,43 @@
       if (f) f.classList.remove('is-invalid');
       if (note && noteText) note.textContent = noteText;
     });
+  });
+
+  /* ── steppers ────────────────────────────────────────── */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-stepper]'), function (st) {
+    var tabs = Array.prototype.slice.call(st.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+    var cur = 0, auto = !reduced;
+    st.style.setProperty('--n', tabs.length);
+    var show = function (i, focus) {
+      cur = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, k) {
+        var on = k === cur;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        t.classList.toggle('is-done', auto && k < cur);
+        panels[k].hidden = !on; panels[k].classList.toggle('is-on', on);
+      });
+      if (focus) tabs[cur].focus();
+    };
+    var stop = function () { auto = false; st.classList.remove('is-auto'); show(cur); };
+    tabs.forEach(function (t, k) {
+      t.addEventListener('click', function () { stop(); show(k); });
+      t.addEventListener('keydown', function (e) {
+        var d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (d) { e.preventDefault(); stop(); show(cur + d, true); }
+      });
+      // the active line finishes filling: on to the next step
+      t.querySelector('i').addEventListener('animationend', function () { if (auto && k === cur) show(cur + 1); });
+    });
+    if (auto && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        var vis = es[0].isIntersecting;
+        st.classList.toggle('is-paused', !vis);
+        if (vis && !st.classList.contains('is-auto') && auto) { st.classList.add('is-auto'); show(cur); }
+      }, { threshold: 0.35 }).observe(st);
+      st.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') st.classList.add('is-paused'); });
+      st.addEventListener('pointerleave', function () { st.classList.remove('is-paused'); });
+    }
+    show(0);
   });
 })();

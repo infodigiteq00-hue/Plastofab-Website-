@@ -13,14 +13,14 @@ Run it after editing anything in pages/:   python3 build-pages.py
 import html, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = '51'   # cache-busting version for css/js
+V = '52'   # cache-busting version for css/js
 
 # the site menu: (label, [(title, href, hint), ...]) or (label, href)
 NAV = [
     ('Company', 'company', [
         ('About Us', 'about.html', 'Since 1992, in Ankleshwar'),
         ('Clients', 'clients.html', 'Who we build for'),
-        ('Notable Projects', 'projects.html', 'Case studies from the field'),
+        ('Notable Projects', 'projects.html', 'Notes from the works'),
         ('Careers', 'careers.html', 'Be a part of our story'),
     ]),
     ('Products', 'products', [

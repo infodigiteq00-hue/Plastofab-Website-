@@ -53,32 +53,52 @@ group: company
 </section>
 
 <section class="ab-route" aria-labelledby="route-title" data-route>
-  <div class="ab-route__pin">
-    <div class="wrap ab-route__grid">
-      <div class="ab-route__copy">
-        <span class="eyebrow">Where we are</span>
-        <h2 id="route-title" class="h-l">Halfway between Ahmedabad and Mumbai.</h2>
-        <p class="lede">Our location on the national highway, NH 8 (now NH 48), puts us within reach of almost any production or site project in western India.</p>
-      </div>
-      <svg class="route" viewBox="0 0 360 620" role="img" aria-label="A map of the highway from Ahmedabad to Mumbai, with Plasto-Fab at Ankleshwar">
-        <path class="route__river" d="M10 262 C 90 250, 150 280, 210 262 S 320 240, 350 255"/>
-        <text class="route__rivername" x="300" y="246">Narmada</text>
-        <path class="route__road" d="M150 30 C 160 90, 175 130, 172 170 S 182 240, 190 300 S 205 380, 196 430 S 185 520, 200 590"/>
-        <path class="route__run" pathLength="1" d="M150 30 C 160 90, 175 130, 172 170 S 182 240, 190 300 S 205 380, 196 430 S 185 520, 200 590"/>
-        <g class="route__cities">
-          <g style="--at:0"><circle cx="150" cy="30" r="6"/><text x="166" y="35">Ahmedabad</text></g>
-          <g style="--at:.27"><circle cx="172" cy="170" r="5"/><text x="188" y="175">Vadodara</text></g>
-          <g style="--at:.4"><circle cx="181" cy="236" r="5"/><text x="197" y="241">Bharuch</text></g>
-          <g style="--at:.52"><circle cx="196" cy="420" r="5"/><text x="212" y="425">Surat</text></g>
-          <g style="--at:1"><circle cx="200" cy="590" r="6"/><text x="216" y="595">Mumbai</text></g>
+  <div class="wrap ab-route__grid">
+    <div class="ab-route__copy">
+      <span class="eyebrow">Where we are</span>
+      <h2 id="route-title" class="h-l">Halfway between Ahmedabad and Mumbai.</h2>
+      <p class="lede">Our works sit on the national highway, NH 8 (now NH 48), which puts us within reach of almost any production or site project in western India.</p>
+      <dl class="ab-route__legs">
+        <div><dt>Ahmedabad</dt><dd>≈ 190 km north</dd></div>
+        <div><dt>Vadodara</dt><dd>≈ 85 km north</dd></div>
+        <div><dt>Surat</dt><dd>≈ 65 km south</dd></div>
+        <div><dt>Mumbai</dt><dd>≈ 310 km south</dd></div>
+      </dl>
+    </div>
+    <div class="ab-route__map">
+      <svg class="rt" viewBox="0 0 460 660" role="img" aria-label="Map of the NH 48 highway from Ahmedabad to Mumbai, with Plasto-Fab at Ankleshwar, about 190 km from Ahmedabad and 310 km from Mumbai">
+        <defs>
+          <pattern id="rt-dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,.07)"/></pattern>
+          <pattern id="rt-waves" width="40" height="12" patternUnits="userSpaceOnUse"><path d="M0 6 Q10 2 20 6 T40 6" fill="none" stroke="rgba(120,170,220,.10)" stroke-width="1"/></pattern>
+        </defs>
+        <rect width="460" height="660" fill="url(#rt-dots)"/>
+        <path class="rt__sea" d="M0 210 C 70 200, 130 196, 175 170 C 200 156, 214 140, 226 146 C 238 160, 240 200, 246 236 C 252 262, 262 282, 262 300 C 256 340, 236 372, 232 410 C 228 460, 240 520, 262 570 L 296 660 L 0 660 Z"/>
+        <path d="M0 210 C 70 200, 130 196, 175 170 C 200 156, 214 140, 226 146 C 238 160, 240 200, 246 236 C 252 262, 262 282, 262 300 C 256 340, 236 372, 232 410 C 228 460, 240 520, 262 570 L 296 660 L 0 660 Z" fill="url(#rt-waves)"/>
+        <path class="rt__coast" d="M0 210 C 70 200, 130 196, 175 170 C 200 156, 214 140, 226 146 C 238 160, 240 200, 246 236 C 252 262, 262 282, 262 300 C 256 340, 236 372, 232 410 C 228 460, 240 520, 262 570 L 296 660"/>
+        <text class="rt__water" x="44" y="470">ARABIAN SEA</text>
+        <text class="rt__gulf" x="120" y="262">Gulf of Khambhat</text>
+        <path class="rt__river" d="M460 258 C 410 270, 370 250, 330 272 S 290 290, 262 298"/>
+        <text class="rt__rivername" x="398" y="250">Narmada</text>
+        <path class="rt__road" d="M250 52 C 262 100, 300 140, 300 196 C 300 230, 294 250, 292 280 C 292 288, 294 296, 296 304 C 290 340, 272 370, 268 408 C 262 460, 270 540, 300 592"/>
+        <path class="rt__run rt__run--n" pathLength="1" d="M296 304 C 294 296, 292 288, 292 280 C 294 250, 300 230, 300 196 C 300 140, 262 100, 250 52"/>
+        <path class="rt__run rt__run--s" pathLength="1" d="M296 304 C 290 340, 272 370, 268 408 C 262 460, 270 540, 300 592"/>
+        <g class="rt__traffic" aria-hidden="true">
+          <circle r="3"><animateMotion dur="9s" repeatCount="indefinite" path="M250 52 C 262 100, 300 140, 300 196 C 300 230, 294 250, 292 280 C 292 288, 294 296, 296 304 C 290 340, 272 370, 268 408 C 262 460, 270 540, 300 592"/></circle>
+          <circle r="3"><animateMotion dur="9s" begin="-4.5s" repeatCount="indefinite" path="M250 52 C 262 100, 300 140, 300 196 C 300 230, 294 250, 292 280 C 292 288, 294 296, 296 304 C 290 340, 272 370, 268 408 C 262 460, 270 540, 300 592"/></circle>
+          <circle r="3" class="rt__back"><animateMotion dur="11s" begin="-2s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear" path="M250 52 C 262 100, 300 140, 300 196 C 300 230, 294 250, 292 280 C 292 288, 294 296, 296 304 C 290 340, 272 370, 268 408 C 262 460, 270 540, 300 592"/></circle>
         </g>
-        <g class="route__home" style="--at:.46">
-          <circle class="route__ping" cx="186" cy="286" r="10"/>
-          <circle cx="186" cy="286" r="7"/>
-          <text x="62" y="291">Ankleshwar</text>
-          <text class="route__us" x="62" y="309">Plasto-Fab</text>
+        <g class="rt__nh"><rect x="320" y="108" width="54" height="22" rx="5"/><text x="347" y="123" text-anchor="middle">NH 48</text></g>
+        <g class="rt__north" aria-hidden="true"><path d="M420 58 L428 34 L436 58 L428 52 Z"/><text x="428" y="76" text-anchor="middle">N</text></g>
+        <g class="rt__city" style="--at:.9;--leg:n"><circle cx="250" cy="52" r="5.5"/><text x="266" y="53" text-anchor="start">Ahmedabad</text><text class="rt__km" x="266" y="69" text-anchor="start">≈ 190 km</text></g>
+        <g class="rt__city" style="--at:0.5;--leg:n"><circle cx="300" cy="196" r="5.5"/><text x="316" y="197" text-anchor="start">Vadodara</text><text class="rt__km" x="316" y="213" text-anchor="start">≈ 85 km</text></g>
+        <g class="rt__city" style="--at:0.14;--leg:n"><circle cx="292" cy="280" r="5.5"/><text x="308" y="281" text-anchor="start">Bharuch</text><text class="rt__km" x="308" y="297" text-anchor="start">across the river</text></g>
+        <g class="rt__city" style="--at:0.38;--leg:s"><circle cx="268" cy="408" r="5.5"/><text x="284" y="409" text-anchor="start">Surat</text><text class="rt__km" x="284" y="425" text-anchor="start">≈ 65 km</text></g>
+        <g class="rt__city" style="--at:.9;--leg:s"><circle cx="300" cy="592" r="5.5"/><text x="316" y="593" text-anchor="start">Mumbai</text><text class="rt__km" x="316" y="609" text-anchor="start">≈ 310 km</text></g>
+        <g class="rt__home">
+          <circle class="rt__ping" cx="296" cy="304" r="9"/>
+          <circle class="rt__pin" cx="296" cy="304" r="8"/>
+          <g class="rt__card"><rect x="318" y="296" width="132" height="48" rx="10"/><text class="rt__card-t" x="332" y="317">Ankleshwar</text><text class="rt__card-s" x="332" y="333">PLASTO-FAB · GIDC</text></g>
         </g>
-        <text class="route__nh" x="120" y="140">NH 48</text>
       </svg>
     </div>
   </div>
@@ -87,13 +107,31 @@ group: company
 <section class="sec ab-do" aria-labelledby="do-title">
   <div class="wrap">
     <header class="sec-head"><span class="eyebrow">What we do</span><h2 id="do-title">From the first sketch to the running plant.</h2></header>
-    <ol class="ribbon">
-      <li><b>Design</b><span>Fabrication drawings, or yours</span></li>
-      <li><b>Engineering</b><span>For your loads and chemicals</span></li>
-      <li><b>Manufacturing</b><span>Welded to DVS standards</span></li>
-      <li><b>Erection</b><span>On your site</span></li>
-      <li><b>Commissioning</b><span>And field service after</span></li>
-    </ol>
+    <div class="stepper" data-stepper>
+      <ol class="stepper__bar" role="tablist" aria-label="What we do, step by step"><li><button type="button" role="tab" id="do-t0" aria-controls="do-p0" aria-selected="true"><span>01</span>Design<i></i></button></li><li><button type="button" role="tab" id="do-t1" aria-controls="do-p1" aria-selected="false" tabindex="-1"><span>02</span>Engineering<i></i></button></li><li><button type="button" role="tab" id="do-t2" aria-controls="do-p2" aria-selected="false" tabindex="-1"><span>03</span>Manufacturing<i></i></button></li><li><button type="button" role="tab" id="do-t3" aria-controls="do-p3" aria-selected="false" tabindex="-1"><span>04</span>Erection<i></i></button></li><li><button type="button" role="tab" id="do-t4" aria-controls="do-p4" aria-selected="false" tabindex="-1"><span>05</span>Commissioning<i></i></button></li></ol>
+      <div class="stepper__panels">
+        <article class="stepper__panel is-on" id="do-p0" role="tabpanel" aria-labelledby="do-t0">
+          <div class="stepper__copy"><span class="stepper__n">01 · Design</span><h3>Fabrication drawings, or yours.</h3><p>We make the design and fabrication drawings ourselves, or work from the drawings you supply.</p></div>
+          <figure class="stepper__ph"><img src="assets/pages/design/scrubber-drawing.svg" alt="A general-arrangement drawing of a scrubber system" width="1600" height="1200" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="stepper__panel" id="do-p1" role="tabpanel" aria-labelledby="do-t1" hidden>
+          <div class="stepper__copy"><span class="stepper__n">02 · Engineering</span><h3>For your loads and your chemicals.</h3><p>Each vessel is designed for the dynamic and hydrostatic loads of its process, in the material that suits the medium it will hold.</p></div>
+          <figure class="stepper__ph"><img src="assets/pages/wix/scrubbing-system/02-t.webp" alt="A red FRP horizontal scrubber in the works" width="720" height="324" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="stepper__panel" id="do-p2" role="tabpanel" aria-labelledby="do-t2" hidden>
+          <div class="stepper__copy"><span class="stepper__n">03 · Manufacturing</span><h3>Welded to DVS standards.</h3><p>Sheets are cut, bent, rolled and welded in our Ankleshwar works to DVS 2207–2208, on German Wegener &amp; Widos equipment.</p></div>
+          <figure class="stepper__ph"><img src="assets/pages/wix/scrubbing-system/04-t.webp" alt="The team handling an FRP scrubber column in the works" width="324" height="720" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="stepper__panel" id="do-p3" role="tabpanel" aria-labelledby="do-t3" hidden>
+          <div class="stepper__copy"><span class="stepper__n">04 · Erection</span><h3>On your site.</h3><p>We deliver the equipment to your plant and erect it there, setting each piece in place.</p></div>
+          <figure class="stepper__ph"><img src="assets/pages/wix/scrubbing-system/06-t.webp" alt="A scrubber lifted into place by crane" width="324" height="720" loading="lazy" decoding="async"></figure>
+        </article>
+        <article class="stepper__panel" id="do-p4" role="tabpanel" aria-labelledby="do-t4" hidden>
+          <div class="stepper__copy"><span class="stepper__n">05 · Commissioning</span><h3>And field service after.</h3><p>We commission the system with your team, and come back for field service, repair and installation wherever the site is.</p></div>
+          <figure class="stepper__ph"><img src="assets/pages/wix/sewage-plant/03-t.webp" alt="The Plasto-Fab and client teams at a plant" width="720" height="324" loading="lazy" decoding="async"></figure>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 

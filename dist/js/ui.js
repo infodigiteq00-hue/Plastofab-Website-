@@ -64,7 +64,7 @@
     fadeHint();
   })();
 
-  /* ── product portfolio: rendered equipment on a ring that turns with the scroll ── */
+  /* ── product portfolio: rendered equipment on a ring you turn by dragging (or arrows, keys, the list) ── */
   var port = document.querySelector('.port');
   if (port) (function () {
     var items = Array.prototype.slice.call(port.querySelectorAll('[data-port-item]'));
@@ -73,18 +73,9 @@
     var stage = port.querySelector('.port__stage');
     var n = items.length, step = 360 / n, cur = 0, goal = 0, on = -1, raf = 0;
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // 0 → 1 through the pinned section; the ring settles on each item for a moment
-    var progress = function () {
-      var r = port.getBoundingClientRect(), span = port.offsetHeight - window.innerHeight;
-      return clamp(-r.top / Math.max(1, span), 0, 1);
-    };
-    var target = function () {
-      var t = progress() * (n - 1), i = Math.floor(t), f = t - i;
-      f = f < 0.3 ? 0 : f > 0.7 ? 1 : (f - 0.3) / 0.4;   // hold, then turn
-      return i + f * f * (3 - 2 * f);
-    };
+    var wrap = function (i) { return ((i % n) + n) % n; };
     var draw = function () {
-      var w = stage.offsetWidth, rad = Math.min(w * 0.62, 560), lift = Math.min(w * 0.08, 70);
+      var w = stage.offsetWidth, rad = Math.min(w * 0.5, 480), lift = Math.min(w * 0.08, 70);
       items.forEach(function (it, i) {
         var d = i - cur;
         d -= n * Math.round(d / n);                                   // shortest way round
@@ -96,7 +87,7 @@
         it.style.zIndex = String(Math.round(100 + z));
         it.style.filter = 'saturate(' + (0.4 + 0.6 * front).toFixed(2) + ') brightness(' + (0.9 + 0.1 * front).toFixed(2) + ')';
       });
-      var a2 = Math.round(cur);
+      var a2 = wrap(Math.round(cur));
       if (a2 !== on) {
         on = a2;
         dets.forEach(function (d, i) { d.classList.toggle('is-active', i === on); });
@@ -105,23 +96,63 @@
     };
     var tick = function () {
       raf = 0;
-      cur += (goal - cur) * (reducedMotion ? 1 : 0.14);
+      cur += (goal - cur) * (reducedMotion ? 1 : 0.16);
       if (Math.abs(goal - cur) < 0.001) cur = goal;
       draw();
       if (cur !== goal) raf = requestAnimationFrame(tick);
     };
-    var update = function () { goal = target(); if (!raf) raf = requestAnimationFrame(tick); };
-    // the index scrolls the page to where that item faces you
-    gos.forEach(function (g, i) {
-      g.addEventListener('click', function () {
-        var span = port.offsetHeight - window.innerHeight;
-        var y = port.getBoundingClientRect().top + window.scrollY + span * (i / (n - 1));
-        window.scrollTo({ top: y, behavior: reducedMotion ? 'auto' : 'smooth' });
-      });
+    var turn = function (g) { goal = g; if (!raf) raf = requestAnimationFrame(tick); };
+    // to item i the short way round
+    var to = function (i) { var d = i - wrap(Math.round(goal)); d -= n * Math.round(d / n); turn(Math.round(goal) + d); };
+
+    // it turns on its own while on screen, until someone takes the wheel
+    var touched = false, onScreen = false, timer = 0;
+    var take = function () { touched = true; clearInterval(timer); };
+    if (!reducedMotion && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        onScreen = es[0].isIntersecting;
+        clearInterval(timer);
+        if (onScreen && !touched) timer = setInterval(function () { if (!dragging) turn(Math.round(goal) + 1); }, 4200);
+      }, { threshold: 0.4 }).observe(stage);
+    }
+
+    // drag sideways to turn; vertical swipes still scroll the page (touch-action: pan-y)
+    var sx = null, sg = 0, dragging = false, lastX = 0, lastT = 0, vel = 0;
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      sx = lastX = e.clientX; sg = goal; lastT = performance.now(); vel = 0; dragging = false;
     });
-    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('pointermove', function (e) {
+      if (sx === null) return;
+      var dx = e.clientX - sx;
+      if (!dragging && Math.abs(dx) > 6) { dragging = true; take(); stage.classList.add('is-dragging'); try { stage.setPointerCapture(e.pointerId); } catch (err) {} }
+      if (!dragging) return;
+      var now = performance.now(), per = stage.offsetWidth * 0.32;
+      vel = (e.clientX - lastX) / Math.max(1, now - lastT) * 16 / per;   // items per frame
+      lastX = e.clientX; lastT = now;
+      turn(sg - dx / per);
+    });
+    var end = function () {
+      if (sx === null) return;
+      sx = null;
+      if (!dragging) return;
+      stage.classList.remove('is-dragging');
+      turn(Math.round(goal - vel * 6));                               // a flick carries on, then settles on an item
+      setTimeout(function () { dragging = false; }, 0);
+    };
+    window.addEventListener('pointerup', end);
+    window.addEventListener('pointercancel', end);
+
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { take(); turn(Math.round(goal) + 1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { take(); turn(Math.round(goal) - 1); e.preventDefault(); }
+    });
+    var prev = port.querySelector('[data-port-prev]'), next = port.querySelector('[data-port-next]');
+    if (prev) prev.addEventListener('click', function () { take(); turn(Math.round(goal) - 1); });
+    if (next) next.addEventListener('click', function () { take(); turn(Math.round(goal) + 1); });
+    gos.forEach(function (g, i) { g.addEventListener('click', function () { take(); to(i); }); });
     window.addEventListener('resize', function () { draw(); });
-    goal = cur = target(); draw();
+    draw();
   })();
 
   /* ── work gallery: a sideways-scrolling strip of real work ── */

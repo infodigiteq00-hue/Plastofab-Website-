@@ -26,13 +26,10 @@ The scrubber is meant to look like real equipment: a packed column with an exhau
 
 ## The rest of the home page
 
-- **Product portfolio** (`.port`): nine equipment families as studio renders on a 3D ring that turns as you scroll, with each family's text and an index to jump to it. The renders are illustrations made with Codex image generation (`ref/renders/`, converted by `python3 make.py` there into `assets/portfolio/`).
-- **Work gallery** (`#range`): 10 cards of real work photos in a strip that scrolls sideways (arrows, drag, swipe or arrow keys), including FRP/GRP, thermoplastic and separation tanks. Each card's "Get a quote" ticks the matching project type in the form at the bottom.
+- **Product portfolio** (`.port`): nine equipment families as studio renders on a 3D ring you turn by dragging or swiping (or the arrows, arrow keys or the list). It turns on its own while on screen until someone takes over; the page scrolls normally past it. The renders are illustrations made with Codex image generation (`ref/renders/`, converted by `python3 make.py` there into `assets/portfolio/`).
+- **Work gallery** (`#range`): 10 cards of real work photos in a strip that scrolls sideways (arrows, drag, swipe or arrow keys), including FRP/GRP, thermoplastic and pickling tanks. Each photo is shown whole, over a soft blur of itself. Each card's "Get a quote" ticks the matching project type in the form at the bottom.
 - **Industries:** chemical, pharma, water, electroplating and the others they serve.
 - **Process:** five steps (material, design, manufacturing, inspect, dispatch) as a deck of shop photos (the design step is a general-arrangement drawing, `assets/pages/design/scrubber-drawing.svg`), with a step bar. "View photo" opens the current one full size.
-- **Proof:**
-  - figures: founded 1992, 250+ clients, 1,500+ projects, 25+ products
-  - four cards: German welding equipment, DVS 2207–2208, imported machinery and the 12,000 sq ft shop
 - **Clients:** a moving strip of 28 client logos.
 - **Film:** their company video in a framed player, with sound and a poster. It plays only on click and pauses when it scrolls away.
 - **Contact:**
@@ -45,16 +42,17 @@ Every topic on plasto-fab.com and the Wix site has its own page, each with its o
 
 | Page | File | What makes it different |
 |---|---|---|
-| All Products | `products.html` | The full catalogue in 7 families, with a sticky chip index; photo mosaics open a full-screen viewer (62 photos) |
+| All Products | `products.html` | The full catalogue by family, with a sticky chip index; with a mouse, the photo you point at grows to show itself whole while the others slide smaller; photos open a full-screen viewer |
 | Sewage Treatment | `water-treatment.html` | A dark underwater page: light rays and bubbles, three glasses of water clearing (raw → EC → settled), the six-step treatment path traced by a droplet, gauges, a 20 KLD example table, the 12 installed plants with their capacities, and a photo strip |
-| Materials | `materials.html` | A periodic table of 12 materials (thermoplastics, fluoropolymers, composites) with a filter and a detail card; a dual-laminate wall that explodes into its layers |
-| Fabrication | `fabrication.html` | A welding hero; fewer joints compared with many; a sticky photo story with a weld bead running down it; DVS, Wegener and Widos cards; machinery and plus points |
-| About Us | `about.html` | A giant 1992; a scroll panorama of the works; the founder; the NH 48 route map to Ankleshwar; mission, vision and values; figures that count up |
+| Materials | `materials.html` | A fanned deck of material samples; a table of 12 tiles that look like the real sheet (PP satin, HDPE gloss, PVC matte, FRP weave, dual laminates), CSS textures only (`.tex-*` in `css/pages.css`); a dual-laminate wall that explodes into its layers |
+| Fabrication | `fabrication.html` | The main page: a hero of slowly changing shop photos; turnkey systems as a photo bento; the job step by step (the stepper); fewer joints drawn out; the works, machines and a photo strip; DVS, Wegener & Widos, ISO and testing; the materials as swatches; field service |
+| About Us | `about.html` | A giant 1992; a scroll panorama of the works; the founder and Jhannu Pandya; a night map of NH 48 that draws itself out of Ankleshwar; what we do as a stepper; mission, vision and values; figures that count up |
 | Clients | `clients.html` | Big counters; a wall of 28 logos that turn in tile by tile, in colour on hover |
 | Careers | `careers.html` | Drifting values words, team photos and a CV form |
-| Contact Us | `contact.html` | A live "Open now / Closed" panel in India time; works address with a map link; all three phone numbers and emails; a form |
+| Contact Us | `contact.html` | A live "Open now / Closed" panel in India time; works address with a map link; phone numbers and emails; a form |
 | Get a Quote | `quote.html` | A five-step wizard (industry, project, material, size, you) |
 | Downloads | `downloads.html` | Their four PDFs as cards with fanned page previews |
+| Notable Projects | `projects.html`, `blog-*.html` | The blog: six articles from the works, each on its own page, with a topic filter. Written from `pages/make_blog.py` (run it, then `build-pages.py`) |
 | Not found | `404.html` | Shown by Cloudflare for any broken link: an outlined 404 and quick links to the main pages |
 
 **Forms:**
@@ -71,6 +69,7 @@ python3 build-pages.py
 
 - `pages/<page>.html` holds each page's content, with its title, description and menu group at the top.
 - `pages/_layout.html` is the frame around every page.
+- Shared pieces any page can use: the stepper (`[data-stepper]`, numbered steps with progress lines, in `css/pages.css` and `js/pages.js`), material textures (`.tex-pp`, `.tex-frp`...), and the pop-in: cards rise into view and section headings fade up (`js/site.js` + the end of `css/site.css`; it lists which card classes pop).
 - A `base: /` line makes a page work at any URL (used by the 404 page).
 - The menu and footer are defined in `build-pages.py` (the `NAV` list). The build also refreshes the header and footer inside `index.html`. Bump `V` in `build-pages.py` to make browsers fetch changed CSS/JS.
 - `pages/pagedata.py` generates the parts that come from data: the catalogue, client wall, STP plant list and gallery, and downloads.
