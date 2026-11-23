@@ -88,6 +88,8 @@ python3 build-pages.py
 
 ## Putting it on Cloudflare Pages
 
+**Caching (so an old version never sticks):** `make-dist.sh` runs `stamp.py`, which adds `?v=<hash of the file>` to every css, js and image link in the copied HTML and CSS. A file whose contents change gets a new address and is fetched fresh; unchanged files keep theirs. `_headers` makes browsers re-check every page on each visit (`no-cache`, a quick 304 when nothing changed), keeps css/js for a year and images for a week. The hand-typed `?v=` numbers in the sources no longer matter for the live site. Images that JavaScript builds links to (client logos) aren't stamped, so they still rely on the one-week limit.
+
 **Every time something changes, run:**
 
 ```bash

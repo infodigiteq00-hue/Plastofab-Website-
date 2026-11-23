@@ -9,5 +9,6 @@ rsync -a --prune-empty-dirs \
   --exclude='/ref/' --exclude='/pages/' --exclude='/dist/' --exclude='/js/vendor/' --exclude='/js/tank-story.js' \
   --exclude='__pycache__/' --exclude='*.py' --exclude='*.sh' --exclude='*.md' --exclude='*.zip' --exclude='.*' \
   ./ dist/
+python3 stamp.py dist   # every css/js/image link gets ?v=<hash of the file>, so a changed file is always fetched fresh
 (cd dist && zip -qr -9 ../plasto-fab-site.zip .)
 echo "dist/: $(find dist -type f | wc -l) files, $(du -sh dist | cut -f1)   plasto-fab-site.zip: $(du -h plasto-fab-site.zip | cut -f1)"

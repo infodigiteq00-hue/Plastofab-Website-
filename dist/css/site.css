@@ -331,7 +331,7 @@ main, .site-footer { position: relative; z-index: 1; }
 .contact__ink { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .6s; }
 .contact.ink-live .contact__ink { opacity: 1; }
 /* reduced motion or no WebGL 2: a still frame of the same water */
-.contact.ink-still { background: #eef2f4 url(../assets/ink-still.webp) center / cover no-repeat; }
+.contact.ink-still { background: #eef2f4 url(../assets/ink-still.webp?v=eda7977432) center / cover no-repeat; }
 .contact.ink-still .contact__ink { display: none; }
 /* the copy sits on a card, like the form, so it reads over the ink */
 .contact__intro { background: rgba(255, 255, 255, .86); border: 1px solid var(--line); border-radius: 24px; padding: clamp(24px, 3.4vw, 44px); box-shadow: var(--shadow); }
@@ -457,8 +457,8 @@ img[src$="clients/26.webp"] { object-view-box: inset(34% 3% 32% 3%); }
 .no-webgl .mat { height: auto; }
 .no-webgl .mat__pin { position: relative; height: auto; min-height: 100svh; }
 .no-webgl .mat__tank { background: center / contain no-repeat; }
-.no-webgl .mat--thermo .mat__tank { background-image: url(../assets/portfolio/scrubber.webp); }
-.no-webgl .mat--frp .mat__tank { background-image: url(../assets/portfolio/frp-tanks.webp); }
+.no-webgl .mat--thermo .mat__tank { background-image: url(../assets/portfolio/scrubber.webp?v=50c36b270e); }
+.no-webgl .mat--frp .mat__tank { background-image: url(../assets/portfolio/frp-tanks.webp?v=8b38824fab); }
 @media (prefers-reduced-motion: reduce) { .logos__row { animation: none; } .logos { overflow-x: auto; } }
 
 /* ── pop-in: cards rise and settle with a little spring as they come into view (site.js adds .pop / .is-popped).
