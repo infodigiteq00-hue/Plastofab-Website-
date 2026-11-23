@@ -255,8 +255,5 @@ body.lb-open { overflow: hidden; }
 .stepper__ph[style*="--ph"] { position: relative; isolation: isolate; }
 .stepper__ph[style*="--ph"]::before { content: ""; position: absolute; inset: -30px; z-index: -1; background: var(--ph) center / cover; filter: blur(24px) saturate(1.1) brightness(.92); }
 .stepper__ph[style*="--ph"] img { object-fit: contain; }
-/* .stepper--plain: the step names alone, without the progress lines */
-.stepper--plain .stepper__bar i { visibility: hidden; height: 0; margin: 0; }   /* still runs, so autoplay keeps its timing */
-.stepper--plain .stepper__bar button { padding: 8px 0; }
-.stepper--plain .stepper__bar [aria-selected="true"] { background: var(--brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.stepper--plain .stepper__bar [aria-selected="true"] span { color: var(--green); }
+/* .stepper--plain: no step bar on show; it stays in the page (hidden) so autoplay keeps its timing */
+.stepper--plain .stepper__bar { visibility: hidden; height: 0; margin: 0; padding: 0; overflow: hidden; border: 0; }
