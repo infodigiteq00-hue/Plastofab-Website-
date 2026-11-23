@@ -481,3 +481,14 @@ img[src$="clients/26.webp"] { object-view-box: inset(34% 3% 32% 3%); }
 .std__card:hover, .mv:hover, .founder:hover, .plant:hover, .ccard:hover { translate: 0 -6px; box-shadow: 0 28px 46px -32px rgba(13, 20, 36, .5); }
 .pillar:hover { translate: 0 -4px; }
 @media (prefers-reduced-motion: reduce) { .pop:not(.is-popped) { opacity: 1; } .pop.is-popped, .pop.is-popped::before, .pop.is-popped img { animation: none; } }
+
+/* why choose us: four strong points, each with a big brand-gradient number and a line that fills in on hover */
+.pillars--why { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.pillars--why .pillar { position: relative; gap: 14px; padding: 30px 26px 34px; border: 0; border-radius: 22px; background: #fff; box-shadow: 0 1px 0 var(--line), 0 24px 40px -34px rgba(13, 20, 36, .45); overflow: hidden; }
+.pillars--why .pillar::before { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 34%; background: var(--brand); transition: width .6s var(--ease); }
+.pillars--why .pillar:hover::before { width: 100%; }
+.pillars--why .pillar__n { font-size: clamp(46px, 4.4vw, 64px); font-weight: 600; line-height: 1; letter-spacing: -.04em; background: var(--brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pillars--why .pillar h3 { font-size: clamp(20px, 1.7vw, 24px); }
+.pillars--why .pillar p { font-size: 15px; line-height: 1.6; }
+@media (max-width: 900px) { .pillars--why { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .pillars--why { grid-template-columns: 1fr; } }

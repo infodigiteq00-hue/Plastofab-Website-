@@ -13,7 +13,7 @@
 .k-thermo { background: #2e4b8f; } .k-fluoro { background: #1f8f8a; } .k-comp { background: #8fb40d; }
 .mt-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 24px; align-items: start; }
 .ptable { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
-.el { --c: #2e4b8f; position: relative; aspect-ratio: 1; display: grid; align-content: space-between; padding: 14px; text-align: left; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--c) 30%, transparent); background: color-mix(in srgb, var(--c) 7%, #fff); cursor: pointer; transition: transform .35s var(--ease), box-shadow .35s, background .3s, opacity .3s; }
+.el { --c: #2e4b8f; position: relative; aspect-ratio: 1; display: grid; align-content: space-between; padding: 14px; text-align: left; border-radius: 14px; cursor: pointer; transition: transform .35s var(--ease), box-shadow .35s, background .3s, opacity .3s; }
 .el--fluoro { --c: #1f8f8a; } .el--comp { --c: #6e8f00; }
 .el small { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .el b { font-size: clamp(20px, 2.2vw, 32px); font-weight: 600; letter-spacing: -.02em; line-height: 1; color: var(--c); }
@@ -71,8 +71,9 @@
 .el[aria-selected="true"] { outline-color: var(--navy); translate: 0 -4px; }
 .el:focus-visible { outline-color: var(--blue); }
 /* the dual-laminate tiles show their liner on top, so the symbol sits on the FRP */
-.tex-ppfrp b, .tex-pvcfrp b, .tex-pvdffrp b { color: #1d1f22; }
-.tex-pvcfrp small { color: #fff; }
+.tex-ppfrp b, .tex-pvdffrp b { color: #1d1f22; }
+.el.tex-pvcfrp b, .el.tex-pvcfrp small { color: #fff; }
+.el.tex-ppfrp span, .el.tex-pvcfrp span, .el.tex-pvdffrp span { color: #1d1f22; }
 .mt-card__ph { aspect-ratio: 16 / 9; }
 .mt-card__tex::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, var(--sheen) 48%, transparent 60%); }
 

@@ -12,10 +12,10 @@ CLIENTS = ['Thermax', 'Jubilant Life Sciences', 'Asian Paints', 'Glenmark', 'Anu
 
 # the catalogue: (anchor, name, tone, kicker, text, facts, items, photo folders or single photos)
 CATALOGUE = [
-    ('storage', 'Storage Tanks', '#d8a400', 'Tanks for liquids and gases',
+    ('storage', 'FRP or Thermoplastic Tanks', '#d8a400', 'Tanks for liquids and gases',
      ['Storage tanks and process vessels serve many industrial uses, so each has to meet different requirements. We make a wide range for storing liquids and gases, entirely in FRP or in thermoplastic, as the client needs.',
       'Pickling tanks process metal surface treatment: the metal is immersed in pickling acid to take the scale and rust off.'],
-     [('Made to measure', 'for liquids and gases'), ('Double wall', 'with leakage monitoring'), ('FRP or thermoplastic', 'to suit the chemical')],
+     [('Made to measure', 'for liquids and gases'), ('Double wall', 'with leakage monitoring')],
      ['Pickling tanks', 'PP / HDPE tanks', 'PP / FRP tanks', 'PP & HDPE spiral tanks'], ['wix/storage-tanks']),
     ('scrubbers', 'Scrubbing Systems', '#2f6db5', 'Pollution control',
      ['Scrubbers and columns are pollution-control equipment: they remove particles and gases from industrial exhaust streams.',
@@ -55,6 +55,10 @@ LEAD = {'wix/storage-tanks': ['21', '18', '12', '19', '00'], 'wix/scrubbing-syst
         'wix/vacuum-receiver': ['04', '05', '00'], 'wix/centrifugal-blower': ['00', '01', '03'], 'wix/ducting': ['05', '01', '04']}
 
 
+# photos the client asked us not to use anywhere (sheet bending, shell rolling/welding, the site inspection)
+BANNED = {'wix/home/08', 'wix/home/09', 'wix/home/13', 'wix/home/22', 'wix/home/23', 'wix/sewage-plant/03'}
+
+
 def photos(man, folder):
     if folder in man:  # a single photo rather than a folder
         keys = [folder]
@@ -62,6 +66,7 @@ def photos(man, folder):
         keys = sorted(k for k in man if k.startswith(folder + '/') and not k.endswith('-t'))
         lead = [f'{folder}/{n}' for n in LEAD.get(folder, []) if f'{folder}/{n}' in man]
         keys = lead + [k for k in keys if k not in lead]
+    keys = [k for k in keys if k not in BANNED]
     return [{'src': f'assets/pages/{k}.webp', 'thumb': f'assets/pages/{k}-t.webp', 'w': man[k]['w'], 'h': man[k]['h'], 'tw': man[k]['tw'], 'th': man[k]['th']} for k in keys]
 
 

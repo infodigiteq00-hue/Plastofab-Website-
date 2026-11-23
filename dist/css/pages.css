@@ -172,29 +172,35 @@ body.lb-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { .stepper__panel.is-on, .stepper__panel.is-on .stepper__ph img { animation: none; } }
 
-/* ── material textures (Materials page tiles, the Fabrication swatches): a base colour, a sheen (how glossy), fine grain, and the cut edge of a sheet ── */
-:root { --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --mottle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
-  --weave: repeating-linear-gradient(0deg, rgba(255, 255, 255, .09) 0 2px, transparent 2px 5px),
-           repeating-linear-gradient(90deg, rgba(70, 50, 0, .08) 0 2px, transparent 2px 5px),
-           repeating-linear-gradient(35deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 9px); }
-[class*="tex-"] { --ink-on: #1d1f22; --sheen: rgba(255, 255, 255, .38); background-blend-mode: soft-light, overlay, normal; }
-.tex-pp     { background: var(--grain), var(--mottle), linear-gradient(160deg, #e6e1d2, #cbc4b0); --sheen: rgba(255, 255, 255, .32); }
-.tex-hdpe   { background: var(--grain), var(--mottle), linear-gradient(160deg, #34373c, #0f1012 70%); --ink-on: #fff; --sheen: rgba(255, 255, 255, .26); }
-.tex-pvc    { background: var(--grain), var(--mottle), linear-gradient(160deg, #6a7076, #454a4f); --ink-on: #fff; --sheen: rgba(255, 255, 255, .12); }
-.tex-cpvc   { background: var(--grain), var(--mottle), linear-gradient(160deg, #dcdfe0, #b4b9bc); --sheen: rgba(255, 255, 255, .22); }
-.tex-pvdf   { background: var(--grain), var(--mottle), linear-gradient(160deg, #faf8f1, #e2ddcd); --sheen: rgba(255, 255, 255, .7); }
-.tex-ectfe  { background: var(--grain), var(--mottle), linear-gradient(160deg, #f3f3ee, #d3d4cc); --sheen: rgba(255, 255, 255, .6); }
-.tex-fep    { background: var(--grain), radial-gradient(120% 80% at 30% 20%, rgba(255, 255, 255, .9), transparent 60%), linear-gradient(160deg, #e9f1f5, #bfd0da); --sheen: rgba(255, 255, 255, .55); }
-.tex-pfa    { background: var(--grain), radial-gradient(120% 80% at 30% 20%, rgba(255, 255, 255, .9), transparent 60%), linear-gradient(160deg, #eef0f4, #c6ccd8); --sheen: rgba(255, 255, 255, .55); }
-.tex-frp    { background: var(--grain), var(--weave), linear-gradient(160deg, #d2c27e, #a79443 55%, #8a7a33); background-blend-mode: soft-light, normal, normal; --sheen: rgba(255, 255, 255, .45); }
-/* dual laminates: the liner on top, a bonding line, then the wound FRP */
-.tex-ppfrp, .tex-pvcfrp, .tex-pvdffrp { background-repeat: no-repeat; background-blend-mode: soft-light, normal, normal, normal, normal; --sheen: rgba(255, 255, 255, .4); }
-.tex-ppfrp    { background: var(--grain), linear-gradient(160deg, #e6e1d2, #cbc4b0) top / 100% 44% no-repeat, linear-gradient(#a9925a, #8c7743) 0 44% / 100% 5% no-repeat, var(--weave), linear-gradient(160deg, #cdbd77, #95833a); }
-.tex-pvcfrp   { background: var(--grain), linear-gradient(160deg, #6a7076, #454a4f) top / 100% 44% no-repeat, linear-gradient(#a9925a, #8c7743) 0 44% / 100% 5% no-repeat, var(--weave), linear-gradient(160deg, #cdbd77, #95833a); }
-.tex-pvdffrp  { background: var(--grain), linear-gradient(160deg, #faf8f1, #e2ddcd) top / 100% 44% no-repeat, linear-gradient(#a9925a, #8c7743) 0 44% / 100% 5% no-repeat, var(--weave), linear-gradient(160deg, #cdbd77, #95833a); }
-
-.tex-ppfrp b, .tex-pvcfrp b, .tex-pvdffrp b { color: #1d1f22; }
+/* ── material textures (Materials page tiles, the Fabrication swatches). Each sheet is its own colour (--c1 → --c2) under soft studio light:
+   a light falloff from the top left, a reflection band as glossy as the plastic (--gloss), and a whisper of grain. FRP shows its glass-fibre twill. ── */
+:root { --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --twill: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27%3E%3Cdefs%3E%3ClinearGradient id=%27v%27 x1=%270%27 x2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23000%27 stop-opacity=%27.32%27/%3E%3Cstop offset=%27.5%27 stop-color=%27%23fff%27 stop-opacity=%27.34%27/%3E%3Cstop offset=%271%27 stop-color=%27%23000%27 stop-opacity=%27.32%27/%3E%3C/linearGradient%3E%3ClinearGradient id=%27h%27 x2=%270%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23000%27 stop-opacity=%27.4%27/%3E%3Cstop offset=%27.5%27 stop-color=%27%23fff%27 stop-opacity=%27.18%27/%3E%3Cstop offset=%271%27 stop-color=%27%23000%27 stop-opacity=%27.4%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x=%270%27 y=%270%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%270%27 y=%273%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%270%27 y=%276%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3Crect x=%270%27 y=%279%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3Crect x=%273%27 y=%270%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%273%27 y=%273%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3Crect x=%273%27 y=%276%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3Crect x=%273%27 y=%279%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%276%27 y=%270%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3Crect x=%276%27 y=%273%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3Crect x=%276%27 y=%276%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%276%27 y=%279%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%279%27 y=%270%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3Crect x=%279%27 y=%273%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%279%27 y=%276%27 width=%273%27 height=%273%27 fill=%27url%28%23v%29%27/%3E%3Crect x=%279%27 y=%279%27 width=%273%27 height=%273%27 fill=%27url%28%23h%29%27/%3E%3C/svg%3E"); }
+.tex-pp, .tex-hdpe, .tex-pvc, .tex-cpvc, .tex-pvdf, .tex-ectfe, .tex-fep, .tex-pfa, .tex-frp, .tex-ppfrp, .tex-pvcfrp, .tex-pvdffrp {
+  --ink-on: #1d1f22; --gloss: .3; --sheen: rgba(255, 255, 255, .4);
+  --light: linear-gradient(118deg, transparent 26%, rgb(255 255 255 / var(--gloss)) 38%, transparent 52%), radial-gradient(140% 110% at 12% 0%, rgba(255, 255, 255, .3), transparent 58%), linear-gradient(170deg, transparent 55%, rgba(0, 0, 0, .14));
+  background: var(--grain), var(--light), linear-gradient(165deg, var(--c1), var(--c2));
+  background-blend-mode: soft-light, normal, normal, normal, normal; }
+.tex-pp    { --c1: #e2dccb; --c2: #c2baa4; --gloss: .28; }
+.tex-hdpe  { --c1: #33363b; --c2: #0b0c0e; --gloss: .22; --ink-on: #fff; --sheen: rgba(255, 255, 255, .22); }
+.tex-pvc   { --c1: #6b7177; --c2: #464b51; --gloss: .08; --ink-on: #fff; --sheen: rgba(255, 255, 255, .12); }
+.tex-cpvc  { --c1: #d6d9db; --c2: #a9aeb2; --gloss: .2; }
+.tex-pvdf  { --c1: #fbf9f2; --c2: #e0d9c6; --gloss: .55; }
+.tex-ectfe { --c1: #f4f2e8; --c2: #d6d2c0; --gloss: .4; }
+.tex-fep   { --c1: #f1f6f8; --c2: #c3d3dc; --gloss: .65; }
+.tex-pfa   { --c1: #f3f4f7; --c2: #c7cdda; --gloss: .65; }
+/* FRP: glass-fibre twill in amber resin; dual laminates: the liner on top, a bond line, then the FRP */
+.tex-frp { --c1: #d3bd78; --c2: #8c7631; --gloss: .3;
+  background: var(--grain), var(--light), var(--twill) 0 0 / 20px 20px, linear-gradient(165deg, var(--c1), var(--c2)); }
+.tex-ppfrp, .tex-pvcfrp, .tex-pvdffrp {
+  background: var(--grain), var(--light), linear-gradient(165deg, var(--c1), var(--c2)) top / 100% 62% no-repeat,
+    linear-gradient(rgba(40, 30, 0, .35), rgba(40, 30, 0, .35)) 0 62% / 100% 2px no-repeat, var(--twill) 0 0 / 20px 20px, linear-gradient(165deg, #d3bd78, #8c7631); }
+.tex-ppfrp   { --c1: #e2dccb; --c2: #cdc6b1; }
+.tex-pvcfrp  { --c1: #6b7177; --c2: #535960; }
+.tex-pvdffrp { --c1: #fbf9f2; --c2: #e6e0cf; }
+.tex-ppfrp b, .tex-pvdffrp b { color: #1d1f22; }
+.tex-pvcfrp { --ink-on: #fff; }
+.tex-pvcfrp span { color: #1d1f22; }
 
 /* ── blog: article cards (index and "more" lists) and the article page ── */
 .bgrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2vw, 28px); }
@@ -244,3 +250,13 @@ body.lb-open { overflow: hidden; }
   .post__cover img { aspect-ratio: 4 / 3; border-radius: 18px; }
   .post__head { padding-top: 120px; }
 }
+
+/* a stepper photo with --ph shows whole, over a soft blur of itself, so tall and wide shots both fit the frame */
+.stepper__ph[style*="--ph"] { position: relative; isolation: isolate; }
+.stepper__ph[style*="--ph"]::before { content: ""; position: absolute; inset: -30px; z-index: -1; background: var(--ph) center / cover; filter: blur(24px) saturate(1.1) brightness(.92); }
+.stepper__ph[style*="--ph"] img { object-fit: contain; }
+/* .stepper--plain: the step names alone, without the progress lines */
+.stepper--plain .stepper__bar i { visibility: hidden; height: 0; margin: 0; }   /* still runs, so autoplay keeps its timing */
+.stepper--plain .stepper__bar button { padding: 8px 0; }
+.stepper--plain .stepper__bar [aria-selected="true"] { background: var(--brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stepper--plain .stepper__bar [aria-selected="true"] span { color: var(--green); }

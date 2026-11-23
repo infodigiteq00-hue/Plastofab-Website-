@@ -29,6 +29,7 @@ The scrubber is meant to look like real equipment: a packed column with an exhau
 - **Product portfolio** (`.port`): nine equipment families as studio renders on a 3D ring you turn by dragging or swiping (or the arrows, arrow keys or the list). It turns on its own while on screen until someone takes over; the page scrolls normally past it. The renders are illustrations made with Codex image generation (`ref/renders/`, converted by `python3 make.py` there into `assets/portfolio/`).
 - **Work gallery** (`#range`): 10 cards of real work photos in a strip that scrolls sideways (arrows, drag, swipe or arrow keys), including FRP/GRP, thermoplastic and pickling tanks. Each photo is shown whole, over a soft blur of itself. Each card's "Get a quote" ticks the matching project type in the form at the bottom.
 - **Industries:** chemical, pharma, water, electroplating and the others they serve.
+- **Why choose Plasto-Fab:** four points as cards with big gradient numbers.
 - **Process:** five steps (material, design, manufacturing, inspect, dispatch) as a deck of shop photos (the design step is a general-arrangement drawing, `assets/pages/design/scrubber-drawing.svg`), with a step bar. "View photo" opens the current one full size.
 - **Clients:** a moving strip of 28 client logos.
 - **Film:** their company video in a framed player, with sound and a poster. It plays only on click and pauses when it scrolls away.
@@ -44,9 +45,9 @@ Every topic on plasto-fab.com and the Wix site has its own page, each with its o
 |---|---|---|
 | All Products | `products.html` | The full catalogue by family, with a sticky chip index; with a mouse, the photo you point at grows to show itself whole while the others slide smaller; photos open a full-screen viewer |
 | Sewage Treatment | `water-treatment.html` | A dark underwater page: light rays and bubbles, three glasses of water clearing (raw → EC → settled), the six-step treatment path traced by a droplet, gauges, a 20 KLD example table, the 12 installed plants with their capacities, and a photo strip |
-| Materials | `materials.html` | A fanned deck of material samples; a table of 12 tiles that look like the real sheet (PP satin, HDPE gloss, PVC matte, FRP weave, dual laminates), CSS textures only (`.tex-*` in `css/pages.css`); a dual-laminate wall that explodes into its layers |
+| Materials | `materials.html` | A fanned deck of material samples; a table of 12 tiles that look like the real sheet (PP satin, HDPE gloss, PVC matte, glass-fibre twill for FRP, dual laminates with the liner over the FRP), CSS textures only (`.tex-*` in `css/pages.css`: each sets `--c1`/`--c2` and `--gloss`); a dual-laminate wall that explodes into its layers |
 | Fabrication | `fabrication.html` | The main page: a hero of slowly changing shop photos; turnkey systems as a photo bento; the job step by step (the stepper); fewer joints drawn out; the works, machines and a photo strip; DVS, Wegener & Widos, ISO and testing; the materials as swatches; field service |
-| About Us | `about.html` | A giant 1992; a scroll panorama of the works; the founder and Jhannu Pandya; a night map of NH 48 that draws itself out of Ankleshwar; what we do as a stepper; mission, vision and values; figures that count up |
+| About Us | `about.html` | A giant 1992; a scroll panorama of the works; the founder and Jhannu Pandya; a night map of NH 48 that draws itself out of Ankleshwar; what we do as a stepper (material, design, manufacturing, inspect, dispatch); mission, vision and values; figures that count up |
 | Clients | `clients.html` | Big counters; a wall of 28 logos that turn in tile by tile, in colour on hover |
 | Careers | `careers.html` | Drifting values words, team photos and a CV form |
 | Contact Us | `contact.html` | A live "Open now / Closed" panel in India time; works address with a map link; phone numbers and emails; a form |
@@ -72,6 +73,7 @@ python3 build-pages.py
 - Shared pieces any page can use: the stepper (`[data-stepper]`, numbered steps with progress lines, in `css/pages.css` and `js/pages.js`), material textures (`.tex-pp`, `.tex-frp`...), and the pop-in: cards rise into view and section headings fade up (`js/site.js` + the end of `css/site.css`; it lists which card classes pop).
 - A `base: /` line makes a page work at any URL (used by the 404 page).
 - The menu and footer are defined in `build-pages.py` (the `NAV` list). The build also refreshes the header and footer inside `index.html`. Bump `V` in `build-pages.py` to make browsers fetch changed CSS/JS.
+- Photos the client turned down are listed in `BANNED` in `pages/pagedata.py` (sheet bending, shell rolling and welding, the site inspection). Don't use them anywhere.
 - `pages/pagedata.py` generates the parts that come from data: the catalogue, client wall, STP plant list and gallery, and downloads.
 - Each page's own style and behaviour live in `css/pages/<page>.css` and `js/pages/<page>.js`. Shared pieces:
   - `css/pages.css`
@@ -127,6 +129,6 @@ Photos, client logos, the film, the PDFs, product text, contact details and the 
 - The about text says NH 8. That road is now NH 48, so the site says "NH 8 (now NH 48)" on the About page and NH 48 elsewhere.
 
 Some copy was written for this site and should be reviewed before going live:
-- the industry tiles, the eight user-advantage texts on the home page, the process steps and the materials descriptions
+- the industry tiles, the four Why-choose-us points on the home page, the process steps and the materials descriptions
 - the 20 KLD sewage plant example table, which is an illustration built from their STP brochure
 - the short headings on the inner pages

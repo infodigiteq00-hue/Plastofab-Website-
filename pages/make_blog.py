@@ -112,7 +112,7 @@ POSTS = [
 '''),
  ('dvs-welding-standards', 'Quality', 'DVS 2207 and 2208: what the welding guidelines mean for your equipment',
   'The German standards behind every thermoplastic weld we make, and why they matter to the people who buy the equipment.',
-  'wix/home/09', 'A rolled thermoplastic shell being welded in the works', '''
+  'wix/home/10', 'A large welded HDPE tank finished in the works', '''
 <p>DVS, the German Welding Society, publishes the guidelines that thermoplastic fabricators around the world work to. Two series matter most for tanks, scrubbers and ducting.</p>
 <h2>DVS 2207: how the weld is made</h2>
 <p>DVS 2207 covers the welding of thermoplastics: processes such as heated-tool butt welding and extrusion welding, for materials including PE, PP and PVDF. It sets out how the joint is prepared, and the temperatures, pressures and times each material needs.</p>
