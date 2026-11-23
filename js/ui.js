@@ -85,7 +85,7 @@
         it.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) scale(' + (0.42 + 0.58 * Math.pow(front, 3)).toFixed(3) + ')';
         it.style.opacity = String(Math.cos(a) < 0 ? 0 : Math.min(1, 0.15 + Math.pow(front, 4)).toFixed(3));
         it.style.zIndex = String(Math.round(100 + z));
-        it.style.filter = 'saturate(' + (0.4 + 0.6 * front).toFixed(2) + ') brightness(' + (0.9 + 0.1 * front).toFixed(2) + ')';
+        it.style.filter = 'saturate(' + (0.4 + 0.6 * front).toFixed(2) + ') brightness(' + (0.9 + 0.1 * front).toFixed(2) + ') blur(' + Math.min(8, 22 * (1 - front)).toFixed(1) + 'px)';   // only the front one is sharp
       });
       var a2 = wrap(Math.round(cur));
       if (a2 !== on) {
