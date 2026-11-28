@@ -492,3 +492,9 @@ img[src$="clients/26.webp"] { object-view-box: inset(34% 3% 32% 3%); }
 .pillars--why .pillar p { font-size: 15px; line-height: 1.6; }
 @media (max-width: 900px) { .pillars--why { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .pillars--why { grid-template-columns: 1fr; } }
+
+/* scroll gauge (site.js): a hairline track on the right edge, filling in the brand gradient, the % riding its tip */
+.gauge { position: fixed; right: 22px; top: 50%; height: 34vh; width: 1px; translate: 0 -50%; background: var(--line); z-index: 40; pointer-events: none; }
+.gauge__fill { position: absolute; inset: 0; background: linear-gradient(180deg, #1e2a52, #2e5e78 55%, #8fb40d); transform-origin: 50% 0; transform: scaleY(0); }
+.gauge__n { position: absolute; right: 9px; top: 0; translate: 0 -50%; font: 500 11px/1 var(--font); letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 899px) { .gauge { display: none; } }

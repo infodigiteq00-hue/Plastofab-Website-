@@ -49,6 +49,27 @@
     targets.forEach(function (el) { el.classList.add('is-in'); });
   }
 
+  // scroll gauge: a hairline down the right edge that fills as the page is read, with the percentage at its tip
+  if (window.matchMedia('(min-width: 900px)').matches) {
+    var gauge = document.createElement('div');
+    gauge.className = 'gauge'; gauge.setAttribute('aria-hidden', 'true');
+    gauge.innerHTML = '<i class="gauge__fill"></i><span class="gauge__n">0%</span>';
+    document.body.appendChild(gauge);
+    var gFill = gauge.firstChild, gNum = gauge.lastChild, gLast = -1, gRaf = 0;
+    var gDraw = function () {
+      gRaf = 0;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var f = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0, pc = Math.round(f * 100);
+      gFill.style.transform = 'scaleY(' + f.toFixed(4) + ')';
+      gNum.style.top = (f * 100).toFixed(2) + '%';
+      if (pc !== gLast) { gLast = pc; gNum.textContent = pc + '%'; }
+    };
+    var gQueue = function () { if (!gRaf) gRaf = requestAnimationFrame(gDraw); };
+    window.addEventListener('scroll', gQueue, { passive: true });
+    window.addEventListener('resize', gQueue);
+    gDraw();
+  }
+
   var year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
 })();

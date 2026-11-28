@@ -10,13 +10,13 @@ python3 -m http.server 5191 --directory plastofab-site
 
 | Section | What happens |
 |---|---|
-| Welcome (`.intro`, one pinned scene) | "Welcome to" and the real logo. As you scroll, a flat plastic sheet with the logo printed on it slides in. It **rolls into a cylinder**, the seam is **welded** (a hot bead runs up it), the **dished heads** grow on, and it becomes a **wet scrubber system** that **spins once**. It then sinks to the horizon with its top showing at the bottom centre while **"Creating shapes that matter."** rises in word by word (`js/ui.js`). Finally it comes back up to the centre. |
-| Thermoplastics (`.mat--thermo`) | The scrubber moves beside the list and changes material as each line comes into view: PP-H, HDPE, PVC-U, CPVC, PVDF and ECTFE, each with its own colour and gloss. A weld ring glows on each change. |
-| Composites (`.mat--frp`) | Glass-fibre roving **winds helically** over the liner (the FRP wrap of a dual-laminate scrubber), with a lime band at the winding head. |
+| Welcome (`.intro`, one pinned scene) | "Welcome to" and the real logo. As you scroll, a flat plastic sheet with the logo printed on it slides in. It **rolls into a cylinder**, the seam is **welded** (a hot bead runs up it), a **domed top and flat gusseted base** grow on, and it becomes an upright **FRP storage tank** in the client's blue-grey that **spins once**. It then sinks to the horizon with its top showing at the bottom centre while **"Creating shapes that matter."** rises in word by word (`js/ui.js`). Finally it comes back up to the centre. |
+| Thermoplastics (`.mat--thermo`) | The tank moves beside the list and changes material as each line comes into view: PP-H, HDPE, PVC-U, CPVC, PVDF and ECTFE, each with its own colour and gloss. A weld ring glows on each change. |
+| Composites (`.mat--frp`) | Glass-fibre roving **winds helically** over the liner (the FRP wrap of a dual-laminate tank, in the same blue-grey), with a lime band at the winding head. |
 
-The scrubber is meant to look like real equipment: a packed column with an exhaust stack, a centrifugal blower (blue motor) feeding the low inlet, a recirculation pump on a plinth with its riser, valve and spray-header line, packing manholes, body flanges, a sump level gauge, a yellow caged ladder up to a top platform, and a nameplate. It is lit by a studio light setup (softboxes, ceiling and floor bounce) with ACES tone mapping.
+The tank is modelled on a client's FRP tank (their photo showed it lying down with a yellow lifting beam; here it stands upright with no beam): a domed top with a manway, two nozzles and lifting lugs, three raised stiffener bands, a side manhole, a low outlet nozzle, a flat base plate with twelve gusset lugs, and a nameplate. Until 2026-11 it was a wet scrubber system with stack, blower, pump and ladder (see git history). It is lit by a studio light setup (softboxes, ceiling and floor bounce) with ACES tone mapping.
 
-- The scrubber follows the `.mat__tank` boxes, so CSS controls where it sits at every width.
+- The tank follows the `.mat__tank` boxes, so CSS controls where it sits at every width.
 - Browsers without WebGL get the static logo (`.no-webgl`).
 - **To change the scene, edit `js/tank-story.js`, then run `./build.sh`.** The page loads `js/tank-story.min.js`, which is that file bundled with only the parts of Three.js it uses. After rebuilding, bump its `?v=` in `index.html` (both the `modulepreload` and the `script` tag).
 - To stay fast, the canvas:
@@ -25,6 +25,8 @@ The scrubber is meant to look like real equipment: a packed column with an exhau
   - lowers its resolution on machines that can't hold the frame rate
 
 ## The rest of the home page
+
+- **Scroll gauge** (every page, desktop only, `site.js` + `.gauge` in `site.css`): a hairline down the right edge that fills in the brand gradient as you scroll, with the percentage riding its tip.
 
 - **Product portfolio** (`.port`): eight equipment families on a 3D ring (ducting left out on purpose) you turn by dragging or swiping (or the arrows, arrow keys or the list); only the front item is sharp, the rest are blurred so they don't pull the eye. It turns on its own while on screen until someone takes over; the page scrolls normally past it. The pictures are 3D studio renders made in ChatGPT from Plasto-Fab's own job photos (paint colours kept), saved in `ref/renders-from-photos/`; the photo references sent are in `ref/photo-refs/`. Each render had its background cut out (rembg `isnet-general-use`) and was fitted into a 900×900 transparent WebP. Source photos: scrubber ← `wix/scrubbing-system/01`, FRP tanks ← `storage-tanks/21`, thermoplastic tank ← `storage-tanks/12`, pickling tank ← `storage-tanks/00`, reaction vessel ← `reaction-vessels/00`, vacuum receiver ← `vacuum-receiver/04`, blower ← `centrifugal-blower/00`, STP ← `sewage-plant/02` (the whole plant: filters, treatment tank, control panel, pumps; its background was keyed out from the edges, because the AI cut-out dropped the beige tank). The first Codex renders are still in `ref/renders/`.
 - **Work gallery** (`#range`): 10 cards of real work photos in a strip that scrolls sideways (arrows, drag, swipe or arrow keys), including FRP/GRP, thermoplastic and pickling tanks. Each photo is shown whole, over a soft blur of itself. Each card's "Get a quote" ticks the matching project type in the form at the bottom.
