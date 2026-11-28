@@ -334,11 +334,11 @@ async function init() {
     h.add(mesh(gussetG, partMat)); bottom.add(h);
   }
 
-  // the shell: three raised stiffener bands, a side manhole, an outlet, a nameplate (the course seams between them weld in the thermoplastics section)
+  // the shell: two raised stiffener bands (none across the printed logo), a side manhole, an outlet, a nameplate (the course seams between them weld in the thermoplastics section)
   const body = new THREE.Group();
   const RING_Y = SHELL_H * 0.3;
   TU.uRingY.value = RING_Y;
-  const rings = [RING_Y, 0, -RING_Y].map(y => { const m = mesh(new THREE.LatheGeometry(ringProfile(R * 0.995, R * 1.05, 0.09 * R), 160), partMat, 0, y, 0); body.add(m); return m; });
+  const rings = [RING_Y, -RING_Y].map(y => { const m = mesh(new THREE.LatheGeometry(ringProfile(R * 0.995, R * 1.05, 0.09 * R), 160), partMat, 0, y, 0); body.add(m); return m; });
   const onShell = (theta, y, child, out = 0) => {   // stands a part on the shell, pointing outward
     const h = new THREE.Group(); h.position.set(Math.sin(theta) * (R + out), y, Math.cos(theta) * (R + out)); h.rotation.y = theta;
     child.rotation.x = Math.PI / 2; h.add(child); body.add(h); return h;
@@ -349,7 +349,7 @@ async function init() {
     const hd = new THREE.Mesh(new THREE.TorusGeometry(0.06 * R, 0.009 * R, 8, 20, Math.PI), steelMat);
     hd.rotation.y = Math.PI / 2; hd.position.y = 0.1 * R + 0.15 * R * 0.34 * 1.05; g.add(hd); return g;
   };
-  const sideNozzles = [onShell(0.95, -SHELL_H * 0.1, manhole(), -0.02 * R), onShell(-0.5, -SHELL_H * 0.43, nozzle(0.07 * R, 0.16 * R, true), -0.02 * R)];
+  const sideNozzles = [onShell(1.35, -SHELL_H * 0.2, manhole(), -0.02 * R), onShell(-0.5, -SHELL_H * 0.43, nozzle(0.07 * R, 0.16 * R, true), -0.02 * R)];
   // nameplate, riveted stainless
   const plateTex = (() => {
     const c = document.createElement('canvas'); c.width = 512; c.height = 320; const g = c.getContext('2d');

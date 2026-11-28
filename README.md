@@ -14,7 +14,7 @@ python3 -m http.server 5191 --directory plastofab-site
 | Thermoplastics (`.mat--thermo`) | The tank moves beside the list and changes material as each line comes into view: PP-H, HDPE, PVC-U, CPVC, PVDF and ECTFE, each with its own colour and gloss. A weld ring glows on each change. |
 | Composites (`.mat--frp`) | Glass-fibre roving **winds helically** over the liner (the FRP wrap of a dual-laminate tank, in the same blue-grey), with a lime band at the winding head. |
 
-The tank is modelled on a client's FRP tank (their photo showed it lying down with a yellow lifting beam; here it stands upright with no beam): a domed top with a manway, two nozzles and lifting lugs, three raised stiffener bands, a side manhole, a low outlet nozzle, a flat base plate with twelve gusset lugs, and a nameplate. Until 2026-11 it was a wet scrubber system with stack, blower, pump and ladder (see git history). It is lit by a studio light setup (softboxes, ceiling and floor bounce) with ACES tone mapping.
+The tank is modelled on a client's FRP tank (their photo showed it lying down with a yellow lifting beam; here it stands upright with no beam): a domed top with a manway, two nozzles and lifting lugs, two raised stiffener bands (none across the logo), a side manhole, a low outlet nozzle, a flat base plate with twelve gusset lugs, and a nameplate. Until 2026-11 it was a wet scrubber system with stack, blower, pump and ladder (see git history). It is lit by a studio light setup (softboxes, ceiling and floor bounce) with ACES tone mapping.
 
 - The tank follows the `.mat__tank` boxes, so CSS controls where it sits at every width.
 - Browsers without WebGL get the static logo (`.no-webgl`).
