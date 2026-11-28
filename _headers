@@ -7,14 +7,15 @@
   X-Frame-Options: SAMEORIGIN
   Cache-Control: no-cache
 
-# css, js and images: make-dist.sh stamps every link to them with ?v=<hash of the file> (stamp.py), so a changed
-# file gets a new address and is fetched fresh; an unchanged one can be kept. "! Cache-Control" drops the rule above.
+# css and js: re-checked every visit here too, because their ?v= numbers in the sources are typed by hand.
+# make-dist.sh switches these two to a one-year cache in dist/_headers, where stamp.py has put a content hash
+# on every link (safe only when Cloudflare publishes dist/). "! Cache-Control" drops the rule above.
 /css/*
   ! Cache-Control
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: no-cache
 /js/*
   ! Cache-Control
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: no-cache
 /assets/*
   ! Cache-Control
   Cache-Control: public, max-age=604800
